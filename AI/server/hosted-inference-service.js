@@ -131,7 +131,7 @@ class HostedInferenceService {
     const currentDateTime = new Date();
     const currentTimeStr = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const currentDateStr = currentDateTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    let augmentedSystemPrompt = `${systemPrompt}\n\n[SYSTEM TELEMETRY CONTEXT]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}`;
+    let augmentedSystemPrompt = `${systemPrompt}\n\n[AUTHORITATIVE CURRENT SYSTEM TELEMETRY]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}\n- INSTRUCTION: You have verified real-time access to the current system time and date above. When asked for the current time or date, answer directly using this telemetry.`;
 
     // Check Physics Domain First
     const physicsDomain = physicsService.detectPhysicsDomain(rawUserQuery);
@@ -217,7 +217,7 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
 - Reason: ${researchReq.reason}
 - Mandatory Rules:
   1. DO NOT fabricate, invent, or hallucinate citations, URLs, papers, statistics, or source names.
-  2. If evidence is inconclusive or an external fact cannot be verified, state clearly: "I do not have enough information to establish that."
+  2. For external web claims where evidence is inconclusive, state clearly: "I do not have enough information to establish that." (Note: Current system time and date are provided above in authoritative system telemetry and are fully verified).
   3. Clearly distinguish between "The source states X" vs "Based on X, I infer Y". Never present inferences as stated source facts.
   4. For claims where reputable sources disagree, present the disagreement rather than manufacturing artificial consensus.`;
 
@@ -465,7 +465,7 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
       const currentDateTime = new Date();
       const currentTimeStr = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
       const currentDateStr = currentDateTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      let augmentedSystemPrompt = `${systemPrompt}\n\n[SYSTEM TELEMETRY CONTEXT]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}`;
+      let augmentedSystemPrompt = `${systemPrompt}\n\n[AUTHORITATIVE CURRENT SYSTEM TELEMETRY]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}\n- INSTRUCTION: You have verified real-time access to the current system time and date above. When asked for the current time or date, answer directly using this telemetry.`;
 
       // Check Physics Domain First
       const physicsDomain = physicsService.detectPhysicsDomain(rawUserQuery);
@@ -552,7 +552,7 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
 - Reason: ${researchReq.reason}
 - Mandatory Rules:
   1. DO NOT fabricate, invent, or hallucinate citations, URLs, papers, statistics, or source names.
-  2. If evidence is inconclusive or an external fact cannot be verified, state clearly: "I do not have enough information to establish that."
+  2. For external web claims where evidence is inconclusive, state clearly: "I do not have enough information to establish that." (Note: Current system time and date are provided above in authoritative system telemetry and are fully verified).
   3. Clearly distinguish between "The source states X" vs "Based on X, I infer Y". Never present inferences as stated source facts.
   4. For claims where reputable sources disagree, present the disagreement rather than manufacturing artificial consensus.`;
 

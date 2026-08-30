@@ -82,7 +82,7 @@ class UserProfileStore {
     return {
       enabledCharacters: ['penny', 'pete', 'mina'],
       selectedCharacter: 'auto',
-      activeModelProvider: 'stub',
+      activeModelProvider: 'hosted',
       perspectiveMode: 'auto',
       banterFrequency: 'natural',
       technicalDepth: 'advanced',
