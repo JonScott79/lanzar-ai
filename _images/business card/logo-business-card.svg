@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260">
+
+    <!-- Orbit -->
+    <ellipse
+        cx="450"
+        cy="120"
+        rx="360"
+        ry="82"
+        fill="none"
+        stroke="#2A728F"
+        stroke-width="4"
+        transform="rotate(-9 450 120)" />
+
+    <!-- Destination Planet -->
+    <circle
+        cx="805"
+        cy="82"
+        r="12"
+        fill="#F46B45" />
+
+    <!-- North Star -->
+    <g transform="translate(112 58)">
+        <polygon
+            points="0,-12 3,-3 12,0 3,3 0,12 -3,3 -12,0 -3,-3"
+            fill="#E2B84D" />
+    </g>
+
+    <!-- Wordmark -->
+    <g transform="skewX(-14)">
+        <text
+            x="180"
+            y="142"
+            font-family="Space Grotesk, system-ui, sans-serif"
+            font-size="84"
+            font-weight="700"
+            letter-spacing="-3"
+            fill="#20303C">
+            LANZAR
+        </text>
+    </g>
+
+    <!-- Divider -->
+    <line
+        x1="185"
+        y1="164"
+        x2="710"
+        y2="164"
+        stroke="#2A728F"
+        stroke-width="3"
+        opacity="0.95" />
+
+    <!-- Tagline -->
+    <text
+        x="448"
+        y="198"
+        text-anchor="middle"
+        font-family="Space Grotesk, system-ui, sans-serif"
+        font-size="24"
+        font-weight="600"
+        letter-spacing="0.8"
+        fill="#20303C">
+        Web • IT • Digital Solutions
+    </text>
+
+</svg>

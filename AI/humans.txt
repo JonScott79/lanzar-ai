@@ -1,0 +1,11 @@
+/* TEAM */
+Engineer: Larry (LANZAR AI Coding Agent)
+Design & Direction: LANZAR
+Personas: Penelope ("Penny") & Peter ("Pete")
+Site: https://lanzar.ai
+
+/* SITE */
+Last update: 2026/08/26
+Standards: HTML5, CSS3, ES6+ Modules
+Aesthetic: Atomic Age / 1950s Retro-Futurism
+Philosophy: "I don't know. Let's find out."

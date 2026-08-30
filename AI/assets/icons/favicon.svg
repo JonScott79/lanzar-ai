@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="46" fill="#15222E" stroke="#E2B84D" stroke-width="4"/>
+  <!-- Orbit Ring -->
+  <ellipse cx="50" cy="50" rx="38" ry="14" fill="none" stroke="#2A728F" stroke-width="3" transform="rotate(-30 50 50)"/>
+  <!-- Rocket in center -->
+  <g transform="translate(50, 50) rotate(-45) scale(0.6) translate(-50, -50)">
+    <path d="M50 10 C50 10 30 35 30 70 L40 75 L50 90 L60 75 L70 70 C70 35 50 10 50 10 Z" fill="#F46B45" stroke="#FFFFFF" stroke-width="2"/>
+    <circle cx="50" cy="45" r="8" fill="#F7F2E8" stroke="#15222E" stroke-width="2"/>
+    <path d="M40 75 L50 95 L60 75 Z" fill="#E2B84D"/>
+  </g>
+  <!-- Spark -->
+  <polygon points="50,18 52,24 58,26 52,28 50,34 48,28 42,26 48,24" fill="#E2B84D"/>
+</svg>

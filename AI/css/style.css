@@ -1,0 +1,482 @@
+/*
+    style.css
+
+    Master page composition, retro-futuristic styling embellishments, and visual animations for LANZAR AI.
+
+    Responsibilities
+    - Import and harmonize all stylesheet layers
+    - Atomic Age visual flourishes (starbursts, retro grid, dials, glow effects)
+    - Active project status widget and tool visualizer styling
+*/
+
+/* =====================================
+   Atomic Visual Flourishes & Badges
+===================================== */
+
+.atomic-starburst {
+  display: inline-block;
+  color: var(--atomic-gold);
+  font-weight: bold;
+  animation: starPulse 3s infinite ease-in-out;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15) rotate(15deg);
+    opacity: 1;
+  }
+}
+
+.retro-grid-bg {
+  background-image: linear-gradient(to right, rgba(42, 114, 143, 0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(42, 114, 143, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* =====================================
+   Meet the Staff Showcase Layout
+===================================== */
+
+.staff-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.staff-masthead {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.staff-headline {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--deep-navy);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0.5rem 0;
+}
+
+.staff-tagline {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.staff-dossiers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .staff-dossiers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .staff-dossiers-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.staff-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 2px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform var(--speed-normal) var(--ease-retro), box-shadow var(--speed-normal) ease;
+}
+
+.staff-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-large);
+}
+
+.penny-staff-card {
+  border-top: 6px solid var(--penny-coral);
+}
+
+.pete-staff-card {
+  border-top: 6px solid var(--pete-blueprint);
+}
+
+.mina-staff-card {
+  border-top: 6px solid var(--mina-crimson);
+}
+
+.card-ambient-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.12;
+}
+
+.penny-glow {
+  background: radial-gradient(circle at 80% 20%, var(--penny-coral), transparent 60%);
+}
+
+.pete-glow {
+  background: radial-gradient(circle at 20% 20%, var(--pete-blueprint), transparent 60%);
+}
+
+.mina-glow {
+  background: radial-gradient(circle at 50% 20%, var(--mina-crimson), transparent 60%);
+}
+
+.staff-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.5rem;
+}
+
+.dossier-id {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.staff-name {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--deep-navy);
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.staff-rank {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.staff-badge {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+}
+
+.staff-art-wrapper {
+  height: 380px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  margin: 1rem 0;
+}
+
+.staff-full-image {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.18));
+  transition: transform var(--speed-normal) var(--ease-retro);
+}
+
+.staff-card:hover .staff-full-image {
+  transform: scale(1.03);
+}
+
+.staff-dossier-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.dossier-meta-item {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+/* =====================================
+   CRT Teletype Terminal
+===================================== */
+
+.crt-terminal-section {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.crt-terminal-frame {
+  background: #0d151d;
+  border: 3px solid var(--border-console);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+.crt-screen-header {
+  background: #172430;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #233647;
+}
+
+.crt-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.crt-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.crt-dot.red { background: #ff5f56; }
+.crt-dot.yellow { background: #ffbd2e; }
+.crt-dot.green { background: #27c93f; }
+
+.crt-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--atomic-gold);
+  letter-spacing: 0.1em;
+}
+
+.crt-status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #4cd964;
+  animation: crtPulse 2s infinite ease-in-out;
+}
+
+@keyframes crtPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.crt-screen-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  background: radial-gradient(circle at 50% 50%, #13222f 0%, #0c141c 100%);
+}
+
+.crt-msg {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.crt-msg.penny-crt {
+  color: #ff9f87;
+}
+
+.crt-msg.pete-crt {
+  color: #8ed2f5;
+}
+
+.crt-msg.mina-crt {
+  color: #ff8594;
+}
+
+.crt-speaker {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.crt-text {
+  color: #e6f1f7;
+}
+
+.staff-footer-cta {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* =====================================
+   Console Persona Header Badge
+===================================== */
+
+.persona-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.persona-mode-pill.mode-penny {
+  background: rgba(212, 93, 66, 0.25);
+  border-color: rgba(212, 93, 66, 0.5);
+  color: #ff9f87;
+}
+
+.persona-mode-pill.mode-pete {
+  background: rgba(36, 88, 115, 0.35);
+  border-color: rgba(36, 88, 115, 0.6);
+  color: #8ed2f5;
+}
+
+.persona-mode-pill.mode-mina {
+  background: rgba(211, 47, 63, 0.25);
+  border-color: rgba(211, 47, 63, 0.5);
+  color: #ff8594;
+}
+
+.persona-mode-pill.mode-collaborate {
+  background: rgba(226, 184, 77, 0.25);
+  border-color: rgba(226, 184, 77, 0.5);
+  color: var(--atomic-gold);
+}
+
+/* =====================================
+   Project Dashboard Card in Sidebar
+===================================== */
+
+.active-project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--atomic-gold);
+}
+
+.project-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.site-footer a:hover {
+  color: var(--text-light);
+}
+
+/* Shake feedback when clicking disabled cards */
+@keyframes shake-item {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake-item 0.35s ease-in-out;
+}
+
+.project-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin: 0.25rem 0;
+}
+
+.project-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--retro-teal), var(--atomic-gold));
+  border-radius: var(--radius-pill);
+  transition: width var(--speed-normal) ease;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background var(--speed-fast) ease;
+  cursor: pointer;
+}
+
+.sidebar-nav-item:hover,
+.sidebar-nav-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* =====================================
+   Sound & Interaction Indicator
+===================================== */
+
+.voice-intro-preview {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: rgba(42, 114, 143, 0.08);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}

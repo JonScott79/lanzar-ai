@@ -1,0 +1,42 @@
+# Environment & Secret Keys
+.env
+.env.*
+!.env.example
+firebase-credentials/
+*service-account*.json
+*.pem
+*.key
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build & Bundles
+dist/
+build/
+.cache/
+
+# Large Archives & Binaries
+*.zip
+*.tar.gz
+*.tgz
+*.7z
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+
+# Testing & Temp Artifacts
+.tempmediaStorage/
+.system_generated/
+scratch/

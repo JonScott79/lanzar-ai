@@ -1,0 +1,188 @@
+/*
+    theme.css
+
+    Global CSS custom properties, variables, and typography definitions for LANZAR AI.
+
+    Responsibilities
+    - Brand color palette & Atomic Age retro-futuristic styling tokens
+    - Semantic theme variables for Light / Dark / Mid-century Laboratory modes
+    - Border radius, spacing, animations, and typography configurations
+*/
+
+:root {
+  /* =====================================
+     Brand Colors & Atomic Palette
+  ===================================== */
+  --cream: #f7f2e8;
+  --warm-parchment: #f0e6d2;
+  --card-bg: #fbf8f1;
+  --retro-teal: #2a728f;
+  --retro-teal-dark: #1b4b5f;
+  --retro-teal-light: #4495b6;
+  --rocket-orange: #f46b45;
+  --rocket-orange-hover: #d95737;
+  --atomic-gold: #e2b84d;
+  --atomic-gold-dark: #c59b2d;
+  --deep-navy: #15222e;
+  --cockpit-navy: #0f1922;
+  --soft-gray: #6d7b83;
+  --charcoal: #2a2a2a;
+  --subtle-blue: #d6e5ec;
+  --penny-coral: #d45d42;
+  --pete-blueprint: #245873;
+  --mina-crimson: #d32f3f;
+  --mina-gold: #f5a623;
+  --accent: var(--rocket-orange);
+
+  /* =====================================
+     Backgrounds & Surfaces
+  ===================================== */
+  --bg-primary: var(--cream);
+  --bg-secondary: #fffdf8;
+  --bg-panel: rgba(255, 253, 248, 0.92);
+  --bg-dark: var(--deep-navy);
+  --bg-cockpit: var(--cockpit-navy);
+  --bg-console: #1a2a38;
+  --bg-card: var(--card-bg);
+
+  /* =====================================
+     Text & Typography Colors
+  ===================================== */
+  --text-primary: #1e262c;
+  --text-secondary: #4a565e;
+  --text-muted: #7c8b94;
+  --text-light: #f7f9fa;
+  --text-gold: #f2cf6d;
+
+  /* =====================================
+     Buttons & Interactive
+  ===================================== */
+  --btn-primary-bg: var(--rocket-orange);
+  --btn-primary-hover: var(--rocket-orange-hover);
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-bg: var(--retro-teal);
+  --btn-secondary-hover: var(--retro-teal-dark);
+  --btn-secondary-text: #ffffff;
+
+  --btn-pete-bg: #245873;
+  --btn-pete-hover: #173f54;
+  --btn-penny-bg: #d45d42;
+  --btn-penny-hover: #b8462d;
+  --btn-mina-bg: #d32f3f;
+  --btn-mina-hover: #b52230;
+
+  /* =====================================
+     Borders & Dividers
+  ===================================== */
+  --border-subtle: rgba(30, 48, 60, 0.12);
+  --border-medium: rgba(30, 48, 60, 0.22);
+  --border-strong: rgba(30, 48, 60, 0.4);
+  --border-atomic: rgba(226, 184, 77, 0.4);
+  --border-console: #324759;
+
+  /* =====================================
+     Shadows & Atmospheric Glow
+  ===================================== */
+  --shadow-small: 0 3px 8px rgba(21, 34, 46, 0.08);
+  --shadow-medium: 0 8px 24px rgba(21, 34, 46, 0.14);
+  --shadow-large: 0 18px 45px rgba(21, 34, 46, 0.22);
+  --shadow-console: 0 20px 50px rgba(10, 18, 25, 0.45);
+  --glow-orange: 0 0 20px rgba(244, 107, 69, 0.35);
+  --glow-teal: 0 0 20px rgba(42, 114, 143, 0.35);
+  --glow-gold: 0 0 20px rgba(226, 184, 77, 0.45);
+
+  /* =====================================
+     Border Radii
+  ===================================== */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  /* =====================================
+     Animation & Transitions
+  ===================================== */
+  --speed-instant: 0.1s;
+  --speed-fast: 0.18s;
+  --speed-normal: 0.32s;
+  --speed-slow: 0.6s;
+  --ease-retro: cubic-bezier(0.25, 1, 0.35, 1);
+
+  /* =====================================
+     Fonts
+  ===================================== */
+  --font-heading: "Space Grotesk", "Century Gothic", "Futura", sans-serif;
+  --font-body: "Inter", "Segoe UI", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+}
+
+/* =====================================
+   Dark Mode Custom Properties
+===================================== */
+[data-theme="dark"],
+body.dark-mode {
+  --bg-primary: #0d161f;
+  --bg-secondary: #13202c;
+  --bg-panel: rgba(19, 32, 44, 0.94);
+  --bg-card: #152433;
+  --card-bg: #152433;
+  --bg-dark: #0a1118;
+  --bg-cockpit: #060b10;
+  --bg-console: #101c26;
+
+  --text-primary: #f0f4f8;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.28);
+  --border-console: #24384a;
+
+  --shadow-small: 0 3px 8px rgba(0, 0, 0, 0.35);
+  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-large: 0 18px 45px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .site-header,
+body.dark-mode .site-header {
+  background-color: rgba(13, 22, 31, 0.94);
+  border-bottom-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .header-logo,
+body.dark-mode .header-logo {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .brand-logo-img,
+body.dark-mode .brand-logo-img {
+  filter: brightness(1.15) contrast(1.05);
+}
+
+[data-theme="dark"] .site-footer,
+body.dark-mode .site-footer {
+  background: #090f15;
+  color: var(--text-secondary);
+  border-top-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .ai-msg .message-card,
+body.dark-mode .ai-msg .message-card {
+  background: #172736;
+  color: #f0f4f8;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =====================================
+   Accessibility Focus Outlines
+===================================== */
+
+:focus-visible {
+  outline: 3px solid var(--rocket-orange);
+  outline-offset: 3px;
+}

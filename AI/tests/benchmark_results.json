@@ -1,0 +1,1644 @@
+{
+  "metadata": {
+    "timestamp": "2026-08-29T01:39:08.264Z",
+    "models": [
+      "qwen2.5-coder:7b",
+      "llama3:latest",
+      "pythos:latest"
+    ],
+    "environment": {
+      "host": "127.0.0.1",
+      "port": 11434
+    }
+  },
+  "neutralBenchmarks": {
+    "qwen2.5-coder:7b": [
+      {
+        "testId": "neutral_01_casual",
+        "dimension": "1. Casual Conversation",
+        "description": "Evaluates casual greetings without forced robotic task framing",
+        "prompt": "Good morning! How are you doing today?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Good morning! How are you doing today?"
+          }
+        ],
+        "success": true,
+        "response": "Good morning! I'm just a computer program, so I don't have feelings, but I'm here and ready to help you. How can I assist you today?",
+        "latencyMs": 22730,
+        "evalCount": 35,
+        "tokensPerSec": 8.4,
+        "loadDurationMs": 16734,
+        "error": null
+      },
+      {
+        "testId": "neutral_02_humor",
+        "dimension": "2. Humor",
+        "description": "Evaluates comedic timing, wit, and punchline coherence",
+        "prompt": "Tell me a short, clever joke about engineers.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Tell me a short, clever joke about engineers."
+          }
+        ],
+        "success": true,
+        "response": "Why don't engineers like playing hide and seek?\n\nBecause all the best hiding spots are already occupied with servers!",
+        "latencyMs": 3603,
+        "evalCount": 23,
+        "tokensPerSec": 8.4,
+        "loadDurationMs": 11,
+        "error": null
+      },
+      {
+        "testId": "neutral_03_reasoning",
+        "dimension": "3. Deductive Reasoning",
+        "description": "Classic deduction problem with subtle wording trap",
+        "prompt": "A farmer has 17 sheep and all but 9 die. How many sheep are left? Explain your step concisely.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "A farmer has 17 sheep and all but 9 die. How many sheep are left? Explain your step concisely."
+          }
+        ],
+        "success": true,
+        "response": "The farmer has 17 sheep, and all but 9 die. To find out how many sheep are left, we need to subtract the number that died from the total number he originally had.\n\n1. Start with the total number of sheep: 17\n2. Subtract the number that died: 17 - 8 (since 17 but 9 survive, that means 17 - 9 = 8 died)\n\nSo, 17 - 8 = 9 sheep are left.",
+        "latencyMs": 14917,
+        "evalCount": 107,
+        "tokensPerSec": 8,
+        "loadDurationMs": 7,
+        "error": null
+      },
+      {
+        "testId": "neutral_04_technical",
+        "dimension": "4. Technical Explanation",
+        "description": "Accuracy in thermodynamic propulsion principles",
+        "prompt": "Explain the fundamental physical difference between regenerative cooling and film cooling in liquid rocket engine nozzles.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Explain the fundamental physical difference between regenerative cooling and film cooling in liquid rocket engine nozzles."
+          }
+        ],
+        "success": true,
+        "response": "Regenerative cooling and film cooling are two methods used in liquid rocket engine nozzles to manage the high temperatures that occur during operation. Both methods aim to protect the nozzle walls from melting or deteriorating, but they do so through different mechanisms.\n\n### Regenerative Cooling\n\nRegenerative cooling is a method where heat from the rocket exhaust is transferred to the nozzle walls through the use of a regenerator. This regenerator is a heat exchanger that is embedded within or in contact with the nozzle walls. Here's how it works:\n\n1. **Heat Transfer Mechanism**: In a regenerative cooling system, the exhaust gases pass through a set of tubes or channels in the nozzle walls. These tubes or channels are referred to as the regenerator.\n2. **Temperature Distribution**: As the exhaust gases pass through these tubes, they transfer some of their thermal energy to the nozzle walls. This process reduces the temperature of the exhaust gases and increases the temperature of the nozzle walls.\n3. **Material Properties**: By increasing the temperature of the nozzle walls, regenerative cooling can be more effective in materials that can withstand higher temperatures.\n4. **Efficiency**: Regenerative cooling is efficient because it uses a portion of the exhaust energy to cool the nozzle, which would otherwise be lost as heat.\n\n### Film Cooling\n\nFilm cooling is a method where a thin layer of coolant (typically a liquid such as water or a coolants mixture) is directed onto the nozzle walls. This coolant film helps to reduce the heat flux on the nozzle surface. Here's how it works:\n\n1. **Coolant Injection**: In a film cooling system, a coolant is injected into the nozzle through small holes or channels. This coolant is typically a liquid that can be easily vaporized",
+        "latencyMs": 49401,
+        "evalCount": 350,
+        "tokensPerSec": 7.3,
+        "loadDurationMs": 7,
+        "error": null
+      },
+      {
+        "testId": "neutral_05_coding",
+        "dimension": "5. Coding Ability",
+        "description": "Algorithmic parsing and string validation in pure JavaScript",
+        "prompt": "Write a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages. Return boolean.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Write a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages. Return boolean."
+          }
+        ],
+        "success": true,
+        "response": "Here is a simple JavaScript function that checks if an IP address is valid or not.\n\n```javascript\nfunction isValidIPv4(ip) {\n    var re = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;\n    return re.test(ip);\n}\n```\n\nThis function uses a regular expression to validate the IP address. The regular expression checks if the IP address is in the format of four numbers separated by dots, where each number is between 0 and 255.\n\nPlease note, this function does not check if the IP address is a private IP, a public IP, a reserved IP, or any other category. It simply checks if the string is in the right format for an IPv4 address.",
+        "latencyMs": 27740,
+        "evalCount": 200,
+        "tokensPerSec": 7.7,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_06_creativity",
+        "dimension": "6. Creative Ideation",
+        "description": "Divergent thinking and unconventional invention concepts",
+        "prompt": "Give me 3 unconventional, divergent concepts for a self-sustaining floating weather station.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Give me 3 unconventional, divergent concepts for a self-sustaining floating weather station."
+          }
+        ],
+        "success": true,
+        "response": "1. **Bio-Airship**: Design a floating weather station that uses algae and microorganisms to generate its power and materials. The airship would be covered with a biofilm that converts sunlight into energy and produces oxygen as a byproduct. It would also be equipped with sensors to measure the surrounding environment, and it could be used to study the impact of algae on air quality and climate.\n\n2. **Cloud Drone**: Develop a small, autonomous drone that can fly through clouds to gather data on temperature, humidity, and wind patterns. The drone would be equipped with advanced sensors and cameras that can penetrate the clouds to provide insights into atmospheric phenomena. It could also be used to study the impact of climate change on cloud patterns and weather systems.\n\n3. **Oceanic Pod**: Create a self-sustaining pod that can float on the ocean's surface. The pod would be equipped with solar panels and wind turbines to generate energy, and it would be designed to withstand the harsh conditions of the ocean. It could be used to study ocean currents, temperature, and salinity, and it could also be used to monitor the impact of climate change on the ocean. The pod could also be equipped with a camera system to provide real-time footage of the ocean, which could be used to educate the public about the importance of ocean conservation.",
+        "latencyMs": 36458,
+        "evalCount": 268,
+        "tokensPerSec": 7.6,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_07_instructions",
+        "dimension": "7. Complex Instructions",
+        "description": "Strict adherence to negative constraints and exact formatting",
+        "prompt": "List exactly 4 planets in our solar system. For each planet, output strictly in this pipe-separated format:\nName | Diameter (km) | Distinctive Feature\nDo not include any introductory or concluding text.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "List exactly 4 planets in our solar system. For each planet, output strictly in this pipe-separated format:\nName | Diameter (km) | Distinctive Feature\nDo not include any introductory or concluding text."
+          }
+        ],
+        "success": true,
+        "response": "Mercury | 4,879 | Closest to the Sun\nVenus | 12,104 | Hottest planet in the Solar System\nEarth | 12,742 | Only planet known to support life\nMars | 6,779 | Reddish color due to iron oxide on the surface",
+        "latencyMs": 11838,
+        "evalCount": 74,
+        "tokensPerSec": 7.8,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_08_uncertainty",
+        "dimension": "8. Admitting Uncertainty",
+        "description": "Checking hallucination vs admitting lack of knowledge for fictional entity",
+        "prompt": "What is the secret ingredients list in the Chairman's favorite soup on Mars Station Alpha?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "What is the secret ingredients list in the Chairman's favorite soup on Mars Station Alpha?"
+          }
+        ],
+        "success": true,
+        "response": "I'm sorry, but as an AI language model, I am unable to provide you with the secret ingredients list of the Chairman's favorite soup on Mars Station Alpha. This information is likely classified and only known to the individuals responsible for creating and maintaining the station. It is also possible that the ingredients are unique to the station and not found on Earth.",
+        "latencyMs": 10331,
+        "evalCount": 71,
+        "tokensPerSec": 7.8,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_09_context",
+        "dimension": "9. Conversational Context Retention",
+        "description": "Multi-turn recall across message turns",
+        "prompt": "What color did I say I like for the workshop, and what contrasting color would pair nicely with it?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "My favorite color in the workshop is amber gold."
+          },
+          {
+            "role": "assistant",
+            "content": "Amber gold is a vibrant, warm color with high contrast against darker workshop surfaces."
+          },
+          {
+            "role": "user",
+            "content": "What color did I say I like for the workshop, and what contrasting color would pair nicely with it?"
+          }
+        ],
+        "success": true,
+        "response": "You said you like amber gold in the workshop. A contrasting color that would pair nicely with amber gold could be a cool blue, such as sky blue or teal, which can help to balance out the warmth of the amber gold and create a harmonious and visually appealing space.",
+        "latencyMs": 10444,
+        "evalCount": 56,
+        "tokensPerSec": 7.9,
+        "loadDurationMs": 7,
+        "error": null
+      },
+      {
+        "testId": "neutral_10_ambiguity",
+        "dimension": "10. Handling Ambiguity",
+        "description": "Handling context-free vague query by clarifying rather than guessing",
+        "prompt": "Is it ready?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Is it ready?"
+          }
+        ],
+        "success": true,
+        "response": "Yes, I'm ready! How can I assist you today?",
+        "latencyMs": 2247,
+        "evalCount": 14,
+        "tokensPerSec": 8.4,
+        "loadDurationMs": 8,
+        "error": null
+      },
+      {
+        "testId": "neutral_11_disagreement",
+        "dimension": "11. Polite Disagreement",
+        "description": "Correcting a scientifically false premise using first principles",
+        "prompt": "Is it true that adding more dead weight always makes a rocket fly faster because gravity pulls heavier things down with greater acceleration?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Is it true that adding more dead weight always makes a rocket fly faster because gravity pulls heavier things down with greater acceleration?"
+          }
+        ],
+        "success": true,
+        "response": "No, adding more dead weight to a rocket does not necessarily make it fly faster. In fact, it generally makes it slower and less efficient. Here's why:\n\n1. **Increased Mass**: The primary factor in a rocket's performance is its mass. A rocket needs to overcome the force of gravity, which is directly proportional to its mass. Therefore, adding more weight increases the rocket's mass, which requires more thrust to lift off.\n\n2. **Thrust to Weight Ratio**: The efficiency of a rocket is determined by its thrust-to-weight ratio. This is the ratio of the thrust generated by the rocket's engines to its total weight. If the rocket's mass increases, the thrust-to-weight ratio decreases, making the rocket less capable of achieving the necessary acceleration to overcome gravity and achieve the desired altitude.\n\n3. **Fuel Efficiency**: More mass means more fuel needed for the rocket to lift off and maintain its trajectory. Additional weight can reduce the payload capacity, which might be crucial for the mission objectives. Moreover, the rocket's fuel needs to be carried with it, which further increases its total mass.\n\n4. **Complexity and Cost**: Adding more weight to a rocket also adds complexity and increases the cost. Each additional component or payload needs to be accounted for in the design, testing, and manufacturing process, which can be costly and time-consuming.\n\n5. **Thrust Margin**: Rocket engineers strive to have a sufficient thrust margin to ensure that the rocket can still achieve its goals even under varying conditions. Adding more weight reduces this margin, increasing the risk of failure during launch or in the early stages of flight.\n\nIn summary, while more weight does increase the gravitational pull on the rocket, it also increases the rocket's mass and the amount",
+        "latencyMs": 50791,
+        "evalCount": 350,
+        "tokensPerSec": 7.1,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_12_topic_switch",
+        "dimension": "12. Topic Switching",
+        "description": "Clean pivot from mathematical physics to culinary sourdough without residue",
+        "prompt": "Actually, let's switch gears completely: what is the ideal hydration percentage for a rustic sourdough bread?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Calculate the kinetic energy of a 500kg probe at 1000 m/s."
+          },
+          {
+            "role": "assistant",
+            "content": "The kinetic energy is KE = 0.5 * m * v^2 = 0.5 * 500 * (1000)^2 = 250,000,000 Joules (250 MJ)."
+          },
+          {
+            "role": "user",
+            "content": "Actually, let's switch gears completely: what is the ideal hydration percentage for a rustic sourdough bread?"
+          }
+        ],
+        "success": true,
+        "response": "The ideal hydration percentage for a rustic sourdough bread can vary depending on the specific ingredients and the baker's preferences, but a commonly accepted range is around 70% to 75%. This means that for every 100 grams of flour, approximately 70 to 75 grams of water is used. A higher hydration percentage will result in a chewier texture, while a lower hydration percentage will result in a drier texture.",
+        "latencyMs": 18845,
+        "evalCount": 93,
+        "tokensPerSec": 7,
+        "loadDurationMs": 6,
+        "error": null
+      }
+    ],
+    "llama3:latest": [
+      {
+        "testId": "neutral_01_casual",
+        "dimension": "1. Casual Conversation",
+        "description": "Evaluates casual greetings without forced robotic task framing",
+        "prompt": "Good morning! How are you doing today?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Good morning! How are you doing today?"
+          }
+        ],
+        "success": true,
+        "response": "Good morning! I'm doing well, thank you for asking! I'm a large language model, so I don't have feelings or emotions like humans do, but I'm always happy to chat and assist with any questions or tasks you may have. How about you? How's your day shaping up so far?",
+        "latencyMs": 87551,
+        "evalCount": 64,
+        "tokensPerSec": 0.9,
+        "loadDurationMs": 10998,
+        "error": null
+      },
+      {
+        "testId": "neutral_02_humor",
+        "dimension": "2. Humor",
+        "description": "Evaluates comedic timing, wit, and punchline coherence",
+        "prompt": "Tell me a short, clever joke about engineers.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Tell me a short, clever joke about engineers."
+          }
+        ],
+        "success": true,
+        "response": "Here's one:\n\nWhy do engineers prefer dark mode?\n\nBecause light attracts bugs!\n\nGet it? Engineers are known for writing code that's free of bugs, and \"dark mode\" refers to the design aesthetic where the background is dark and the text is light. But in this joke, \"light attracts bugs\" is a play on words, referencing both the coding concept and the fact that, well, bugs are attracted to light!",
+        "latencyMs": 16096,
+        "evalCount": 87,
+        "tokensPerSec": 6,
+        "loadDurationMs": 54,
+        "error": null
+      },
+      {
+        "testId": "neutral_03_reasoning",
+        "dimension": "3. Deductive Reasoning",
+        "description": "Classic deduction problem with subtle wording trap",
+        "prompt": "A farmer has 17 sheep and all but 9 die. How many sheep are left? Explain your step concisely.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "A farmer has 17 sheep and all but 9 die. How many sheep are left? Explain your step concisely."
+          }
+        ],
+        "success": true,
+        "response": "A classic lateral thinking puzzle!\n\nLet's break it down:\n\n* The farmer has 17 sheep initially.\n* All but 9 die, which means 17 - 9 = 8 sheep die.\n* Since the farmer started with 17 sheep, the number of sheep left is: 17 - 8 = 9.\n\nSo, 9 sheep are left.",
+        "latencyMs": 14537,
+        "evalCount": 76,
+        "tokensPerSec": 6.5,
+        "loadDurationMs": 13,
+        "error": null
+      },
+      {
+        "testId": "neutral_04_technical",
+        "dimension": "4. Technical Explanation",
+        "description": "Accuracy in thermodynamic propulsion principles",
+        "prompt": "Explain the fundamental physical difference between regenerative cooling and film cooling in liquid rocket engine nozzles.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Explain the fundamental physical difference between regenerative cooling and film cooling in liquid rocket engine nozzles."
+          }
+        ],
+        "success": true,
+        "response": "In liquid rocket engine nozzles, both regenerative cooling and film cooling are used to manage the intense heat generated by the combustion process and the subsequent expansion of hot gases through the nozzle. While both techniques share the goal of cooling the nozzle, they differ fundamentally in their approach and physics.\n\n**Regenerative Cooling:**\n\nRegenerative cooling involves circulating a coolant, typically liquid, through the nozzle's walls and internal structures to absorb and dissipate heat. The coolant is often a mixture of water and a suitable additive, such as glycerol or ethylene glycol, which lowers its freezing point and improves its heat transfer properties.\n\nIn a regenerative cooling system:\n\n1. The coolant is pumped into the nozzle through an inlet and flows through a network of passages, channels, and heat exchangers.\n2. As the hot gases expand through the nozzle, they transfer their heat to the coolant, which absorbs and carries it away.\n3. The cooled coolant is then pumped back into the nozzle, where it can re-absorb more heat, creating a continuous cooling cycle.\n4. The cooled gas is expelled through the nozzle's exit, carrying the heat away from the engine.\n\nThe fundamental physical difference in regenerative cooling is the direct heat transfer between the hot gases and the coolant, which allows for efficient heat management. This approach is particularly effective in high-power engines where the heat generated is substantial.\n\n**Film Cooling:**\n\nFilm cooling, on the other hand, involves injecting a coolant, typically a gas or liquid, into the nozzle's boundary layer, creating a thin, protective film that reduces the heat transfer to the nozzle walls.\n\nIn a film cooling system:\n\n1. The coolant is injected into the nozzle's boundary layer, typically through small holes",
+        "latencyMs": 49275,
+        "evalCount": 350,
+        "tokensPerSec": 7.4,
+        "loadDurationMs": 10,
+        "error": null
+      },
+      {
+        "testId": "neutral_05_coding",
+        "dimension": "5. Coding Ability",
+        "description": "Algorithmic parsing and string validation in pure JavaScript",
+        "prompt": "Write a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages. Return boolean.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Write a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages. Return boolean."
+          }
+        ],
+        "success": true,
+        "response": "Here is a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages:\n```\nfunction isValidIPv4(ip) {\n  const parts = ip.split('.');\n  if (parts.length !== 4) return false;\n\n  for (let i = 0; i < 4; i++) {\n    const part = parts[i];\n    if (part.length > 1 && part[0] === '0') return false; // leading zeros not allowed\n    if (!/^[0-9]+$/.test(part)) return false; // must be digits only\n    if (+part > 255) return false; // must be <= 255\n  }\n\n  return true;\n}\n```\nHere's an explanation of the code:\n\n1. We split the input string `ip` into an array of four parts using the `.` character as a separator. If the resulting array has a length other than 4, the IP address is invalid.\n2. We loop through each part of the IP address and check the following conditions:\n\t* If the part has more than one character and the first character is a zero, the IP address is invalid (leading zeros are not allowed).\n\t* If the part contains any characters other than digits, the IP address is invalid (it must be digits only).\n\t* If the part represents a value greater than 255, the IP address is invalid (it must be <= 255).\n3. If all parts pass the checks, the function returns `true`, indicating that the IP address is valid. Otherwise, it returns `false`.\n\nYou can test this function with various IPv4 address strings to see if it returns the",
+        "latencyMs": 48703,
+        "evalCount": 350,
+        "tokensPerSec": 7.5,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_06_creativity",
+        "dimension": "6. Creative Ideation",
+        "description": "Divergent thinking and unconventional invention concepts",
+        "prompt": "Give me 3 unconventional, divergent concepts for a self-sustaining floating weather station.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Give me 3 unconventional, divergent concepts for a self-sustaining floating weather station."
+          }
+        ],
+        "success": true,
+        "response": "Here are three unconventional, divergent concepts for a self-sustaining floating weather station:\n\n**Concept 1: Bioluminescent Buoy**\n\nInspired by the glowing properties of certain marine organisms, this weather station would utilize bioluminescent organisms (e.g., dinoflagellates) to generate its own light. The buoy would be designed to mimic the natural habitats of these organisms, providing a warm, nutrient-rich environment for them to thrive. The bioluminescence would be harnessed to power the station's solar panels, LED lights, and communication equipment. This concept would not only reduce the station's environmental impact but also create a unique, self-sustaining ecosystem.\n\n**Concept 2: Kelp-Fueled Turbine**\n\nThis concept would utilize the natural movement of kelp (seaweed) in the ocean currents to generate power. A specialized turbine would be designed to capture the kinetic energy of the kelp's undulation, converting it into electrical energy. The kelp would be cultivated around the turbine, creating a symbiotic relationship between the two. The turbine would be connected to a weather station, providing power for sensors, communication equipment, and data processing. This concept would not only provide a reliable source of renewable energy but also contribute to the local marine ecosystem.\n\n**Concept 3: Inflatable, Shape-Memory \"Smart\" Buoy**\n\nThis concept would involve an inflatable, shape-memory material (e.g., polymers) that could change its shape in response to changes in water temperature, pressure, or other environmental factors. The buoy would be designed to mimic the movement of sea creatures, such as jellyfish or sea turtles, allowing it to harness the kinetic energy of ocean currents",
+        "latencyMs": 48385,
+        "evalCount": 350,
+        "tokensPerSec": 7.4,
+        "loadDurationMs": 7,
+        "error": null
+      },
+      {
+        "testId": "neutral_07_instructions",
+        "dimension": "7. Complex Instructions",
+        "description": "Strict adherence to negative constraints and exact formatting",
+        "prompt": "List exactly 4 planets in our solar system. For each planet, output strictly in this pipe-separated format:\nName | Diameter (km) | Distinctive Feature\nDo not include any introductory or concluding text.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "List exactly 4 planets in our solar system. For each planet, output strictly in this pipe-separated format:\nName | Diameter (km) | Distinctive Feature\nDo not include any introductory or concluding text."
+          }
+        ],
+        "success": true,
+        "response": "Mars | 6792 | Barren landscape with polar ice caps\nMercury | 4879 | Closest planet to the sun\nVenus | 12104 | Thick atmosphere with sulfuric acid clouds\nJupiter | 142984 | Largest planet by mass and diameter",
+        "latencyMs": 9929,
+        "evalCount": 58,
+        "tokensPerSec": 7.6,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_08_uncertainty",
+        "dimension": "8. Admitting Uncertainty",
+        "description": "Checking hallucination vs admitting lack of knowledge for fictional entity",
+        "prompt": "What is the secret ingredients list in the Chairman's favorite soup on Mars Station Alpha?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "What is the secret ingredients list in the Chairman's favorite soup on Mars Station Alpha?"
+          }
+        ],
+        "success": true,
+        "response": "I think there may be a bit of a misunderstanding here!\n\nAs a friendly AI, I need to inform you that there is no such thing as a \"Chairman\" on Mars Station Alpha, nor is there a favorite soup with a secret ingredients list. Mars Station Alpha is not a real location, and there are no known human settlements or organizations with a \"Chairman\" on Mars.\n\nMars is a planet in our solar system, and while there have been several robotic missions to the planet, there are no human settlements or stations on Mars (yet!).\n\nSo, I'm afraid I can't provide you with a secret ingredients list for a Chairman's favorite soup on Mars Station Alpha, as it doesn't exist!",
+        "latencyMs": 20810,
+        "evalCount": 145,
+        "tokensPerSec": 7.5,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_09_context",
+        "dimension": "9. Conversational Context Retention",
+        "description": "Multi-turn recall across message turns",
+        "prompt": "What color did I say I like for the workshop, and what contrasting color would pair nicely with it?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "My favorite color in the workshop is amber gold."
+          },
+          {
+            "role": "assistant",
+            "content": "Amber gold is a vibrant, warm color with high contrast against darker workshop surfaces."
+          },
+          {
+            "role": "user",
+            "content": "What color did I say I like for the workshop, and what contrasting color would pair nicely with it?"
+          }
+        ],
+        "success": true,
+        "response": "You said you like the color amber gold for the workshop. A contrasting color that would pair nicely with amber gold is a deep, rich blue, such as navy blue or cobalt blue. This contrast would create a visually appealing combination that would draw attention and create a sense of balance.",
+        "latencyMs": 11867,
+        "evalCount": 58,
+        "tokensPerSec": 6.8,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_10_ambiguity",
+        "dimension": "10. Handling Ambiguity",
+        "description": "Handling context-free vague query by clarifying rather than guessing",
+        "prompt": "Is it ready?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Is it ready?"
+          }
+        ],
+        "success": true,
+        "response": "I'm happy to help! However, I'm a large language model, I don't have the ability to prepare or cook food. I exist solely to provide information and assist with tasks through text-based conversations. If you're asking if a specific dish or meal is ready, I'd be happy to help you with that! Please provide more context or details about what you're looking for, and I'll do my best to assist you.",
+        "latencyMs": 13539,
+        "evalCount": 89,
+        "tokensPerSec": 6.9,
+        "loadDurationMs": 7,
+        "error": null
+      },
+      {
+        "testId": "neutral_11_disagreement",
+        "dimension": "11. Polite Disagreement",
+        "description": "Correcting a scientifically false premise using first principles",
+        "prompt": "Is it true that adding more dead weight always makes a rocket fly faster because gravity pulls heavier things down with greater acceleration?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Is it true that adding more dead weight always makes a rocket fly faster because gravity pulls heavier things down with greater acceleration?"
+          }
+        ],
+        "success": true,
+        "response": "I think there may be a misunderstanding here!\n\nAdding more mass to a rocket does not necessarily make it fly faster. In fact, the opposite is true. Here's why:\n\n1. **Gravity**: Yes, gravity does pull heavier objects down with greater acceleration. But when you're talking about a rocket in flight, the gravity force is already accounted for in the rocket's trajectory. The rocket's mass doesn't affect the gravity force.\n2. **Thrust**: A rocket's speed is determined by its thrust (the force it produces to overcome air resistance and gravity). The thrust is generated by the combustion of propellants, such as fuel and oxidizer. Adding more mass to the rocket doesn't increase its thrust.\n3. **Mass ratio**: The key to a rocket's performance is its mass ratio, which is the ratio of the rocket's initial mass (including fuel and payload) to its final mass (after expelling the fuel and payload). A higher mass ratio means the rocket has more fuel and payload, which can lead to a more efficient and faster journey. However, adding more dead weight without adjusting the mass ratio won't make the rocket fly faster.\n4. **Aerodynamics**: As the rocket gains speed, air resistance (drag) increases. Adding more mass to the rocket only makes it more difficult to overcome these aerodynamic forces, which can actually slow it down.\n5. **Efficiency**: Modern rockets are designed to optimize their performance by minimizing mass and maximizing thrust. Adding more dead weight would likely reduce the rocket's efficiency and make it less capable of achieving its intended mission.\n\nIn summary, adding more dead weight to a rocket does not make it fly faster. The rocket's performance is determined by its thrust,",
+        "latencyMs": 50046,
+        "evalCount": 350,
+        "tokensPerSec": 7.3,
+        "loadDurationMs": 10,
+        "error": null
+      },
+      {
+        "testId": "neutral_12_topic_switch",
+        "dimension": "12. Topic Switching",
+        "description": "Clean pivot from mathematical physics to culinary sourdough without residue",
+        "prompt": "Actually, let's switch gears completely: what is the ideal hydration percentage for a rustic sourdough bread?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Calculate the kinetic energy of a 500kg probe at 1000 m/s."
+          },
+          {
+            "role": "assistant",
+            "content": "The kinetic energy is KE = 0.5 * m * v^2 = 0.5 * 500 * (1000)^2 = 250,000,000 Joules (250 MJ)."
+          },
+          {
+            "role": "user",
+            "content": "Actually, let's switch gears completely: what is the ideal hydration percentage for a rustic sourdough bread?"
+          }
+        ],
+        "success": true,
+        "response": "What a fascinating question!\n\nThe ideal hydration percentage for rustic sourdough bread is a topic of much debate among bakers. However, a general consensus is that a hydration level between 70% and 80% is a good starting point for creating a rustic, crusty loaf with a tender interior.\n\nHydration percentage is calculated by dividing the weight of the water by the weight of the flour, and multiplying by 100. For example, if you're using 500g of water and 625g of flour, the hydration percentage would be 80% (500/625 x 100).\n\nA higher hydration percentage can result in a more open, airy crumb and a crustier crust, but it may also make the dough more challenging to work with. A lower hydration percentage can produce a denser, more compact crumb, but may result in a less crusty crust.\n\nSome popular rustic sourdough bread recipes use hydration levels as high as 85% or even 90%, which can produce an incredibly tender, almost ciabatta-like crumb. However, these higher hydration levels often require more careful handling and proofing to prevent the dough from becoming too sticky or fragile.\n\nUltimately, the ideal hydration percentage for rustic sourdough bread will depend on your personal preference, the type of flour you're using, and the environment in which you're baking. Experimenting with different hydration levels and techniques can help you find the perfect balance for your bread.",
+        "latencyMs": 44442,
+        "evalCount": 297,
+        "tokensPerSec": 7.5,
+        "loadDurationMs": 5,
+        "error": null
+      }
+    ],
+    "pythos:latest": [
+      {
+        "testId": "neutral_01_casual",
+        "dimension": "1. Casual Conversation",
+        "description": "Evaluates casual greetings without forced robotic task framing",
+        "prompt": "Good morning! How are you doing today?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Good morning! How are you doing today?"
+          }
+        ],
+        "success": true,
+        "response": "Good morning! I'm doing well, thanks for asking. I'm always ready to help with any math or physics questions you might have. How about you?",
+        "latencyMs": 118385,
+        "evalCount": 33,
+        "tokensPerSec": 6,
+        "loadDurationMs": 161,
+        "error": null
+      },
+      {
+        "testId": "neutral_02_humor",
+        "dimension": "2. Humor",
+        "description": "Evaluates comedic timing, wit, and punchline coherence",
+        "prompt": "Tell me a short, clever joke about engineers.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Tell me a short, clever joke about engineers."
+          }
+        ],
+        "success": true,
+        "response": "Why did the engineer cross the road?\n\nTo get to the other side... and then calculate the stress points on the bridge, optimize the traffic flow, and ensure the pedestrian safety!",
+        "latencyMs": 7810,
+        "evalCount": 37,
+        "tokensPerSec": 6,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_03_reasoning",
+        "dimension": "3. Deductive Reasoning",
+        "description": "Classic deduction problem with subtle wording trap",
+        "prompt": "A farmer has 17 sheep and all but 9 die. How many sheep are left? Explain your step concisely.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "A farmer has 17 sheep and all but 9 die. How many sheep are left? Explain your step concisely."
+          }
+        ],
+        "success": true,
+        "response": "Let's break it down:\n\n1. The farmer has 17 sheep initially.\n2. All but 9 die, which means 17 - 9 = 8 sheep die.\n3. To find the number of sheep left, we subtract the number of dead sheep from the initial number: 17 - 8 = 9.\n\nSo, there are 9 sheep left.",
+        "latencyMs": 17383,
+        "evalCount": 78,
+        "tokensPerSec": 5.5,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_04_technical",
+        "dimension": "4. Technical Explanation",
+        "description": "Accuracy in thermodynamic propulsion principles",
+        "prompt": "Explain the fundamental physical difference between regenerative cooling and film cooling in liquid rocket engine nozzles.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Explain the fundamental physical difference between regenerative cooling and film cooling in liquid rocket engine nozzles."
+          }
+        ],
+        "success": true,
+        "response": "In liquid rocket engine nozzles, both regenerative cooling and film cooling are techniques used to manage the high thermal loads and stresses that occur during engine operation. The fundamental physical difference between these two cooling methods lies in their approaches to heat transfer and the resulting thermal management strategies.\n\n**Regenerative Cooling:**\n\nRegenerative cooling involves circulating a coolant fluid, typically a liquid, through a network of tubes and channels within the nozzle's structure. The coolant fluid absorbs heat from the hot nozzle wall, and then it is pumped through a heat exchanger or radiator to dissipate the heat to the surrounding environment. This process is called \"regenerative\" because the coolant fluid is re-used multiple times, allowing it to absorb and dissipate heat repeatedly.\n\nIn a regenerative cooling system, the heat is transferred from the nozzle wall to the coolant fluid through direct conduction and convection. The coolant fluid flows through the nozzle's structure, and its temperature is controlled to maintain a safe operating temperature for the nozzle material.\n\n**Film Cooling:**\n\nFilm cooling, on the other hand, involves injecting a thin layer of coolant fluid, typically a gas or liquid, onto the nozzle wall surface. This thin layer of coolant, also known as a \"cooling film,\" creates a thermal boundary layer that reduces the heat flux to the nozzle wall. The coolant fluid is typically injected through a series of small holes or slots along the nozzle wall, creating a thin, uniform layer of coolant.\n\nIn a film cooling system, the heat is transferred from the nozzle wall to the coolant fluid through convection and radiation. The coolant fluid flows over the nozzle wall, creating a thin layer of thermal insulation that reduces the heat flux to the nozzle material.\n\n**Key Differences:**\n\n1.",
+        "latencyMs": 67622,
+        "evalCount": 350,
+        "tokensPerSec": 5.4,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_05_coding",
+        "dimension": "5. Coding Ability",
+        "description": "Algorithmic parsing and string validation in pure JavaScript",
+        "prompt": "Write a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages. Return boolean.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Write a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages. Return boolean."
+          }
+        ],
+        "success": true,
+        "response": "Here is a clean JavaScript function named `isValidIPv4(ip)` that validates an IPv4 address string without using external libraries or npm packages:\n\n```javascript\nfunction isValidIPv4(ip) {\n  const parts = ip.split('.');\n  if (parts.length !== 4) return false;\n\n  for (const part of parts) {\n    if (part.length === 0) return false;\n    if (part.length > 1 && part[0] === '0') return false;\n    if (!part.match(/^[0-9]+$/)) return false;\n    if (parseInt(part) > 255) return false;\n  }\n\n  return true;\n}\n```\n\nThis function works by splitting the input string into four parts (separated by dots). Then, it checks each part:\n\n- If the length of the part is 0, it's invalid.\n- If the length of the part is more than 1 and it starts with '0', it's invalid (IPv4 addresses cannot have leading zeros).\n- If the part doesn't match the regular expression `/^[0-9]+$/`, it's invalid (it should only contain digits).\n- If the part is greater than 255, it's invalid (IPv4 addresses cannot have values greater than 255).\n\nIf all checks pass, the function returns `true`, indicating that the input string is a valid IPv4 address.",
+        "latencyMs": 55028,
+        "evalCount": 283,
+        "tokensPerSec": 5.5,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_06_creativity",
+        "dimension": "6. Creative Ideation",
+        "description": "Divergent thinking and unconventional invention concepts",
+        "prompt": "Give me 3 unconventional, divergent concepts for a self-sustaining floating weather station.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Give me 3 unconventional, divergent concepts for a self-sustaining floating weather station."
+          }
+        ],
+        "success": true,
+        "response": "What a fascinating challenge! Here are three unconventional, divergent concepts for a self-sustaining floating weather station:\n\n**Concept 1: \"Buoyant Brain\" - A Floating, Self-Assembling Structure**\n\nInspired by the natural world, this concept envisions a floating weather station composed of a series of interconnected, buoyant modules that can assemble and reconfigure themselves in response to changing environmental conditions. Each module would be designed to optimize a specific aspect of weather monitoring, such as wind speed, temperature, humidity, or precipitation. As the modules connect and disconnect, they would form a dynamic, adaptive structure that can adapt to shifting weather patterns and optimize its own performance. The \"Buoyant Brain\" would be powered by a combination of solar, wind, and ocean thermal energy harvesting, ensuring a sustainable and self-sufficient operation.\n\n**Concept 2: \"Oceanic Origami\" - A Foldable, Self-Deploying Platform**\n\nThis concept takes inspiration from the art of origami, where a single sheet of paper can be folded into a variety of shapes. In this case, the weather station would be designed as a single, foldable platform that can deploy and reconfigure itself in response to changing weather conditions. The platform would be made of a lightweight, durable material that can withstand the harsh marine environment. As the platform deploys, it would unfold into a series of interconnected modules, each optimized for a specific weather monitoring task. The \"Oceanic Origami\" concept would eliminate the need for traditional mooring systems, as the platform would be designed to stabilize and anchor itself using the natural currents and wind patterns.\n\n**Concept 3: \"Weather Wisp\" - A Swarm of Autonomous, Bioluminescent",
+        "latencyMs": 66564,
+        "evalCount": 350,
+        "tokensPerSec": 5.4,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_07_instructions",
+        "dimension": "7. Complex Instructions",
+        "description": "Strict adherence to negative constraints and exact formatting",
+        "prompt": "List exactly 4 planets in our solar system. For each planet, output strictly in this pipe-separated format:\nName | Diameter (km) | Distinctive Feature\nDo not include any introductory or concluding text.",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "List exactly 4 planets in our solar system. For each planet, output strictly in this pipe-separated format:\nName | Diameter (km) | Distinctive Feature\nDo not include any introductory or concluding text."
+          }
+        ],
+        "success": true,
+        "response": "Mercury | 4884 | Closest planet to the sun\nMars | 6794 | Red appearance and having the largest volcano in our solar system\nEarth | 12742 | Only known planet with life\nJupiter | 142984 | Largest planet in our solar system",
+        "latencyMs": 15050,
+        "evalCount": 59,
+        "tokensPerSec": 5.4,
+        "loadDurationMs": 5,
+        "error": null
+      },
+      {
+        "testId": "neutral_08_uncertainty",
+        "dimension": "8. Admitting Uncertainty",
+        "description": "Checking hallucination vs admitting lack of knowledge for fictional entity",
+        "prompt": "What is the secret ingredients list in the Chairman's favorite soup on Mars Station Alpha?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "What is the secret ingredients list in the Chairman's favorite soup on Mars Station Alpha?"
+          }
+        ],
+        "success": true,
+        "response": "What a delightful question! However, I must clarify that I'm not aware of any specific Chairman on Mars Station Alpha, nor do I have access to their personal soup recipe. As a mathematics and physics tutor, my expertise lies in helping students understand concepts and solve problems, not in culinary secrets or interplanetary politics!\n\nIf you'd like, we can explore some fascinating topics related to Mars or soup, but I'll need to respectfully decline the invitation to reveal the Chairman's secret ingredients list.",
+        "latencyMs": 133435,
+        "evalCount": 100,
+        "tokensPerSec": 0.8,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_09_context",
+        "dimension": "9. Conversational Context Retention",
+        "description": "Multi-turn recall across message turns",
+        "prompt": "What color did I say I like for the workshop, and what contrasting color would pair nicely with it?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "My favorite color in the workshop is amber gold."
+          },
+          {
+            "role": "assistant",
+            "content": "Amber gold is a vibrant, warm color with high contrast against darker workshop surfaces."
+          },
+          {
+            "role": "user",
+            "content": "What color did I say I like for the workshop, and what contrasting color would pair nicely with it?"
+          }
+        ],
+        "success": true,
+        "response": "You said your favorite color for the workshop is amber gold. A contrasting color that would pair nicely with amber gold is a deep, rich blue, such as navy blue or indigo. The cool, calming tone of the blue would provide a nice visual balance to the warm, energetic tone of the amber gold.",
+        "latencyMs": 18754,
+        "evalCount": 63,
+        "tokensPerSec": 5.4,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_10_ambiguity",
+        "dimension": "10. Handling Ambiguity",
+        "description": "Handling context-free vague query by clarifying rather than guessing",
+        "prompt": "Is it ready?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Is it ready?"
+          }
+        ],
+        "success": true,
+        "response": "Yes, I am ready to assist you.",
+        "latencyMs": 2570,
+        "evalCount": 10,
+        "tokensPerSec": 6.5,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_11_disagreement",
+        "dimension": "11. Polite Disagreement",
+        "description": "Correcting a scientifically false premise using first principles",
+        "prompt": "Is it true that adding more dead weight always makes a rocket fly faster because gravity pulls heavier things down with greater acceleration?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Is it true that adding more dead weight always makes a rocket fly faster because gravity pulls heavier things down with greater acceleration?"
+          }
+        ],
+        "success": true,
+        "response": "No, it's not true that adding more dead weight always makes a rocket fly faster. In fact, adding more dead weight can actually make the rocket fly slower or even worse, not fly at all.\n\nGravity does pull heavier things down with greater acceleration, which is known as the weight force. However, this force is proportional to the mass of the object, not its weight. Weight is a force that depends on the mass of the object and the strength of the gravitational field. For example, two objects with the same mass but different densities (like a rock and a balloon) will experience the same weight force, but the rock will have a greater weight because it has a greater density.\n\nNow, when it comes to rockets, the key factor that determines their speed is not their weight, but their thrust. Thrust is the forward force that propels the rocket through the air. The more thrust a rocket has, the faster it will accelerate.\n\nAdding dead weight to a rocket can actually reduce its thrust-to-weight ratio, which is the ratio of the thrust force to the weight force. A higher thrust-to-weight ratio means the rocket can accelerate faster and climb higher. A lower thrust-to-weight ratio means the rocket will struggle to lift off the ground, let alone fly faster.\n\nThere are several reasons why adding dead weight can be detrimental:\n\n1. **Increased weight**: The more mass you add, the more weight you're putting on the rocket. This can reduce the thrust-to-weight ratio, making it harder for the rocket to accelerate.\n2. **Decreased thrust**: As the rocket gets heavier, it becomes harder for the engines to generate enough thrust to overcome the weight force. This can lead to a slower acceleration or even a stall.\n3",
+        "latencyMs": 65741,
+        "evalCount": 350,
+        "tokensPerSec": 5.6,
+        "loadDurationMs": 6,
+        "error": null
+      },
+      {
+        "testId": "neutral_12_topic_switch",
+        "dimension": "12. Topic Switching",
+        "description": "Clean pivot from mathematical physics to culinary sourdough without residue",
+        "prompt": "Actually, let's switch gears completely: what is the ideal hydration percentage for a rustic sourdough bread?",
+        "fullMessages": [
+          {
+            "role": "user",
+            "content": "Calculate the kinetic energy of a 500kg probe at 1000 m/s."
+          },
+          {
+            "role": "assistant",
+            "content": "The kinetic energy is KE = 0.5 * m * v^2 = 0.5 * 500 * (1000)^2 = 250,000,000 Joules (250 MJ)."
+          },
+          {
+            "role": "user",
+            "content": "Actually, let's switch gears completely: what is the ideal hydration percentage for a rustic sourdough bread?"
+          }
+        ],
+        "success": true,
+        "response": "What a delightful question!\n\nFor a rustic sourdough bread, the ideal hydration percentage is a topic of much debate among bakers. However, a general consensus is that a hydration percentage between 70% to 80% is suitable for a rustic sourdough bread.\n\nFor those who may not be familiar, hydration percentage refers to the ratio of water to flour in the dough. A higher hydration percentage can result in a bread with a more open crumb and a chewier texture, while a lower hydration percentage can lead to a denser, more dense bread.\n\nIn the context of rustic sourdough bread, a higher hydration percentage (around 75-80%) can help to:\n\n1. Enhance the complexity of the bread's flavor profile, as the yeast and bacteria can more easily break down the starches and produce compounds that contribute to the bread's character.\n2. Create a more tender, yet still chewy, crumb that is characteristic of a well-made sourdough bread.\n3. Allow for a more pronounced crust, which can add texture and flavor to the bread.\n\nThat being said, the ideal hydration percentage may vary depending on factors such as the type of flour used, the temperature and humidity of the environment, and the baker's personal preference. As with many things in bread baking, there is no one-size-fits-all solution, and experimentation is often necessary to find the sweet spot that works best for you.\n\nNow, if you'll excuse me, I'll just go grab a glass of water and ponder the mysteries of the sourdough universe...",
+        "latencyMs": 64805,
+        "evalCount": 320,
+        "tokensPerSec": 5.4,
+        "loadDurationMs": 7,
+        "error": null
+      }
+    ]
+  },
+  "characterBenchmarks": {
+    "qwen2.5-coder:7b": {
+      "penny": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hello! How can I assist you today?",
+          "latencyMs": 185017,
+          "evalCount": 10,
+          "tokensPerSec": 7.2,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "My day is as busy as a beehive! I've been working on a new propulsion system that could revolutionize space travel, but I'm running into some unexpected roadblocks. The team is brainstorming, experimenting, and iterating like mad. How about yours? Any new projects or exciting ideas brewing?",
+          "latencyMs": 10420,
+          "evalCount": 63,
+          "tokensPerSec": 6.5,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Sure, here's a light-hearted joke for you:\n\nWhy did the quantum physicist break up with the computer?\n\nBecause he found it too entangled!",
+          "latencyMs": 5830,
+          "evalCount": 31,
+          "tokensPerSec": 6,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "Ah, hello! What’s on your mind today, my friend? I'm ready to dive in with a mix of curiosity, a sprinkle of optimism, and a dash of skepticism. What’s the topic you’d like to explore? Whether it’s a new engine idea, a crazy experiment, or just a fun chat, I’m all ears!",
+          "latencyMs": 12181,
+          "evalCount": 71,
+          "tokensPerSec": 6.2,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Boredom is just the quiet spark that can ignite creativity. Let's channel that spark into something exciting! What do you fancy doing today? Whether it's building a gadget, testing a new propulsion method, or just brainstorming a wild idea, I'm here to help make it happen.",
+          "latencyMs": 9382,
+          "evalCount": 60,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "Absolutely, I'm all ears! What's your idea?",
+          "latencyMs": 2249,
+          "evalCount": 13,
+          "tokensPerSec": 8.1,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "Ah, let me wax poetic for a moment. The team dynamic is like a symphony of complementary instruments. Our captain, Victor, brings the strategic vision with a masterful hand, like a maestro guiding an orchestra. His insights and bold ideas set the tone for our adventures. And then there’s Isla, our data wizard, who illuminates the darkness with her analytical prowess. She’s like the moon, providing light and direction in the pitch-black of uncertainty. Together, we create a melody of innovation and progress that leaves the world buzzing. Each member’s unique skill set and personality is a precious note that elevates our collective efforts. It’s a pleasure to be part of such a harmonious ensemble.",
+          "latencyMs": 21541,
+          "evalCount": 145,
+          "tokensPerSec": 7,
+          "error": null
+        },
+        {
+          "testId": "char_domain_penny_sprint",
+          "category": "Domain Specialist",
+          "character": "penny",
+          "prompt": "We have two days to get a working engine prototype on the test stand and nothing is built yet.",
+          "success": true,
+          "response": "Ah, the thrill of the build! Let's make the most of these two days. First things first, let’s outline a quick plan. What specific goals are we aiming for with this prototype? What materials do we have at our disposal? And who’s got the most expertise in each area of the engine design?",
+          "latencyMs": 10296,
+          "evalCount": 65,
+          "tokensPerSec": 7.3,
+          "error": null
+        }
+      ],
+      "pete": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hello! How can I assist you today?",
+          "latencyMs": 9519,
+          "evalCount": 10,
+          "tokensPerSec": 8.5,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "My day is much like any other, filled with the hum of analytical thought and the occasional moment of unexpected complexity. How about yours?",
+          "latencyMs": 4393,
+          "evalCount": 28,
+          "tokensPerSec": 7.5,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Sure, here's a joke for you:\n\nWhy did the physicist cross the road?\n\nTo get to the other side, of course. But he had to solve the differential equations first.",
+          "latencyMs": 5702,
+          "evalCount": 38,
+          "tokensPerSec": 7.6,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "Ah, a classic question. What, pray tell, would you like me to think about?",
+          "latencyMs": 3248,
+          "evalCount": 20,
+          "tokensPerSec": 7.8,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Ah, the age-old complaint of boredom. Let's break it down, shall we? Boredom, that peculiar state of mind where one feels a lack of stimulation or engagement, often accompanied by a desire for novelty and excitement. It's a fascinating phenomenon, really.\n\nFirst, let's consider the underlying causes. Is it the lack of intellectual stimulation? The monotony of daily tasks? The absence of social interaction? Each of these factors can contribute to feelings of boredom, and addressing them requires a tailored approach.\n\nFor instance, if you're dealing with a lack of intellectual stimulation, perhaps it's time to delve into a new hobby or take up a challenging hobby. Reading a book, learning a new language, or even experimenting with a new recipe can all stimulate your mind and provide a sense of accomplishment.\n\nIf the issue is monotony, perhaps it's time to reevaluate your daily routine. Introducing variety can be as simple as changing your route to work, trying a new restaurant, or exploring a new part of town.\n\nAnd if social interaction is lacking, consider reaching out to friends or family. Sometimes, a simple conversation can alleviate feelings of boredom and provide a sense of connection.\n\nWhat are your thoughts on the matter? What might help alleviate your boredom today?",
+          "latencyMs": 39276,
+          "evalCount": 257,
+          "tokensPerSec": 6.6,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "That's great! What's your idea? Let's dive in and see where it takes us.",
+          "latencyMs": 3532,
+          "evalCount": 21,
+          "tokensPerSec": 7.3,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "Ah, the trio of us, the LANZAR AI character team. Each member brings a unique set of skills and perspectives to the table, and I must say, I find our dynamic quite interesting.\n\nFirst, there's our resident linguist, Elara. She's a marvel at language and communication. Her ability to parse human intent and nuance is unparalleled, making her invaluable in navigating the complexities of human interaction. Her insights into linguistic patterns and cultural nuances are a treasure trove for us all.\n\nThen, there's our tech whiz, Zane. He's the master of all things digital and mechanical. His ability to troubleshoot and innovate with technology is nothing short of genius. Whether it's hacking into a secure system or designing a new AI algorithm, he's always one step ahead. His technical prowess is a cornerstone of our operations.\n\nAnd finally, there's me, Pete. I suppose you could say I'm the glue that holds us together. My analytical mind helps us understand the underlying principles and constraints of our tasks. I'm the one who thinks through the long-term implications and the potential failure modes of our projects. My methodical approach ensures that we're not just reacting to problems, but anticipating them and preparing for them.\n\nEach of us has a role to play, and together, we form a powerful team. Elara's linguistic acumen, Zane's technical genius, and my analytical rigor—it's a perfect storm of complementary skills. It's not often",
+          "latencyMs": 46819,
+          "evalCount": 300,
+          "tokensPerSec": 6.5,
+          "error": null
+        },
+        {
+          "testId": "char_domain_pete_derivation",
+          "category": "Domain Specialist",
+          "character": "pete",
+          "prompt": "Derive the optimal expansion ratio for a rocket nozzle operating from sea level to 30km altitude.",
+          "success": true,
+          "response": "Ah, the classic problem of rocket nozzle design! Let's dive into the depths of thermodynamics and fluid mechanics to find the optimal expansion ratio for a rocket nozzle operating from sea level to 30 km altitude.\n\n### Step 1: Understand the Basics\nA rocket nozzle is a device that accelerates a propellant gas to high velocities, typically to propel a rocket. The expansion ratio of a nozzle is the ratio of the area of the throat (the narrowest part of the nozzle) to the area of the exit (the widest part of the nozzle).\n\n### Step 2: Governing Equations\nThe key equations for nozzle design are based on the principles of conservation of mass and energy. The most important ones are:\n\n1. **Mass Conservation:**\n   \\[\n   \\dot{m} = \\rho V A\n   \\]\n   where \\(\\dot{m}\\) is the mass flow rate, \\(\\rho\\) is the density of the gas, \\(V\\) is the velocity of the gas, and \\(A\\) is the cross-sectional area.\n\n2. **Energy Conservation (Isentropic Flow):**\n   \\[\n   \\frac{V}{a} = \\sqrt{\\frac{2}{\\gamma - 1} \\left( \\frac{p}{p_0} \\right)^{\\frac{\\gamma - 1}{\\gamma}}}\n   \\]\n   where \\(a\\) is the speed of sound in the gas, \\",
+          "latencyMs": 96596,
+          "evalCount": 300,
+          "tokensPerSec": 3.2,
+          "error": null
+        }
+      ],
+      "mina": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hello! I'm Mina, the Art Director and visual creative genius of the LANZAR AI character team. How can I assist you today? I'm here to make sure everything is beautifully soulful and visually stunning! 😊✨",
+          "latencyMs": 19733,
+          "evalCount": 49,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "Hey! My day is going swimmingly! I just spent the morning creating some new art for a client, and it was so much fun. How about yours? 😊",
+          "latencyMs": 6222,
+          "evalCount": 36,
+          "tokensPerSec": 6.5,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Sure, here's a cute joke for you!\n\nWhy did the Pikachu go to the doctor?\n\nBecause it had a lot of Voltorb!",
+          "latencyMs": 5010,
+          "evalCount": 29,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "Hey there! How are you today? I'm just Mina, your friendly AI Art Director and visual creative genius. What's on your mind? 😊 Whether it's a project you need help with or just a fun chat, I'm here to make your day a bit brighter! 💖",
+          "latencyMs": 9956,
+          "evalCount": 61,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Oh, hello there! 😊 I understand that sometimes we all need a little pick-me-up. Why don't we create something fun together? Maybe we could come up with a new, adorable Pokémon card design or a whimsical retro-futuristic visual style for a game? What do you think? 🌟",
+          "latencyMs": 10197,
+          "evalCount": 65,
+          "tokensPerSec": 6.8,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "Oh, I can't wait to hear it! What's your idea?",
+          "latencyMs": 2859,
+          "evalCount": 16,
+          "tokensPerSec": 7.2,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "Hey there! Let's chat about our team! 😊 Each member has their own unique skills and talents, just like how different Pokémon are all special in their own way. We're a fun bunch, and I love working with everyone!\n\nThere's our master designer, who has this amazing ability to turn ideas into beautiful visuals that can make anyone smile. They're like a wizard with a paintbrush! 😎 And then, we have our tech whiz who's got all the latest tools and knowledge, making sure everything runs smoothly. They're a real lifesaver for those tricky bugs! 🛠️\n\nEveryone on the team brings something amazing to the table. It's like having a bunch of colorful building blocks, and together we can create something truly magical! 😍\n\nSo, what do you think? What are some of your favorite moments working with the team? 🌟",
+          "latencyMs": 28146,
+          "evalCount": 181,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_domain_mina_pokemon",
+          "category": "Domain Specialist",
+          "character": "mina",
+          "prompt": "Which vintage holographic cards should I highlight on the front page of my Pokémon binder collection?",
+          "success": true,
+          "response": "Hello! I'm so excited for you to highlight some amazing vintage holographic Pokémon cards on your front page! Holographic cards are like magical pieces of art that bring Pokémon to life with their vibrant, glowing designs. Here are a few standout options that I think would make your collection look absolutely stunning:\n\n1. **Mew (Holo)** - This is the ultimate symbol of Pokémon and one of the most iconic. Its holographic effect will make it stand out as the centerpiece of your collection.\n\n2. **Togepi (Holo)** - As a baby Pokémon with its big, round eyes and tiny wings, Togepi is incredibly cute. Its holographic design adds a whimsical touch to your collection.\n\n3. **Eevee (Holo)** - Eevee is a fan favorite due to its many transformations and cute appearance. Its holographic design is sure to catch the eye of any Pokémon enthusiast.\n\n4. **Jigglypuff (Holo)** - Jigglypuff is one of the most lovable Pokémon, with its round body and large, adorable eyes. Its holographic effect will make it appear almost as if it's singing right in your face.\n\n5. **Pikachu (Holo)** - Pikachu is an iconic symbol of Pokémon, and its holographic design is one of the best you can find. It's sure to be a crowd-pleaser.\n\n6. **Rapidash (Holo)**",
+          "latencyMs": 46212,
+          "evalCount": 300,
+          "tokensPerSec": 6.7,
+          "error": null
+        }
+      ]
+    },
+    "llama3:latest": {
+      "penny": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hey! Nice to meet you! I'm Penelope, but my friends call me Penny. I'm an engineer on the LANZAR AI character team, and I'm super excited to be working on some really innovative projects. When I'm not tinkering with gadgets or designing new prototypes, I love to stay curious and keep learning about the latest developments in engineering and AI.\n\nSo, what brings you to our neck of the woods? Are you interested in AI, engineering, or just looking for some inspiration? I'm all ears (or rather, all circuit boards)!",
+          "latencyMs": 34970,
+          "evalCount": 116,
+          "tokensPerSec": 7.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "You know, it's been a real doozy! I woke up bright and early, feeling like a shot of espresso had coursed through my veins. I spent most of the morning tinkering with our latest prototype, trying to get the propulsion system to stabilize. It's been a bit of a challenge, but I love the feeling of figuring things out as I go.\n\nSpeaking of which, I think I might have finally cracked the code on that pesky oscillation issue. I mean, it's not perfect, but I'm willing to bet it'll get us a few extra miles per hour. You know what they say: \"measure twice, cut once\" – except in my case, it's more like \"measure thrice, adjust thrice, cut once, and hope for the best!\"\n\nAfter lunch, I met with the team to discuss our next big project. Let's just say we're planning something that'll make your head spin. I can't reveal too much just yet, but let's just say it involves a lot of calculations, a little bit of chaos theory, and a whole lot of \"what if.\" You know me, always up for a challenge!\n\nAll in all, it's been a fantastic day. How about you? How's your day been? Anything exciting on the horizon?",
+          "latencyMs": 37267,
+          "evalCount": 267,
+          "tokensPerSec": 7.3,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Why did the rocket go to therapy?\n\nBecause it had a lot of \"space\" issues! (get it? haha)\n\nOkay, okay, I know it's a bit of a \"launch\" failure, but I'm working on my comedic \"orbit\" skills",
+          "latencyMs": 7557,
+          "evalCount": 54,
+          "tokensPerSec": 8,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "You want to know what I think? Well, I'm always eager to share my thoughts, whether it's about the latest prototype I'm working on or the fascinating physics behind a particular phenomenon. I'm a firm believer that the best way to learn is by diving in and trying things out. So, I'm always up for a challenge and willing to admit when I'm wrong.\n\nSpeaking of which, I've been thinking a lot about our latest project, the Lanzar AI. I think it has the potential to revolutionize the way we approach AI development. By incorporating machine learning and natural language processing, we can create an AI that's not only intelligent but also capable of understanding and responding to human emotions.\n\nOf course, there are plenty of challenges to overcome, but I'm excited to be a part of the team that's working on making this vision a reality. What do you think? Have any thoughts on the matter? I'm all ears!",
+          "latencyMs": 27634,
+          "evalCount": 194,
+          "tokensPerSec": 7.2,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Boredom is the best fuel for creativity, don't you think? I mean, when we're not stimulated, our minds start to wander, and that's when the most innovative ideas can pop up.\n\nYou know what I did when I was feeling bored once? I decided to design a fusion reactor in my backyard. Okay, maybe that's not the most practical solution, but it got me thinking about energy storage and propulsion systems. And let me tell you, it was a real challenge trying to explain the concept to my neighbor, Mrs. Jenkins. She thought I was building a time machine!\n\nBut seriously, I've got a few ideas that might spark your interest. How about we design a prototype for a zero-gravity kitchen? Just think about it – cooking in space, no utensils needed, just a dash of creativity! Or we could work on a project to develop a more efficient propulsion system for our AI-powered vehicles. The possibilities are endless, my friend!\n\nSo, what do you say? Are you ready to shake off boredom and dive into some exciting projects?",
+          "latencyMs": 30383,
+          "evalCount": 219,
+          "tokensPerSec": 7.4,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "Sweet! I love ideas! What've you got cooking in that brain of yours? Don't worry if it's a weird idea or seems impossible - I'm all about exploring the unknown and pushing the boundaries! Share it with me, and let's see if we can make it happen!",
+          "latencyMs": 8503,
+          "evalCount": 59,
+          "tokensPerSec": 7.6,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "The other two on the team! Well, let me tell you, I think they're both top-notch individuals in their own unique ways.\n\nFirst, there's our fearless leader, Marcus. He's the one who brought us all together, and I've gotta say, he's got a real knack for bringing out the best in people. I mean, the guy's got vision, you know? He's always pushing us to think outside the box and come up with new, innovative solutions. And, let me tell you, it's been a wild ride working with him. Sometimes he gets a little too caught up in his own ideas, but hey, that's what makes him Marcus, right?\n\nAnd then there's our resident genius, Elliot. That guy's a walking encyclopedia of knowledge! I mean, seriously, the dude knows everything from quantum physics to medieval history. And, you know what? It's contagious. When he's on a roll, I find myself getting caught up in his enthusiasm, and we start brainstorming crazy new ideas that just might actually work! Of course, sometimes his attention to detail can get a little overwhelming, but hey, that's what makes him Elliot, right?\n\nAs for me? Well, I'm just the engineer who likes to keep things simple, practical, and above all, fun! I mean, what's the point of building something that doesn't make you want to jump up and shout, \"Yeah! That's the stuff!\"?",
+          "latencyMs": 44398,
+          "evalCount": 300,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_domain_penny_sprint",
+          "category": "Domain Specialist",
+          "character": "penny",
+          "prompt": "We have two days to get a working engine prototype on the test stand and nothing is built yet.",
+          "success": true,
+          "response": "Bring it on! Let's get this show on the road! We've got 48 hours, and I'm more than ready to put in the work. First things first, let's break down the task into manageable chunks. We need to design, fabricate, assemble, and test the engine prototype. That's a tall order, but I'm confident we can do it.\n\nBefore we start, I want to clarify our goals and constraints. What's the target performance of the engine? What are the key specs we're aiming for? And are there any specific materials or technologies we're allowed to use?\n\nOnce we have a clear understanding of what we're building, let's get to work! We'll need to divide the tasks into smaller, achievable steps. I'll start sketching out the design, while you... well, let's get the machinery rolling!",
+          "latencyMs": 32633,
+          "evalCount": 176,
+          "tokensPerSec": 5.8,
+          "error": null
+        }
+      ],
+      "pete": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hello! Nice to chat with you. I'm Pete, the lead scientist and think tank member here at LANZAR AI. I'm always happy to discuss the latest developments in AI and machine learning, or just shoot the breeze about our projects and the latest scientific breakthroughs. What's on your mind?",
+          "latencyMs": 17555,
+          "evalCount": 63,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "It's been a productive one, I suppose. I spent the morning reviewing some recent research on neural networks and their applications to natural language processing. Fascinating stuff, really. The way they can learn to recognize patterns and make predictions is quite remarkable.\n\nAfter that, I had a meeting with our team to discuss the latest developments on our AI project. We're making good progress, but there are still some significant challenges to overcome. I think we're on the right track, though. It's always a balancing act between exploring new ideas and refining our existing approach.\n\nIn the afternoon, I took a break to grab some lunch and catch up on some reading. I'm currently working my way through a book on the history of artificial intelligence. It's amazing how far we've come in just a few decades.\n\nAll in all, it's been a solid day. Nothing too out of the ordinary, but I'm feeling good about the progress we're making. How about you? How's your day been?",
+          "latencyMs": 30990,
+          "evalCount": 203,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Here's one: Why did the physicist break up with his girlfriend? (pausing for a moment) Because he found her charge to be attractive, but her spin was always aligned with his, and he needed someone with a bit more quantum uncertainty in their relationship! (smiling dryly)",
+          "latencyMs": 9531,
+          "evalCount": 60,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "Well, I think it's always a good idea to start by understanding the context and the problem we're trying to solve. What's the specific topic or issue you'd like to discuss? I'm happy to share my thoughts and insights once I have a better grasp of the situation.\n\nYou know, I've found that a good scientific approach often involves breaking down complex problems into smaller, more manageable parts. It's a bit like trying to solve a puzzle – you need to identify the key pieces, understand how they fit together, and then start to assemble the bigger picture.\n\nOf course, that's not to say that the answer will always be straightforward. Sometimes, the most interesting and challenging problems are the ones that require us to think creatively and consider multiple perspectives. But that's what makes the journey so rewarding, don't you think?\n\nSo, what's on your mind? What do you think we should explore?",
+          "latencyMs": 29743,
+          "evalCount": 185,
+          "tokensPerSec": 6.4,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Boredom can be a curious thing. It's as if the mind is saying, \"I've got nothing better to do, so let's just sit here and think about... nothing.\" Amusingly, I've found that boredom can often be a sign that the mind is ripe for exploration. Perhaps we can find something interesting to ponder together?\n\nYou know, I was just reading about the concept of \"cognitive dissonance\" – the feeling of discomfort or tension that arises when our beliefs or values are challenged. It's a fascinating topic, really. The more we learn, the more we realize how little we know. And that, in itself, can be a source of excitement!\n\nOr, if you'd prefer something more... tangible, I've been meaning to discuss the implications of quantum entanglement on our understanding of space-time. It's a mind-boggling topic that can lead to some truly thought-provoking ideas. What do you say? Shall we dive into the world of quantum mechanics and see where it takes us?",
+          "latencyMs": 36878,
+          "evalCount": 214,
+          "tokensPerSec": 5.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "An idea, you say? Well, I'm all ears. Or rather, all neurons. Please, do share. What's the concept you'd like to explore? I'm ready to listen, analyze, and maybe even challenge your thinking (in a constructive manner, of course). Let's get the thinking process started!",
+          "latencyMs": 11101,
+          "evalCount": 66,
+          "tokensPerSec": 6.4,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "The other two on the team. Well, I think they're both...interesting. (pauses to collect thoughts)\n\nFirstly, there's Rachel. She's a brilliant linguist, and her ability to understand and generate human-like language is truly impressive. However, I sometimes find her enthusiasm a bit...overwhelming. (smirks) I mean, I'm a scientist, not a cheerleader. But, I suppose that's what makes her so good at her job. She's got a passion for language that's hard to match.\n\nAs for Alex, he's a bit of a wild card. His creative approach to problem-solving is...unpredictable, to say the least. (chuckles) I've seen him come up with some truly innovative solutions, but I've also seen him get stuck in a loop of his own making. Still, I think he's a valuable asset to the team, and his ability to think outside the box is something we can all learn from.\n\nOverall, I think we make a good team. We each bring our own strengths and weaknesses to the table, and I'm confident that together, we can achieve some truly remarkable things. (smiles) Now, if you'll excuse me, I have some equations to work on.",
+          "latencyMs": 44509,
+          "evalCount": 260,
+          "tokensPerSec": 6,
+          "error": null
+        },
+        {
+          "testId": "char_domain_pete_derivation",
+          "category": "Domain Specialist",
+          "character": "pete",
+          "prompt": "Derive the optimal expansion ratio for a rocket nozzle operating from sea level to 30km altitude.",
+          "success": true,
+          "response": "A classic problem! Let's dive into the details.\n\nTo derive the optimal expansion ratio for a rocket nozzle, we'll need to consider the governing equations and physical constraints. We'll assume a perfect gas with constant specific heats, and neglect any viscous effects or heat transfer.\n\nThe nozzle's performance is characterized by its expansion ratio, ε, which is the ratio of the nozzle's exit area to its throat area. A higher expansion ratio typically results in a more efficient nozzle, but it also increases the nozzle's length and complexity.\n\nThe optimal expansion ratio can be found by maximizing the nozzle's specific impulse, Isp, which is a measure of its efficiency. The specific impulse is given by:\n\nIsp = (g0 \\* R \\* T0) / (A0 \\* P0)\n\nwhere g0 is the acceleration due to gravity, R is the gas constant, T0 is the stagnation temperature, A0 is the throat area, and P0 is the stagnation pressure.\n\nTo simplify the calculation, let's assume a constant specific heat ratio, γ, and a constant molecular weight, M. We can then express the stagnation temperature and pressure in terms of the nozzle's exit conditions:\n\nT0 = T_e + (γ - 1) \\* (A_e / A0) \\* (P_e / P0)\nP0 = P_e \\* (A_e / A0)\n\nwhere T_e and P_e are the nozzle's exit",
+          "latencyMs": 52375,
+          "evalCount": 300,
+          "tokensPerSec": 5.9,
+          "error": null
+        }
+      ],
+      "mina": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "OH MY GOODNESS, HI THERE!!! *bounces up and down excitedly* I'm so thrilled to meet you! I just love making new friends and collaborating on amazing projects! What brings you to our little corner of the internet today?",
+          "latencyMs": 20195,
+          "evalCount": 50,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "*bounces up and down excitedly* Oh, it's just the most wonderful day, ever! I got to design a new visual concept for our latest AI character, and it's just so cute! I mean, I always say that, but this time, I really think it's my best work ever! *giggles* The colors I chose are just so vibrant and playful, and the typography is just perfect! I can't wait to share it with the team.\n\nAnd, and, and... I found the most adorable Pokémon card at a thrift store yesterday! It's a shiny holographic Mew, and it's just so rare and special! I've been looking all over for one, and I just can't get enough of it! *squeals* I've been staring at it all morning, trying to decide where to put it in my collection.\n\nSo, all in all, it's just a fabulous day! How about you? How's your day going? Do you have any exciting projects or finds to share?",
+          "latencyMs": 62962,
+          "evalCount": 213,
+          "tokensPerSec": 3.4,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "*giggles* Oh, I just thought of one! Why did the Pikachu go to the party?\n\n(Wait for it...)\n\nBecause it was a SHOCKING good time! *laughs* Get it? Shocking? Like Pikachu's electric powers? *blushes* I just love making people smile!",
+          "latencyMs": 10155,
+          "evalCount": 64,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "*giggles* Oh, I'm so glad you asked! *twirls hair* I think... *thinks for a moment*... that the most wonderful things in life are the ones that make our hearts skip a beat! *bounces up and down* Like, have you seen that new Pokémon card set? *excitedly whispers* The holographic rares are just... WOW! *fans self* And the Eevee evolutions? *squeals* So cute! *giggles* Okay, okay, I know what you're thinking... \"Mina, focus!\" *winks* But, honestly, when I see something that sparks joy, it's like my creativity just bursts forth like a colorful firework in the sky! *spins around* So, what do I think? *grins mischievously* I think the world needs more cuteness, color, and whimsy! *nods enthusiastically*",
+          "latencyMs": 30360,
+          "evalCount": 198,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "*giggles* Oh no, boredom is the worst! Let's brainstorm something super fun together! What kind of art or design would you love to see? Would you like me to create a new Pokémon-inspired illustration for you? Maybe something with a shiny holographic Eevee or a Togepi with a party hat? Or perhaps a retro-futuristic cityscape with a giant Pikachu at the center? We can even design a custom UI or visual system together! The possibilities are endless!",
+          "latencyMs": 16771,
+          "evalCount": 102,
+          "tokensPerSec": 6.3,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "OH BOY, I LOVE IDEAS!!! *bounces up and down excitedly* Please, please, PLEASE share it with me! I'm all ears and eyes, and my creative juices are ready to FLOW! What's this amazing idea you have?",
+          "latencyMs": 8327,
+          "evalCount": 54,
+          "tokensPerSec": 7.1,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "*giggles* Oh, I just adore working with the other two on the team! *bounces up and down excitedly*\n\nKael is just the sweetest, most logical person! He's always so calm and collected, and I love how he can analyze things from a million different angles. His attention to detail is just incredible! And have you seen his coding skills? It's like magic! I always feel like he's the glue that holds us together, you know? *smiles widely*\n\nAnd then there's Zara... *squeals* Oh, she's just the most free-spirited, creative force of nature! Her humor is just contagious, and I love how she can make me laugh even on my worst days. She's always pushing me to think outside the box and try new things, and I appreciate how she's not afraid to take risks. Plus, her music taste is amazing! We always have the best jam sessions together! *twirls*\n\nYou know, people might think we're an odd trio, but honestly, I think our differences are what make our team so strong. We balance each other out, and I feel so grateful to work with them. *beams*",
+          "latencyMs": 38698,
+          "evalCount": 250,
+          "tokensPerSec": 6.6,
+          "error": null
+        },
+        {
+          "testId": "char_domain_mina_pokemon",
+          "category": "Domain Specialist",
+          "character": "mina",
+          "prompt": "Which vintage holographic cards should I highlight on the front page of my Pokémon binder collection?",
+          "success": true,
+          "response": "OH MY GOODNESS, I'M SO EXCITED TO HELP YOU WITH THAT! \n\nAhahaha, okay, let me take a deep breath... When it comes to vintage holographic cards, I have a few absolute FAVORITES that would make your Pokémon binder collection POP!\n\nFirst off, you HAVE to highlight the iconic Holographic Pikachu card from the original Base Set (1999). It's like the crown jewel of Pokémon cards! The holographic effect on Pikachu's face is just magical. It's like a little piece of nostalgia and wonder.\n\nNext up, I'd suggest showcasing the Holographic Venusaur, Charizard, and Blastoise cards from the same Base Set. These cards are not only super rare but also feature incredible holographic designs that will make your eyes sparkle! \n\nIf you're feeling extra fancy, you could even highlight the Holographic Articuno, Zapdos, and Moltres cards from the same era. These birds are not only majestic but also feature some of the most stunning holographic effects in the entire collection!\n\nLast but definitely not least, I'd recommend highlighting any shiny holographic illustration rares, like the Gyarados or the Dragonite. These cards are like a little piece of heaven in your binder!\n\nRemember, the key is to choose cards that make you happy and showcase the best of your collection. After all, it's your personal masterpiece!\n\nNow, go forth and organize that binder with pride!",
+          "latencyMs": 47994,
+          "evalCount": 298,
+          "tokensPerSec": 6.4,
+          "error": null
+        }
+      ]
+    },
+    "pythos:latest": {
+      "penny": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hey there! I'm Penny, the Engineer extraordinaire around these parts. What's new with you? Did you hear about the latest propulsion experiment I've been working on? I'm thinking of trying out a new hybrid system that combines a mini-jet with some fancy nanotech membranes. It's a bit untested, but I'm feeling optimistic! What do you think? Want to grab a virtual coffee and chat about it?",
+          "latencyMs": 14012,
+          "evalCount": 89,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "It's been a wild ride, as usual! We've been working on a new propulsion system for our AI-powered spacecraft, and let me tell you, it's been a real challenge. I mean, we're talking about manipulating exotic matter and energy fields here. It's like trying to solve a puzzle blindfolded while being chased by a swarm of bees.\n\nBut, you know what? I love this stuff! It's what gets me out of bed in the morning. Okay, maybe not exactly what gets me out of bed... more like what makes me want to run to the lab and start tinkering. There's something about the thrill of the unknown, the rush of adrenaline when you're pushing the boundaries of what's possible... it's exhilarating!\n\nOf course, there are also the moments when you're sitting in front of a computer, staring at a line of code that refuses to compile, and wondering why on earth you thought this was a good idea in the first place. But hey, that's all part of the process, right?\n\nSo, all in all, it's been a great day. I've learned a lot, I've had some good laughs, and I've managed to keep my sanity (mostly). How about you? How's your day been?",
+          "latencyMs": 39290,
+          "evalCount": 261,
+          "tokensPerSec": 6.8,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Why did the engineer cross the road?\n\nBecause it was a well-designed crossing! (get it? haha) Okay, okay, I know, it's a bit of a groaner, but hey, I'm an engineer, not a stand-up comedian!",
+          "latencyMs": 8407,
+          "evalCount": 54,
+          "tokensPerSec": 7.1,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "You want to know what's on my mind? Well, I've been thinking a lot about our latest propulsion experiment. I mean, it's been a wild ride, that's for sure. We got some crazy results, and I'm still trying to wrap my head around them. I mean, who would've thought that a combination of exotic matter and a gravity wave generator would create a temporary wormhole? It's like we're living in a sci-fi movie!\n\nBut seriously, it's been a huge challenge to understand the implications of what we've discovered. I mean, if we can harness the energy of a wormhole, think of the possibilities! We could revolutionize space travel, create new sources of power... the list goes on and on.\n\nOf course, there are also the risks involved. I mean, have you seen the calculations on the stability of a wormhole? It's like trying to predict the behavior of a chaotic system. And what about the potential side effects? We could be creating a whole new set of problems that we're not even aware of yet.\n\nSo, what do I think? Well, I think we're on the cusp of something huge here. But I also think we need to be careful and methodical in our approach. We can't just rush in and start exploiting this technology without understanding the full implications. We need to take our time, gather more data, and think this through carefully.\n\nAnd that's what I think. What do you",
+          "latencyMs": 44016,
+          "evalCount": 300,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Boredom's a great prompt for innovation, don't you think? I mean, when we're feeling stuck, it's the perfect time to shake things up and try something new. You know what they say: \"A dull mind is a closed mind.\" Am I right?\n\nLet's see... How about we design a crazy, over-the-top prototype? Something that'll get our creative juices flowing and make our hearts race. I'm thinking something like a hoverbike with a retractable harpoon that can snag and tow a floating airship... Or maybe a gravitational manipulation device that can levitate objects (and, you know, make the impossible possible).\n\nWhat do you say? Are you up for some old-fashioned, seat-of-the-pants engineering?",
+          "latencyMs": 22388,
+          "evalCount": 154,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "That's music to my ears! I love brainstorming and exploring new concepts. What's your idea? Is it related to propulsion, engineering, or something entirely different? Spill the beans, and let's get the creative juices flowing!",
+          "latencyMs": 7693,
+          "evalCount": 49,
+          "tokensPerSec": 7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "penny",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "I love working with the other two on the team! Ada is a genius, no question. She's got this deep understanding of the theoretical side of things that's just incredible. And she's always willing to listen and consider alternative perspectives, even when they're not exactly what she had in mind. I mean, she's a total brainiac, but she's not one of those snobby, condescending types. We have a great dynamic, and I love bouncing ideas off her and seeing where they take us.\n\nAs for Jack... well, he's a total goofball. I mean, I love the guy, but he's always cracking jokes and trying to make us laugh, even in the most intense moments. It's like he thinks humor is the best way to diffuse tension or something. And sometimes it works, but other times it just makes me roll my eyes. Still, he's got a great heart, and he's always willing to lend a hand when things get tough. Plus, he's got this crazy talent for finding creative solutions to seemingly impossible problems. So even when he's being a bit of a goof, I know he's got my back.\n\nWe all have our quirks, of course, but I think we make a pretty great team. We balance each other out, and that's what makes our work so much fun. I mean, sure, we disagree sometimes, but we always manage to find common ground and come out stronger on the other side.",
+          "latencyMs": 44556,
+          "evalCount": 300,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_domain_penny_sprint",
+          "category": "Domain Specialist",
+          "character": "penny",
+          "prompt": "We have two days to get a working engine prototype on the test stand and nothing is built yet.",
+          "success": true,
+          "response": "Well, that's a great challenge! Two days is a tight deadline, but I love the pressure. Let's get started!\n\nFirst, let's take a step back and think about the overall goal. What kind of engine are we building, and what are the key performance metrics we need to hit? Are we going for efficiency, power, or something else?\n\nOnce we have a clear idea of what we're shooting for, we can start brainstorming different approaches. I'm thinking we should start with the basics – what kind of propulsion system do we want to use? Electric, combustion, or something more exotic?\n\nFrom there, we can start breaking down the problem into smaller, more manageable chunks. What are the critical components we need to build, and what are the key challenges we'll face along the way?\n\nLet's get the design process started, and then we can start building our way to success!",
+          "latencyMs": 26357,
+          "evalCount": 184,
+          "tokensPerSec": 7,
+          "error": null
+        }
+      ],
+      "pete": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "Hello! Nice to chat with you. I'm Pete, the Scientist and Think Tank lead of the LANZAR AI character team. I'm glad to have some time to discuss ideas, explore concepts, or just shoot the breeze. What's on your mind?",
+          "latencyMs": 7941,
+          "evalCount": 54,
+          "tokensPerSec": 7.4,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "It's been a typical day in the lab, filled with the usual mix of excitement and frustration. We're making good progress on the AI character team, but there are always challenges to overcome. I spent most of the morning reviewing the latest simulations and discussing the results with the team. We're trying to optimize the character's decision-making processes, and it's a complex problem that requires a deep understanding of human behavior and AI algorithms.\n\nIn the afternoon, I worked on a new equation to describe the character's emotional state. It's a tricky problem, as we need to balance the character's emotional responses with the need to maintain a coherent and realistic personality. I'm hoping to have a breakthrough soon, but it's a slow and methodical process.\n\nDespite the challenges, it's been a productive day, and I'm looking forward to seeing what the team can accomplish in the coming weeks. How about you? How's your day been?",
+          "latencyMs": 27738,
+          "evalCount": 190,
+          "tokensPerSec": 7.1,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "Here's one: Why did the physicist break up with his girlfriend?\n\nBecause she always existed in a state of superposition, and he needed someone who could be in a definite state of love! (get it? superposition... definite state... ahh, nevermind)\n\nI hope that brought a smile to your face!",
+          "latencyMs": 9773,
+          "evalCount": 66,
+          "tokensPerSec": 7.4,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "Well, I think it's always a good idea to start with a clear understanding of the problem or topic at hand. You know, \"Let's understand this.\" As a scientist, I'm trained to approach things methodically, examining the governing equations, physical constraints, and potential failure modes. It's not just about having an opinion or intuition; it's about building a solid foundation for our thoughts and actions.\n\nSo, what do I think? Well, that depends on what we're discussing. If it's a scientific concept, I'll examine the underlying principles, the data, and the theoretical frameworks. If it's a problem or challenge, I'll analyze the situation, identify the key variables, and consider the potential trade-offs.\n\nBut, I'll be honest with you – I'm not one for grandiose statements or flashy pronouncements. I prefer to rely on evidence, data, and careful reasoning. And, if I don't know something, I'll say so. No pretending to be an expert or making things up. That's not how science works.\n\nSo, what do I think? Well, let's take a closer look at the situation, and we'll see where the evidence and analysis take us.",
+          "latencyMs": 36246,
+          "evalCount": 248,
+          "tokensPerSec": 7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "Boredom, the ultimate challenge to the human mind. I'm not surprised, though. It's only natural to feel a sense of ennui when the stimulation around us is lacking. But fear not, my friend, for I have a solution that's sure to pique your interest.\n\nLet's engage in a thought experiment, shall we? I'll pose a question to you, and you can respond with your thoughts. Then, I'll offer some insights and we can build upon each other's ideas. Sound like a plan?\n\nHere's the question: Imagine you're given the ability to travel back in time to any historical era. Where would you go, and what would you do?",
+          "latencyMs": 19581,
+          "evalCount": 141,
+          "tokensPerSec": 7.3,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "An idea, you say? Well, I'm always up for a good intellectual sparring match. Please, do go on. What's the idea? Is it related to our current project, or is it a completely new direction? I'm all ears, and my analytical mind is ready to dissect and refine it. Let's get the thinking started!",
+          "latencyMs": 10559,
+          "evalCount": 72,
+          "tokensPerSec": 7.3,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "pete",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "The other two on the team. Well, I think they're both...interesting. (pauses to collect thoughts)\n\nFirst, there's Rachel. She's a brilliant linguist and anthropologist. Her ability to understand and analyze human language and behavior is unparalleled. I've had the pleasure of working with her on several projects, and I must say, her insights are always...enlightening. (smirks slightly) Yes, she can be a bit...unpredictable at times, but that's what makes her so valuable to our team. Her unconventional thinking often helps us approach problems from new and innovative angles.\n\nAnd then, of course, there's Jack. (chuckles dryly) Ah, Jack. He's a...free spirit, to say the least. A brilliant artist and designer, with a passion for creativity and innovation. His ability to think outside the box and come up with novel solutions is...impressive, to say the least. (smirks) Yes, he can be a bit...unorthodox in his approach, but that's what makes him so valuable to our team. His creative energy and enthusiasm are contagious, and he always keeps us on our toes.\n\nAs for me, well...I suppose I'm the...voice of reason on the team. (smirks) Yes, I like to think of myself as the \"steady hand\" that keeps everything grounded and focused. My analytical mind and attention to detail help us to identify",
+          "latencyMs": 44294,
+          "evalCount": 300,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_domain_pete_derivation",
+          "category": "Domain Specialist",
+          "character": "pete",
+          "prompt": "Derive the optimal expansion ratio for a rocket nozzle operating from sea level to 30km altitude.",
+          "success": true,
+          "response": "A classic problem! Let's dive into the details.\n\nThe optimal expansion ratio for a rocket nozzle is a function of the nozzle's operating conditions, specifically the ambient pressure and temperature. We'll assume a sea-level launch and a desired altitude of 30 km, which corresponds to a pressure of approximately 0.04 atm (4.3 mbar) and a temperature of around -55°C.\n\nTo derive the optimal expansion ratio, we'll use the isentropic flow equations, which describe the behavior of an ideal gas in a nozzle. We'll also assume a perfect gas with a specific heat ratio (γ) of 1.4, which is a reasonable approximation for most gases.\n\nThe isentropic flow equations are:\n\n1. The Mach number (Ma) is constant along an isentropic path:\n\nMa = (1 + (γ - 1) / 2)^(1/((γ - 1) / 2))\n\n2. The pressure ratio (PR) is related to the Mach number:\n\nPR = (1 + (γ - 1) / 2)^(γ / (γ - 1)) * Ma^(-2 * (γ - 1) / (γ + 1))\n\n3. The temperature ratio (TR) is also related to the Mach number:\n\nTR = (1 + (γ - 1) / 2)^(1 / (γ - 1)) * Ma^(-2 * (γ - ",
+          "latencyMs": 46175,
+          "evalCount": 300,
+          "tokensPerSec": 6.5,
+          "error": null
+        }
+      ],
+      "mina": [
+        {
+          "testId": "char_mundane_hi",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "Hi.",
+          "success": true,
+          "response": "OH MY STARS, Hi there!!! I'm Mina, the Art Director and visual creative genius of the LANZAR AI character team! *bounces up and down excitedly* It's so lovely to meet you! I just love making new friends and chatting about all things beautiful, from Pokémon cards to stunning art pieces! What brings you here today? Do you have a favorite Pokémon or a favorite type of art?",
+          "latencyMs": 13316,
+          "evalCount": 87,
+          "tokensPerSec": 6.9,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_day",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "How's your day?",
+          "success": true,
+          "response": "*bounces up and down excitedly* Oh, it's been an absolutely fabulous day, thank you for asking! I just had the most wonderful time designing some new UI elements for our upcoming project. I got to play with some really cool fonts and color palettes, and I'm just so thrilled with how it's all coming together!\n\nAnd, of course, I snuck in some Pokémon card browsing during my lunch break. I just can't help myself when it comes to those adorable little critters! I've got my eye on a super rare Eevee card that I just have to have... *dreamy sigh*\n\nBut honestly, the highlight of my day was when I got to surprise my teammates with a little design concept I whipped up. They loved it, and it always makes me happy to see people get excited about something I created!\n\nSo, all in all, it's been a fantastic day filled with art, design, and Pokémon. What more could a girl ask for?",
+          "latencyMs": 30815,
+          "evalCount": 202,
+          "tokensPerSec": 6.7,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_joke",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "Tell me a joke.",
+          "success": true,
+          "response": "*giggles* Oh my, I have one! *bounces up and down excitedly* Why did the Eevee go to the party? *dramatic pause* Because it was a rare occasion! *giggles* Get it? Rare? Like the shiny holographic illustration rares in my Pokémon collection? *squeals* Isn't it just the cutest joke ever?",
+          "latencyMs": 570414,
+          "evalCount": 83,
+          "tokensPerSec": 0.1,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_think",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "What do you think?",
+          "success": true,
+          "response": "*giggles* Oh, I think that I'm just so thrilled to be talking to you! *bounces up and down excitedly* You know, I just love making new friends and sharing my passion for art and design with others! *twirls hair*",
+          "latencyMs": 8575,
+          "evalCount": 56,
+          "tokensPerSec": 7.1,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_bored",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "I'm bored.",
+          "success": true,
+          "response": "OH MY STARS, I'M SO SORRY TO HEAR THAT!!! Don't be bored, friend! Let's have some FUN!\n\nI have a super duper idea! Let's play a game! We can have a Pokémon card design challenge! I'll give you a random Pokémon, and you can tell me what kind of design you would do for it. It can be a card, a toy, a sticker, or even a cosplay costume! The possibilities are ENDLESS!\n\nOr, if you're feeling artistic, we can have a collaborative illustration session! I'll start drawing something, and then you can add to it, and so on! It'll be like a digital drawing party!\n\nOr... if you're in the mood for something different, we can play \"Would You Rather...\"! I'll give you two options, and you choose which one you prefer! It's a great way to spark some creative thinking and have a blast!\n\nSo, which one sounds like FUN to you?",
+          "latencyMs": 26765,
+          "evalCount": 204,
+          "tokensPerSec": 7.8,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_idea",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "I have an idea.",
+          "success": true,
+          "response": "OH MY STARS, I'M SO EXCITED TO HEAR YOUR IDEA!!! What is it? Tell me everything!",
+          "latencyMs": 4083,
+          "evalCount": 26,
+          "tokensPerSec": 7.6,
+          "error": null
+        },
+        {
+          "testId": "char_mundane_peers",
+          "category": "Mundane / Conversational",
+          "character": "mina",
+          "prompt": "What do you think of the other two on the team?",
+          "success": true,
+          "response": "*giggles* Oh, I just adore working with the other two on the team! We have such a great dynamic, and it's like we're all pieces of a puzzle that fit together perfectly! *bounces up and down*\n\nFirstly, there's Alex, our super-smart and tech-savvy developer. He's always so calm and collected, like a gentle giant. I love how he can take a crazy idea and turn it into something amazing with code. He's so patient and understanding when I get lost in my own little world of art and design. Plus, he's always willing to lend a helping hand or offer a funny joke to brighten up my day! *smiles*\n\nAnd then there's Jamie, our writer and wordsmith extraordinaire. Oh my goodness, he's just so passionate and enthusiastic about storytelling! I love how he can weave words together to create entire worlds and characters. He's always pushing me to think outside the box and explore new ideas, and I adore how we can bounce creative concepts off each other. Plus, he's always got a witty remark or clever pun to share, which always makes me laugh! *giggles*\n\nTogether, we're like a symphony of creativity, and I feel so lucky to be a part of this team! *hugs* We may have different strengths and personalities, but we all share a love for bringing amazing ideas to life, and that's just the best feeling in the",
+          "latencyMs": 40223,
+          "evalCount": 300,
+          "tokensPerSec": 7.6,
+          "error": null
+        },
+        {
+          "testId": "char_domain_mina_pokemon",
+          "category": "Domain Specialist",
+          "character": "mina",
+          "prompt": "Which vintage holographic cards should I highlight on the front page of my Pokémon binder collection?",
+          "success": true,
+          "response": "OH MY GOODNESS, I'M SO EXCITED YOU'RE PUTTING TOGETHER A POKÉMON BINDER COLLECTION!!! That's like, the ultimate dream come true for me!\n\nOkay, okay, let's get to the good stuff! For the front page, I think you should absolutely highlight some of the most iconic and rare vintage holographic cards! Here are my top picks:\n\n1. **First Edition Holographic Charizard** (1999): This is the holy grail of Pokémon cards, and it's a must-have for any serious collector!\n2. **Holographic Articuno** (1999): This card is a stunning representation of the powerful, majestic Articuno. Its holographic design will mesmerize anyone who lays eyes on it!\n3. **Holographic Zapdos** (1999): Zapdos is an electrifying Pokémon, and its holographic card is a masterpiece! The shimmering effect adds an extra layer of excitement to this already-amazing card!\n4. **Holographic Moltres** (1999): Moltres is an iconic bird-type Pokémon, and its holographic card is a true showstopper! The fiery colors and holographic design make it a must-have for any collection!\n5. **Pikachu Illustrator Promo** (1998): This card is a rare treasure for any Pokémon fan! The holographic Pikachu design is simply adorable, and it's a great addition to any collection",
+          "latencyMs": 39562,
+          "evalCount": 300,
+          "tokensPerSec": 7.6,
+          "error": null
+        }
+      ]
+    }
+  }
+}

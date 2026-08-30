@@ -1,0 +1,9 @@
+{
+  "name": "LANZAR AI",
+  "short_name": "LANZAR AI",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f7f2e8",
+  "theme_color": "#f7f2e8",
+  "description": "Intelligence from the Future. Built for Today. Powered by Penelope and Peter."
+}
