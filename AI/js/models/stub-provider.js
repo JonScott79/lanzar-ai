@@ -104,9 +104,9 @@ export class StubModelProvider extends ModelProvider {
       return this.#generateHandoffResponse(rawQuery, query, decision);
     }
 
-    // B. Direct Persona Greeting / Address / Casual Conversation (e.g. "hows ya'lls day", "how are you", "hi Mina")
-    const isCasualConversational = query.includes("hows ya") || query.includes("how was your day") || query.includes("how is your day") || query.includes("how are you") || query.includes("how are we") || query.includes("doing today") || /\b(hi|hello|hey|status)\b/i.test(query) || query === "mina";
-    const isSubstantiveDesignQuestion = query.includes("logo") || query.includes("picture") || query.includes("draw") || query.includes("palette") || query.includes("ui") || query.includes("pokemon") || query.includes("pokémon") || query.includes("card") || query.includes("binder");
+    // B. Direct Persona Greeting / Address / Casual Conversation (e.g. "hows ya'lls day", "how are you", "hi Mina", "is mina there?")
+    const isCasualConversational = query.includes("hows ya") || query.includes("how was your day") || query.includes("how is your day") || query.includes("how are you") || query.includes("how are we") || query.includes("doing today") || /\b(hi|hello|hey|status|there)\b/i.test(query) || query.includes("is mina") || query === "mina";
+    const isSubstantiveDesignQuestion = query.includes("logo") || query.includes("picture") || query.includes("draw") || query.includes("palette") || query.includes("ui") || query.includes("pokemon") || query.includes("pokémon") || query.includes("card") || query.includes("binder") || query.includes("joke");
 
     if (decision.taskType === "unknown_concept_clarification") {
       return {
