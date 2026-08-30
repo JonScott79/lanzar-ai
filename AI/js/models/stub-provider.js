@@ -472,8 +472,9 @@ In the actual game lore, mythicals like **Celebi**, **Jirachi**, **Deoxys**, and
     }
 
     // B. Direct Persona Greeting / Address / Casual Conversation (e.g. "how are you Pete", "hi Pete")
+    const isMathOrCalc = CognitiveRouter._isMathOrEquation(query) || CognitiveRouter._isCalculusOrTheory(query) || /\b(\d+\s*(?:[xX*+/^]|times|plus|minus)\s*\d+)\b/i.test(query) || /\d+\s*x\s*[\+\-]\s*\d+/i.test(query) || query.includes("x^2") || query.includes("dy/dx");
     const isCasualConversational = query.includes("hows ya") || query.includes("how was your day") || query.includes("how is your day") || query.includes("how are you") || query.includes("how are we") || query.includes("doing today") || /\b(hi|hello|hey|status)\b/i.test(query) || query === "pete" || query === "peter";
-    const isSubstantiveTechnical = query.includes("calculate") || query.includes("equation") || query.includes("physics") || query.includes("thermo") || query.includes("solve") || query.includes("bug") || query.includes("joke") || query.includes("pete");
+    const isSubstantiveTechnical = isMathOrCalc || query.includes("calculate") || query.includes("equation") || query.includes("physics") || query.includes("thermo") || query.includes("solve") || query.includes("bug") || query.includes("joke") || query.includes("pete");
 
     if (decision.taskType === "unknown_concept_clarification") {
       return {
@@ -672,6 +673,7 @@ What would you like to do with it?
     };
     let cleanMath = query
       .replace(/^pete[,:]?\s*/i, '')
+      .replace(/^(?:hey|hi|hello)\s+(?:bro|man|dude|there|team|guys|pete)?[,:]?\s*/i, '')
       .replace(/^(can\s+you\s+(?:please\s+)?(?:tell\s+me|calculate|compute|solve|work\s+out)\s+(?:what|how\s+much)?|please\s+(?:calculate|compute|tell\s+me\s+what)|how\s+much\s+is|what\s+is|what\'s|whats|what|calculate|compute|solve\s+for|solve|find\s+(?:the\s+)?roots\s+of|factor|integrate|differentiate|graph|plot)\s+/i, '')
       .replace(/\s+(?:is|equals|equal\s+to)\s*[\?!.]*$/i, '')
       .replace(/[?!=]+$/, '')

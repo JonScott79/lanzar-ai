@@ -444,6 +444,7 @@ class MathematicsService {
       .replace(/⁹/g, '^9')
       .replace(/√\(([^)]+)\)/g, 'sqrt($1)')
       .replace(/√([a-zA-Z0-9]+)/g, 'sqrt($1)')
+      .replace(/^(?:hey|hi|hello)\s+(?:bro|man|dude|there|team|guys|pete|penny|mina)?[,:]?\s*/i, '')
       .replace(/^(can\s+you\s+(?:please\s+)?(?:tell\s+me|calculate|compute|solve|work\s+out)\s+(?:what|how\s+much)?|please\s+(?:calculate|compute|tell\s+me\s+what)|how\s+much\s+is|what\s+is|what\'s|whats|what|calculate|compute|solve\s+for|solve|find\s+(?:the\s+)?roots\s+of|factor|integrate|differentiate|graph|plot)\s+/i, '')
       .replace(/\s+(?:is|equals|equal\s+to)\s*[\?!.]*$/i, '')
       .replace(/\s+(when|at|if)\s+[a-z]\s*=\s*[\d\.\-]+.*$/i, '')

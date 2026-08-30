@@ -137,6 +137,7 @@ export class SettingsModalController {
               <label class="setting-label" for="settingModelProvider">Inference Engine Backend</label>
               <p class="setting-hint">Select the neural model provider powering LANZAR AI conversations.</p>
               <select id="settingModelProvider" class="setting-select">
+                <option value="hosted" ${currentProvider === "hosted" ? "selected" : ""}>☁️ LANZAR Hosted AI (Cloud Engine)</option>
                 <option value="stub" ${currentProvider === "stub" ? "selected" : ""}>⚡ LANZAR Triad (Simulated Cognitive Multi-Mind)</option>
                 <option value="lanzar-001" ${currentProvider === "lanzar-001" ? "selected" : ""}>⚛ LANZAR-001 Local PyTorch Engine (Port 5050)</option>
               </select>
