@@ -127,8 +127,11 @@ class HostedInferenceService {
       throw new Error('Hosted AI provider is not configured on server (HOSTED_AI_API_KEY missing).');
     }
 
-    // 0b. Deterministic Mathematical & Physics Intent Analysis & Ground Truth Injection
-    let augmentedSystemPrompt = systemPrompt;
+    // 0a. Dynamic Current Temporal Context Injection
+    const currentDateTime = new Date();
+    const currentTimeStr = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const currentDateStr = currentDateTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    let augmentedSystemPrompt = `${systemPrompt}\n\n[SYSTEM TELEMETRY CONTEXT]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}`;
 
     // Check Physics Domain First
     const physicsDomain = physicsService.detectPhysicsDomain(rawUserQuery);
@@ -458,8 +461,11 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
         return;
       }
 
-      // 0b. Deterministic Mathematical & Physics Intent Analysis & Ground Truth Injection
-      let augmentedSystemPrompt = systemPrompt;
+      // 0a. Dynamic Current Temporal Context Injection
+      const currentDateTime = new Date();
+      const currentTimeStr = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const currentDateStr = currentDateTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      let augmentedSystemPrompt = `${systemPrompt}\n\n[SYSTEM TELEMETRY CONTEXT]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}`;
 
       // Check Physics Domain First
       const physicsDomain = physicsService.detectPhysicsDomain(rawUserQuery);

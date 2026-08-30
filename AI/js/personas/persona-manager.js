@@ -341,7 +341,13 @@ export class PersonaManager {
     }
 
     this.#selectedPersonaId = id;
-    localStorage.setItem(STORAGE_KEYS.SELECTED_PERSONA, id);
+    if (typeof localStorage !== "undefined") {
+      try {
+        localStorage.setItem(STORAGE_KEYS.SELECTED_PERSONA, id);
+      } catch (e) {
+        console.warn("[PersonaManager] Failed to persist selected persona:", e);
+      }
+    }
 
     Analytics.track("Persona", "SelectionChanged", { selectedPersonaId: id });
     globalBus.emit("personas:changed", {

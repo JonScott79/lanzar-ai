@@ -201,18 +201,13 @@ export class CognitiveRouter {
           }
         }
 
-        const targetName = (target.shortName || target.name || target.id || "").toLowerCase();
-        const isSwitchGreeting = query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("there") || query === target.id || query === targetName || query.includes("?");
-        const isHandoff = isSwitchGreeting && previousAssistantPersona && previousAssistantPersona !== target.id && isEnabled(previousAssistantPersona);
         return {
           owner: target.id,
-          taskType: isHandoff ? "persona_handoff" : "addressed_persona",
+          taskType: "addressed_persona",
           previousOwner: previousAssistantPersona,
           targetOwner: target.id,
           setFocus: target.id,
-          reason: isHandoff
-            ? `User addressed ${target.shortName || target.name} after talking to ${previousAssistantPersona} (Handoff Dialog)`
-            : `User explicitly addressed ${target.shortName || target.name}`
+          reason: `User explicitly addressed ${target.shortName || target.name}`
         };
       } else {
         const disabledTaskType = target.id === "penny" ? "brainstorming_disabled" : (target.id === "pete" ? "technical_disabled" : (target.id === "mina" ? "art_direction_disabled" : `${target.id}_disabled`));

@@ -352,21 +352,26 @@ In the actual game lore, mythicals like **Celebi**, **Jirachi**, **Deoxys**, and
       };
     }
 
-    // K. General Creative / Art Direction Response
+    // J. Time / Date / Utility Questions (e.g. "does anyone know the time?")
+    if (/\b(time|what time|know the time|clock|what is the time)\b/i.test(query)) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return {
+        perspective: "mina",
+        isMultiTurn: false,
+        persona: "mina",
+        authorName: "Mina",
+        content: `It is currently **${timeStr}**! ⏰✨ Let me know if you need anything else! 💖`
+      };
+    }
+
+    // K. General Creative / Conversational Response
     return {
       perspective: "mina",
       isMultiTurn: false,
       persona: "mina",
       authorName: "Mina",
-      content: `Ooooh! I would love to help you with **"${rawQuery}"**! 💖✨
-
-Whenever I create something, I always ask: **Does it have love, beauty, and soul?**
-
-* **Composition:** Balanced, cheerful, and full of positive energy!
-* **Palette:** Warm mid-century tones with glowing highlights.
-* **Feeling:** Uplifting, human, and unforgettable!
-
-Tell me what you're imagining, and I'll sketch out the whole visual concept for you! ✦`
+      content: `I'm happy to help with **"${rawQuery}"**! 💖✨ Tell me what you'd like to explore or create, and we'll dive right in together! ✦`
     };
   }
 
@@ -1223,7 +1228,20 @@ If any specific step, boundary condition, or underlying assumption in our prior 
       };
     }
 
-    // G1. Live / Dynamic / Empirical Questions (e.g. sports scores, live stats, current events)
+    // G1. Time / Date / Clock Questions (e.g. "does anyone know the time?")
+    if (/\b(time|what time|know the time|clock|what is the time)\b/i.test(query)) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return {
+        perspective: "pete",
+        isMultiTurn: false,
+        persona: "pete",
+        authorName: "Pete",
+        content: `The current local time is **${timeStr}**.`
+      };
+    }
+
+    // G2. Live / Dynamic / Empirical Questions (e.g. sports scores, live stats, current events)
     const isEmpiricalOrLive = query.includes("score") || query.includes("game") || query.includes("weather") || query.includes("stock") || query.includes("price") || query.includes("who won") || query.includes("red sox") || query.includes("current");
     if (isEmpiricalOrLive) {
       return {
@@ -1305,6 +1323,17 @@ If any specific step, boundary condition, or underlying assumption in our prior 
         persona: "penny",
         authorName: "Penny",
         content: `Street tacos with extra lime and habanero salsa, or anything you can eat with one hand while holding a soldering iron in the other! 🌮⚡ Fast, spicy, and keeps the energy high!`
+      };
+    }
+
+    // C1. Cross-Character Targeting & Opinions (What Penny thinks of Pete & Mina)
+    if (query.includes("pete") || query.includes("mina") || query.includes("each other") || query.includes("team") || query.includes("individuals")) {
+      return {
+        perspective: "penny",
+        isMultiTurn: false,
+        persona: "penny",
+        authorName: "Penny",
+        content: `I love working with Pete and Mina! 🚀\n\n* **Pete** is our resident genius! He keeps us from blowing up the workshop with his thermodynamic calculations and reality checks (even if I like to push his safety margins just a little!). ⚛️\n* **Mina** brings so much heart, soul, and pure visual brilliance to everything we touch! She turns our functional prototypes into works of art that people actually fall in love with. 💖✨\n\nTogether, we can build, calculate, and design anything!`
       };
     }
 
@@ -1477,6 +1506,19 @@ While Route B wins on the mathematical average, as an engineer I'd weigh these r
 4. **Scoring Metric:** Compare heat dissipation per unit mass ($W/kg$) and pumping power efficiency ($Q / \\Delta P$).
 
 Let's build the test harness and start logging data on the bench! ⚡`
+      };
+    }
+
+    // D2. Time / Date / Clock Questions (e.g. "does anyone know the time?")
+    if (/\b(time|what time|know the time|clock|what is the time)\b/i.test(query)) {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return {
+        perspective: "penny",
+        isMultiTurn: false,
+        persona: "penny",
+        authorName: "Penny",
+        content: `It is currently **${timeStr}**! ⏱️ Ready to get back to building? 🚀`
       };
     }
 
