@@ -381,16 +381,17 @@
 }
 
 .avatar-badge {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-pill);
   overflow: hidden;
   flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   background: var(--deep-navy);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .avatar-badge img {
@@ -398,6 +399,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  display: block;
 }
 
 .avatar-badge.avatar-user {
@@ -533,6 +535,188 @@
   opacity: 0.35;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* =====================================
+   Markdown Content Styling in Chat Cards
+===================================== */
+
+.message-text {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: inherit;
+}
+
+.message-text > *:first-child {
+  margin-top: 0;
+}
+
+.message-text > *:last-child {
+  margin-bottom: 0;
+}
+
+.message-text p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.message-text h1,
+.message-text h2,
+.message-text h3,
+.message-text h4,
+.message-text h5,
+.message-text h6 {
+  font-family: var(--font-heading, inherit);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0.85rem 0 0.4rem;
+  color: inherit;
+}
+
+.message-text h1 { font-size: 1.35rem; }
+.message-text h2 { font-size: 1.2rem; }
+.message-text h3 { font-size: 1.08rem; }
+.message-text h4 { font-size: 1rem; }
+
+.message-text hr {
+  border: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+  margin: 0.85rem 0;
+}
+
+.user-msg .message-text hr {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.message-text ul,
+.message-text ol {
+  margin: 0.5rem 0;
+  padding-left: 1.4rem;
+}
+
+.message-text li {
+  margin: 0.25rem 0;
+  line-height: 1.55;
+}
+
+.message-text blockquote {
+  border-left: 3px solid var(--retro-teal, #2a728f);
+  padding: 0.4rem 0.85rem;
+  margin: 0.6rem 0;
+  background: rgba(42, 114, 143, 0.06);
+  border-radius: 0 var(--radius-xs, 4px) var(--radius-xs, 4px) 0;
+  color: var(--text-secondary, #4a565e);
+  font-style: italic;
+}
+
+.user-msg .message-text blockquote {
+  border-left-color: var(--atomic-gold, #e2b84d);
+  background: rgba(226, 184, 77, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Inline and Fenced Code */
+.message-text code {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  color: #c7254e;
+}
+
+.user-msg .message-text code {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffda79;
+}
+
+.message-text pre {
+  margin: 0.75rem 0;
+  border-radius: var(--radius-sm, 6px);
+  background: #1e262c;
+  color: #f8f8f2;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.message-text pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  display: block;
+}
+
+/* Markdown Tables */
+.message-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.user-msg .message-table-wrapper {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.message-text table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.message-text th,
+.message-text td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  line-height: 1.4;
+  vertical-align: top;
+}
+
+.user-msg .message-text th,
+.user-msg .message-text td {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.message-text th {
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary, #1e262c);
+}
+
+.user-msg .message-text th {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.message-text tr:last-child td {
+  border-bottom: none;
+}
+
+.message-text a {
+  color: var(--retro-teal, #2a728f);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.message-text a:hover {
+  color: var(--rocket-orange, #f46b45);
+}
+
+.user-msg .message-text a {
+  color: var(--atomic-gold, #e2b84d);
+}
+
+.user-msg .message-text a:hover {
+  color: #fff;
 }
 
 /* =====================================

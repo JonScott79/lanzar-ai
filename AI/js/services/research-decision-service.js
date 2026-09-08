@@ -99,14 +99,14 @@ export class ResearchDecisionService {
       };
     }
 
-    // 4. Conversational / Opinion / Brainstorming
+    // 4. Conversational / Opinion / Creative
     const isSubjectiveOrCreative = query.includes("what do you think") || query.includes("give me 5 ideas") ||
       query.includes("brainstorm") || query.includes("write a poem") || query.includes("color palette") ||
       query.includes("crazy idea") || query.includes("design layout") || query.includes("tell me a joke") ||
-      query.includes("think that is expensive") || query.includes("think that's expensive") || query.includes("is that expensive") ||
+      query.includes("what are you working on") || query.includes("what are you doing") || query.includes("how are you") ||
       /^(hi|hello|hey|what's up|how are you|i'm bored)\b/i.test(query);
 
-    if (isSubjectiveOrCreative && !this._hasCurrentTemporalAnchor(query)) {
+    if (isSubjectiveOrCreative && !query.includes("weather") && !query.includes("score") && !query.includes("price of") && !query.includes("who won")) {
       return {
         requiresResearch: false,
         provenance: "OPINION_JUDGMENT",
@@ -139,13 +139,18 @@ export class ResearchDecisionService {
     }
 
     // 7. Current Events / Live External Data
-    if (this._hasCurrentTemporalAnchor(query) || this._isDynamicExternalDomain(query)) {
+    const recentContext = Array.isArray(history) && history.length > 0 
+      ? history.slice(-3).map(m => (m.content || '')).join(' ').toLowerCase() 
+      : '';
+    const combinedContext = `${recentContext} ${query}`;
+
+    if (this._hasCurrentTemporalAnchor(query) || this._isDynamicExternalDomain(query) || (recentContext && this._isDynamicExternalDomain(combinedContext))) {
       return {
         requiresResearch: true,
         provenance: "VERIFIED_EXTERNAL",
         category: "current_external_information",
         reason: "Requires current, time-sensitive, or external empirical factual verification.",
-        searchRecommendedQuery: this._extractSearchCore(query)
+        searchRecommendedQuery: this._extractSearchCore(recentContext ? `${this._extractSearchCore(recentContext)} ${query}` : query)
       };
     }
 
@@ -181,9 +186,15 @@ export class ResearchDecisionService {
       "is api deprecated", "documentation for version", "who leads", "who runs", "'s ceo",
       "gaffer at", "leader of", "who's the boss", "velocidad orbital actual", "issの高度", "iss orbital",
       "pokemon go raid", "pokemon go event", "pokemon go community day", "pokemon go hotspot",
-      "best place near me to play pokemon go", "current raid boss", "current box office"
+      "best place near me to play pokemon go", "current raid boss", "current box office",
+      "trending on", "billboard top", "who won the grammy", "who won the oscar", "game update patch",
+      "latest event", "current price of", "latest version of", "ebt card", "card to culture",
+      "museum admission", "admission fee", "hours and admission", "ticket price", "open today",
+      "ebt admission", "take ebt", "accept ebt", "open now", "hours of operation"
     ];
-    return dynamicKeywords.some(k => query.includes(k)) || /\b([a-z0-9\s]+'s\s+ceo|who\s+(leads|runs)\s+[a-z0-9]+|gaffer\s+at\s+[a-z0-9]+)\b/i.test(query);
+    return dynamicKeywords.some(k => query.includes(k)) ||
+      /\b(can i get into|get into|admission (to|for)|discount for|tickets? (for|to)|open today|is (the )?[a-z0-9\s]+ open|hours for)\b/i.test(query) ||
+      /\b([a-z0-9\s]+'s\s+ceo|who\s+(leads|runs)\s+[a-z0-9]+|gaffer\s+at\s+[a-z0-9]+)\b/i.test(query);
   }
 
   static _extractSearchCore(query) {

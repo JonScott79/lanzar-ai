@@ -56,6 +56,18 @@ class WebResearchService {
     try {
       let parsedResults = [];
 
+      // 0. Dedicated Live Weather Provider Check (wttr.in)
+      if (/\b(weather|temperature|forecast|rain|snow|humidity|wind)\b/i.test(cleanQuery)) {
+        try {
+          const weatherData = await this.#fetchLiveWeatherData(cleanQuery);
+          if (weatherData) {
+            parsedResults.push(weatherData);
+          }
+        } catch (wErr) {
+          // Continue to regular search
+        }
+      }
+
       // 1. Try DuckDuckGo HTML Search for live real-time coverage
       try {
         const html = await this.#fetchDuckDuckGoHtml(cleanQuery);
@@ -64,7 +76,19 @@ class WebResearchService {
           parsedResults.push(...htmlResults);
         }
       } catch (htmlErr) {
-        // Fall back to Instant API
+        // Fall back to DDG Lite
+      }
+
+      // 1b. Try DuckDuckGo Lite endpoint (high reliability fallback)
+      if (parsedResults.length === 0) {
+        try {
+          const liteResults = await this.#fetchDuckDuckGoLite(cleanQuery, maxResults);
+          if (liteResults && liteResults.length > 0) {
+            parsedResults.push(...liteResults);
+          }
+        } catch (liteErr) {
+          // Fall back to Instant API
+        }
       }
 
       // 2. If needed, query DuckDuckGo Instant Answer / Topics API
@@ -200,12 +224,15 @@ class WebResearchService {
       out += `Snippet: ${cleanSnippet}\n\n`;
     });
 
-    out += `MANDATORY INSTRUCTIONS FOR SOURCE USE:\n`;
+    out += `MANDATORY INSTRUCTIONS FOR SOURCE USE & CONVERSATIONAL FORMATTING:\n`;
     out += `1. You HAVE LIVE WEB RESEARCH EVIDENCE PROVIDED ABOVE. You MUST use this evidence to answer the user's question directly!\n`;
-    out += `2. NEVER say "I don't have real-time data" or "I cannot access the internet" when live evidence is provided above. You have live research tools and the evidence is right here.\n`;
-    out += `3. Synthesize the facts, scores, dates, names, and numbers from the evidence above through your unique personality, perspective, and voice.\n`;
-    out += `4. For time-sensitive or sports questions (e.g. "last game", "latest score"), find the most recent completed event or date shown in the snippets and report the score/outcome clearly.\n`;
-    out += `5. When citing specific facts, numbers, or announcements, reference the source or outlet (e.g., ESPN, MLB, official announcement).\n`;
+    out += `2. NEVER say "I don't have real-time data" or "I cannot access the internet" when live evidence is provided above.\n`;
+    out += `3. PRESENTATION IS CONVERSATIONAL: Speak naturally as a teammate conversing with a colleague. Do NOT generate a Markdown document or report with '###' section headers for everyday questions!\n`;
+    out += `   - Use natural paragraphs and direct sentences.\n`;
+    out += `   - Use bullets only when actually listing discrete items (e.g. 3 admission tiers or 4 steps).\n`;
+    out += `   - Do NOT add artificial '### Research Findings', '### Overview', or 'Summary / Conclusion' headers.\n`;
+    out += `4. Synthesize the facts, scores, dates, names, and numbers from the evidence above through your unique personality, perspective, and voice.\n`;
+    out += `5. When citing specific facts, numbers, or announcements, reference the source or outlet naturally in text (e.g. "According to the museum's website...", "AccuWeather reports...").\n`;
     out += `6. Do NOT fabricate facts beyond what is supported by the evidence or your verified baseline knowledge.`;
 
     return out;
@@ -359,6 +386,95 @@ class WebResearchService {
     });
   }
 
+  #fetchDuckDuckGoLite(query, maxResults = 5) {
+    return new Promise((resolve, reject) => {
+      const postData = 'q=' + encodeURIComponent(query);
+      const req = https.request('https://lite.duckduckgo.com/lite/', {
+        method: 'POST',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(postData)
+        },
+        timeout: 10000
+      }, (res) => {
+        let html = '';
+        res.on('data', chunk => html += chunk);
+        res.on('end', () => {
+          if (res.statusCode >= 200 && res.statusCode < 400) {
+            const results = [];
+            const linkRegex = /<a[^>]+href=['"]([^'"]+)['"][^>]*class=['"][^'"]*result-link[^'"]*['"][^>]*>([\s\S]*?)<\/a>/gi;
+            const linkRegexAlt = /<a[^>]+class=['"][^'"]*result-link[^'"]*['"][^>]*href=['"]([^'"]+)['"][^>]*>([\s\S]*?)<\/a>/gi;
+            const snippetRegex = /<td[^>]+class=['"][^'"]*result-snippet[^'"]*['"][^>]*>([\s\S]*?)<\/td>/gi;
+
+            const urls = [];
+            const titles = [];
+            const snippets = [];
+            let match;
+
+            while ((match = linkRegex.exec(html)) !== null) {
+              let rawUrl = match[1];
+              if (rawUrl.includes('uddg=')) {
+                try {
+                  const u = new URL('https://duckduckgo.com' + rawUrl);
+                  rawUrl = decodeURIComponent(u.searchParams.get('uddg') || rawUrl);
+                } catch {}
+              }
+              urls.push(rawUrl);
+              titles.push(match[2].replace(/<[^>]+>/g, '').trim());
+            }
+
+            if (urls.length === 0) {
+              while ((match = linkRegexAlt.exec(html)) !== null) {
+                let rawUrl = match[1];
+                if (rawUrl.includes('uddg=')) {
+                  try {
+                    const u = new URL('https://duckduckgo.com' + rawUrl);
+                    rawUrl = decodeURIComponent(u.searchParams.get('uddg') || rawUrl);
+                  } catch {}
+                }
+                urls.push(rawUrl);
+                titles.push(match[2].replace(/<[^>]+>/g, '').trim());
+              }
+            }
+
+            while ((match = snippetRegex.exec(html)) !== null) {
+              snippets.push(match[1].replace(/<[^>]+>/g, '').trim());
+            }
+
+            const validResults = [];
+            for (let i = 0; i < urls.length; i++) {
+              const u = urls[i] || '';
+              const t = titles[i] || '';
+              const s = snippets[i] || '';
+              // Filter out ad redirect URLs and 'more info' ad disclosures
+              if (u.includes('duckduckgo.com/y.js') || u.includes('bing.com/aclick') || t.toLowerCase() === 'more info') {
+                continue;
+              }
+              validResults.push({
+                title: this.#decodeHtmlEntities(t || 'External Reference'),
+                url: u,
+                snippet: this.#decodeHtmlEntities(s)
+              });
+              if (validResults.length >= maxResults) break;
+            }
+            resolve(validResults);
+          } else {
+            reject(new Error(`DuckDuckGo Lite returned HTTP ${res.statusCode}`));
+          }
+        });
+      });
+
+      req.on('error', reject);
+      req.on('timeout', () => {
+        req.destroy();
+        reject(new Error('DDG Lite search timed out'));
+      });
+      req.write(postData);
+      req.end();
+    });
+  }
+
   #parseSearchResults(html, maxResults = 5) {
     const results = [];
     const titles = [];
@@ -402,16 +518,23 @@ class WebResearchService {
       }
     }
 
-    const count = Math.min(urls.length, maxResults);
-    for (let i = 0; i < count; i++) {
-      results.push({
-        title: this.#decodeHtmlEntities(titles[i] || 'External Reference'),
-        url: urls[i],
-        snippet: this.#decodeHtmlEntities(snippets[i] || '')
+    const validResults = [];
+    for (let i = 0; i < urls.length; i++) {
+      const u = urls[i] || '';
+      const t = titles[i] || '';
+      const s = snippets[i] || '';
+      if (u.includes('duckduckgo.com/y.js') || u.includes('bing.com/aclick') || t.toLowerCase() === 'more info') {
+        continue;
+      }
+      validResults.push({
+        title: this.#decodeHtmlEntities(t || 'External Reference'),
+        url: u,
+        snippet: this.#decodeHtmlEntities(s)
       });
+      if (validResults.length >= maxResults) break;
     }
 
-    return results;
+    return validResults;
   }
 
   #httpGet(urlStr, timeoutMs = 8000) {
@@ -475,6 +598,51 @@ class WebResearchService {
       .replace(/&#x27;/g, "'")
       .replace(/&#39;/g, "'")
       .replace(/&nbsp;/g, ' ');
+  }
+
+  async #fetchLiveWeatherData(query) {
+    // Extract location from query e.g. "weather in hudson ma tonight" -> "Hudson,MA"
+    let loc = query
+      .replace(/^(what is the|whats the|what's the|how is the|hows the|how's the)\s+/i, '')
+      .replace(/\b(weather|temperature|forecast|conditions|tonight|today|tomorrow|like in|like|in|for|near me)\b/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!loc || loc.length < 2) {
+      loc = 'Hudson,MA';
+    } else {
+      loc = loc.replace(/\s*,\s*/g, ',').replace(/\s+/g, '+');
+    }
+
+    return new Promise((resolve) => {
+      const url = `https://wttr.in/${encodeURIComponent(loc)}?format=j1`;
+      https.get(url, { headers: { 'User-Agent': 'curl/8.0' }, timeout: 5000 }, (res) => {
+        let d = '';
+        res.on('data', c => d += c);
+        res.on('end', () => {
+          try {
+            const j = JSON.parse(d);
+            const curr = j.current_condition?.[0];
+            const today = j.weather?.[0];
+            const area = j.nearest_area?.[0]?.areaName?.[0]?.value || loc;
+            const region = j.nearest_area?.[0]?.region?.[0]?.value || '';
+            
+            if (curr && today) {
+              const snippet = `Live Meteorological Observation for ${area}${region ? ', ' + region : ''}: Current Temperature: ${curr.temp_F}°F (Feels like ${curr.FeelsLikeF}°F), Conditions: ${curr.weatherDesc?.[0]?.value || 'Partly Cloudy'}, Humidity: ${curr.humidity}%, Wind: ${curr.windspeedMiles} mph ${curr.winddir16Point}. Today's Forecast: High of ${today.maxtempF}°F, Low of ${today.mintempF}°F, Cloud Cover: ${curr.cloudcover}%, Precipitation: ${curr.precipInches} in.`;
+              resolve({
+                title: `Live Weather Report for ${area}, ${region}`,
+                url: `https://wttr.in/${encodeURIComponent(loc)}`,
+                snippet: snippet
+              });
+              return;
+            }
+            resolve(null);
+          } catch {
+            resolve(null);
+          }
+        });
+      }).on('error', () => resolve(null));
+    });
   }
 
   #getFromCache(key) {

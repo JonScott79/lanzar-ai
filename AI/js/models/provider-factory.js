@@ -40,10 +40,10 @@ export class ProviderFactory {
     this.register("lanzar-001", lanzar001);
     this.register("hosted", hosted);
 
-    // Restore saved provider preference (default to hosted cloud engine for real model inference)
-    let savedKey = "hosted";
+    // Restore saved provider preference (default to stub / local simulated triad)
+    let savedKey = "stub";
     try {
-      savedKey = localStorage.getItem(STORAGE_KEYS.ACTIVE_MODEL_PROVIDER) || "hosted";
+      savedKey = localStorage.getItem(STORAGE_KEYS.ACTIVE_MODEL_PROVIDER) || "stub";
     } catch (e) {
       console.warn("[ProviderFactory] Failed to read model provider from storage:", e);
     }
@@ -52,8 +52,8 @@ export class ProviderFactory {
       this.#activeProviderKey = savedKey;
       this.#activeProvider = this.#providers.get(savedKey);
     } else {
-      this.#activeProviderKey = "hosted";
-      this.#activeProvider = hosted;
+      this.#activeProviderKey = "stub";
+      this.#activeProvider = stub;
     }
 
     this.#initialized = true;

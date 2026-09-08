@@ -128,9 +128,10 @@ class ResearchDecisionService {
       query.includes("brainstorm") || query.includes("write a poem") || query.includes("color palette") ||
       query.includes("crazy idea") || query.includes("design layout") || query.includes("tell me a joke") ||
       query.includes("think that is expensive") || query.includes("think that's expensive") || query.includes("is that expensive") ||
+      query.includes("what are you working on") || query.includes("what are you doing") || query.includes("how are you") ||
       /^(hi|hello|hey|what's up|how are you|i'm bored)\b/i.test(query);
 
-    if (isSubjectiveOrCreative && !this.#hasCurrentTemporalAnchor(query)) {
+    if (isSubjectiveOrCreative && !query.includes("weather") && !query.includes("score") && !query.includes("price of") && !query.includes("who won")) {
       return {
         requiresResearch: false,
         provenance: "OPINION_JUDGMENT",
@@ -170,13 +171,19 @@ class ResearchDecisionService {
     // -------------------------------------------------------------
     // G. CURRENT / EXTERNAL / TEMPORAL FACTS CHECK
     // -------------------------------------------------------------
-    if (this.#hasCurrentTemporalAnchor(query) || this.#isDynamicExternalDomain(query)) {
+    // Also inspect recent conversation context for follow-up questions like "doe they take ebt admission?"
+    const recentContext = Array.isArray(history) && history.length > 0 
+      ? history.slice(-3).map(m => (m.content || '')).join(' ').toLowerCase() 
+      : '';
+    const combinedContext = `${recentContext} ${query}`;
+
+    if (this.#hasCurrentTemporalAnchor(query) || this.#isDynamicExternalDomain(query) || (recentContext && this.#isDynamicExternalDomain(combinedContext))) {
       return {
         requiresResearch: true,
         provenance: "VERIFIED_EXTERNAL",
         category: "current_external_information",
         reason: "Requires current, time-sensitive, or external empirical factual verification.",
-        searchRecommendedQuery: this.#extractSearchCore(query)
+        searchRecommendedQuery: this.#extractSearchCore(recentContext ? `${this.#extractSearchCore(recentContext)} ${query}` : query)
       };
     }
 
@@ -249,9 +256,13 @@ class ResearchDecisionService {
       "pokemon go raid", "pokemon go event", "pokemon go community day", "pokemon go hotspot",
       "best place near me to play pokemon go", "current raid boss", "current box office",
       "trending on", "billboard top", "who won the grammy", "who won the oscar", "game update patch",
-      "latest event", "current price of", "latest version of"
+      "latest event", "current price of", "latest version of", "ebt card", "card to culture",
+      "museum admission", "admission fee", "hours and admission", "ticket price", "open today",
+      "ebt admission", "take ebt", "accept ebt", "open now", "hours of operation"
     ];
-    return dynamicKeywords.some(k => query.includes(k)) || /\b([a-z0-9\s]+'s\s+ceo|who\s+(leads|runs)\s+[a-z0-9]+|gaffer\s+at\s+[a-z0-9]+)\b/i.test(query);
+    return dynamicKeywords.some(k => query.includes(k)) ||
+      /\b(can i get into|get into|admission (to|for)|discount for|tickets? (for|to)|open today|is (the )?[a-z0-9\s]+ open|hours for)\b/i.test(query) ||
+      /\b([a-z0-9\s]+'s\s+ceo|who\s+(leads|runs)\s+[a-z0-9]+|gaffer\s+at\s+[a-z0-9]+)\b/i.test(query);
   }
 
   /**

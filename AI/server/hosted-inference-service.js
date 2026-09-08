@@ -28,8 +28,8 @@ const statisticsProbabilityService = require('./statistics-probability-service.j
 const ALLOWED_MODELS = new Set([
   'openai/gpt-oss-120b',
   'openai/gpt-oss-20b',
-  'qwen/qwen3.6-27b',
   'qwen/qwen3.8-27b',
+  'qwen/qwen3.6-27b',
   'groq/compound',
   'groq/compound-mini',
   'allam-2-7b',
@@ -37,13 +37,12 @@ const ALLOWED_MODELS = new Set([
 ]);
 
 class HostedInferenceService {
-  #apiKey = process.env.HOSTED_AI_API_KEY || '';
+  #apiKey = process.env.HOSTED_AI_API_KEY || process.env.GROQ_API_KEY || '';
   #baseUrl = process.env.HOSTED_AI_BASE_URL || 'https://api.groq.com/openai/v1';
   #defaultModel = process.env.HOSTED_AI_DEFAULT_MODEL || 'openai/gpt-oss-120b';
   #timeoutMs = parseInt(process.env.HOSTED_AI_TIMEOUT_MS || '25000', 10);
 
   constructor() {
-    // Optionally load from local .env if present in root
     this.#loadEnvFile();
   }
 
@@ -51,19 +50,27 @@ class HostedInferenceService {
     try {
       const fs = require('fs');
       const path = require('path');
-      const envPath = path.join(__dirname, '..', '.env');
-      if (fs.existsSync(envPath)) {
-        const content = fs.readFileSync(envPath, 'utf-8');
-        for (const line of content.split('\n')) {
-          const trimmed = line.trim();
-          if (!trimmed || trimmed.startsWith('#')) continue;
-          const idx = trimmed.indexOf('=');
-          if (idx !== -1) {
-            const key = trimmed.slice(0, idx).trim();
-            const val = trimmed.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
-            if (key === 'HOSTED_AI_API_KEY' && !this.#apiKey) this.#apiKey = val;
-            if (key === 'HOSTED_AI_BASE_URL' && this.#baseUrl === 'https://api.groq.com/openai/v1') this.#baseUrl = val;
-            if (key === 'HOSTED_AI_DEFAULT_MODEL' && this.#defaultModel === 'llama-3.1-8b-instant') this.#defaultModel = val;
+      const candidatePaths = [
+        path.join(__dirname, '..', '.env'),
+        path.join(__dirname, '..', '..', '.env'),
+        path.join(process.cwd(), '.env'),
+        path.join(process.cwd(), 'AI', '.env')
+      ];
+
+      for (const envPath of candidatePaths) {
+        if (fs.existsSync(envPath)) {
+          const content = fs.readFileSync(envPath, 'utf-8');
+          for (const line of content.split('\n')) {
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.startsWith('#')) continue;
+            const idx = trimmed.indexOf('=');
+            if (idx !== -1) {
+              const key = trimmed.slice(0, idx).trim();
+              const val = trimmed.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
+              if ((key === 'HOSTED_AI_API_KEY' || key === 'GROQ_API_KEY') && !this.#apiKey) this.#apiKey = val;
+              if (key === 'HOSTED_AI_BASE_URL' && this.#baseUrl === 'https://api.groq.com/openai/v1') this.#baseUrl = val;
+              if (key === 'HOSTED_AI_DEFAULT_MODEL') this.#defaultModel = val;
+            }
           }
         }
       }
@@ -127,11 +134,24 @@ class HostedInferenceService {
       throw new Error('Hosted AI provider is not configured on server (HOSTED_AI_API_KEY missing).');
     }
 
-    // 0a. Dynamic Current Temporal Context Injection
+    // 0a. Dynamic Current Temporal Context Injection & Conversational Output Formatting Rules
     const currentDateTime = new Date();
     const currentTimeStr = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     const currentDateStr = currentDateTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    let augmentedSystemPrompt = `${systemPrompt}\n\n[AUTHORITATIVE CURRENT SYSTEM TELEMETRY]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}\n- INSTRUCTION: You have verified real-time access to the current system time and date above. When asked for the current time or date, answer directly using this telemetry.`;
+    let augmentedSystemPrompt = `${systemPrompt}\n\n[AUTHORITATIVE CURRENT SYSTEM TELEMETRY]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}\n- INSTRUCTION: You have verified real-time access to the current system time and date above. When asked for the current time or date, answer directly using this telemetry.
+
+[UNIVERSAL CONVERSATIONAL FORMATTING GUIDELINES]:
+- DEFAULT TO NATURAL CONVERSATION: Speak as a real human colleague conversing directly with the user.
+- DO NOT FORMAT CASUAL OR FACTUAL ANSWERS AS MARKDOWN REPORTS, WIKI PAGES, OR DOCUMENTATION.
+- NEVER USE '###' OR '##' SECTION HEADERS FOR ORDINARY CONVERSATION OR FACTUAL QUESTIONS.
+- NEVER GENERATE SYNTHETIC TABLES FOR SIMPLE FACTUAL OR RESEARCH QUESTIONS (e.g. do not make a "Source | What it tells us" table). State the verified facts directly in natural prose!
+- Use natural paragraphs and clean, expressive sentences.
+- Use bold sparingly when emphasis genuinely helps readability.
+- Use bullet points only when listing discrete items (e.g. 3 key laptop options or 4 distinct prerequisites).
+- Use numbered lists only when describing a sequential step-by-step procedure.
+- Use code blocks strictly for actual code snippets.
+- Use mathematical/LaTeX formatting when solving formulas or equations.
+- Never add artificial "Summary", "Conclusion", "What you should do next", or "Important Considerations" headers to normal conversation.`;
 
     // Check Physics Domain First
     const physicsDomain = physicsService.detectPhysicsDomain(rawUserQuery);
@@ -217,9 +237,10 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
 - Reason: ${researchReq.reason}
 - Mandatory Rules:
   1. DO NOT fabricate, invent, or hallucinate citations, URLs, papers, statistics, or source names.
-  2. For external web claims where evidence is inconclusive, state clearly: "I do not have enough information to establish that." (Note: Current system time and date are provided above in authoritative system telemetry and are fully verified).
-  3. Clearly distinguish between "The source states X" vs "Based on X, I infer Y". Never present inferences as stated source facts.
-  4. For claims where reputable sources disagree, present the disagreement rather than manufacturing artificial consensus.`;
+  2. For external web claims where evidence is inconclusive, state clearly what is known and what remains uncertain.
+  3. When referencing sources, do NOT output raw source bracket tags like '【1†L1-L3】'. Instead, cite sources naturally in prose (e.g., "According to Mass.gov...") or with clean markdown links like '[Mass.gov](url)'.
+  4. Clearly distinguish between "The source states X" vs "Based on X, I infer Y". Never present inferences as stated source facts.
+  5. For claims where reputable sources disagree, present the disagreement rather than manufacturing artificial consensus.`;
 
     // Perform Live Web Research when external verification is required
     if (researchReq.requiresResearch) {
@@ -250,11 +271,15 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
     const upstreamUrl = `${this.#baseUrl.replace(/\/+$/, '')}/chat/completions`;
     let responseData = null;
     let attempts = 0;
-    const maxAttempts = 6;
+    const maxAttempts = 4;
+    const fallbackModels = [resolvedModel, 'openai/gpt-oss-20b', 'qwen/qwen3.6-27b', 'groq/compound-mini'];
 
     while (attempts < maxAttempts) {
       try {
         attempts++;
+        const currentModel = fallbackModels[Math.min(attempts - 1, fallbackModels.length - 1)];
+        payload.model = currentModel;
+
         responseData = await this.#httpRequest(upstreamUrl, {
           method: 'POST',
           headers: {
@@ -267,9 +292,9 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
         break;
       } catch (err) {
         if (err.message && err.message.includes('429') && attempts < maxAttempts) {
-          const waitMs = 3500 * attempts;
-          console.warn(`[HostedInferenceService] Rate limit (429) hit, retrying in ${waitMs}ms (attempt ${attempts}/${maxAttempts})...`);
-          await new Promise(r => setTimeout(r, waitMs));
+          const nextModel = fallbackModels[Math.min(attempts, fallbackModels.length - 1)];
+          console.warn(`[HostedInferenceService] Rate limit (429) hit on ${payload.model}. Switching to fallback model: ${nextModel}...`);
+          await new Promise(r => setTimeout(r, 1000));
         } else {
           throw err;
         }
@@ -461,11 +486,24 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
         return;
       }
 
-      // 0a. Dynamic Current Temporal Context Injection
+      // 0a. Dynamic Current Temporal Context Injection & Conversational Output Formatting Rules
       const currentDateTime = new Date();
       const currentTimeStr = currentDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
       const currentDateStr = currentDateTime.toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      let augmentedSystemPrompt = `${systemPrompt}\n\n[AUTHORITATIVE CURRENT SYSTEM TELEMETRY]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}\n- INSTRUCTION: You have verified real-time access to the current system time and date above. When asked for the current time or date, answer directly using this telemetry.`;
+      let augmentedSystemPrompt = `${systemPrompt}\n\n[AUTHORITATIVE CURRENT SYSTEM TELEMETRY]:\n- Current Local Time: ${currentTimeStr}\n- Current Date: ${currentDateStr}\n- INSTRUCTION: You have verified real-time access to the current system time and date above. When asked for the current time or date, answer directly using this telemetry.
+
+[UNIVERSAL CONVERSATIONAL FORMATTING GUIDELINES]:
+- DEFAULT TO NATURAL CONVERSATION: Speak as a real human colleague conversing directly with the user.
+- DO NOT FORMAT CASUAL OR FACTUAL ANSWERS AS MARKDOWN REPORTS, WIKI PAGES, OR DOCUMENTATION.
+- NEVER USE '###' OR '##' SECTION HEADERS FOR ORDINARY CONVERSATION OR FACTUAL QUESTIONS.
+- NEVER GENERATE SYNTHETIC TABLES FOR SIMPLE FACTUAL OR RESEARCH QUESTIONS (e.g. do not make a "Source | What it tells us" table). State the verified facts directly in natural prose!
+- Use natural paragraphs and clean, expressive sentences.
+- Use bold sparingly when emphasis genuinely helps readability.
+- Use bullet points only when listing discrete items (e.g. 3 key laptop options or 4 distinct prerequisites).
+- Use numbered lists only when describing a sequential step-by-step procedure.
+- Use code blocks strictly for actual code snippets.
+- Use mathematical/LaTeX formatting when solving formulas or equations.
+- Never add artificial "Summary", "Conclusion", "What you should do next", or "Important Considerations" headers to normal conversation.`;
 
       // Check Physics Domain First
       const physicsDomain = physicsService.detectPhysicsDomain(rawUserQuery);
@@ -552,9 +590,10 @@ ${mathIntent.result.discriminant !== undefined ? `- Discriminant: ${mathIntent.r
 - Reason: ${researchReq.reason}
 - Mandatory Rules:
   1. DO NOT fabricate, invent, or hallucinate citations, URLs, papers, statistics, or source names.
-  2. For external web claims where evidence is inconclusive, state clearly: "I do not have enough information to establish that." (Note: Current system time and date are provided above in authoritative system telemetry and are fully verified).
-  3. Clearly distinguish between "The source states X" vs "Based on X, I infer Y". Never present inferences as stated source facts.
-  4. For claims where reputable sources disagree, present the disagreement rather than manufacturing artificial consensus.`;
+  2. For external web claims where evidence is inconclusive, state clearly what is known and what remains uncertain.
+  3. When referencing sources, do NOT output raw source bracket tags like '【1†L1-L3】'. Instead, cite sources naturally in prose (e.g., "According to Mass.gov...") or with clean markdown links like '[Mass.gov](url)'.
+  4. Clearly distinguish between "The source states X" vs "Based on X, I infer Y". Never present inferences as stated source facts.
+  5. For claims where reputable sources disagree, present the disagreement rather than manufacturing artificial consensus.`;
 
       // Perform Live Web Research when external verification is required (Streaming)
       if (researchReq.requiresResearch) {

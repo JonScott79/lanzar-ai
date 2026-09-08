@@ -126,11 +126,11 @@ export class ConsoleViewController {
               <div class="model-switcher-wrap" aria-label="Model Engine Selector">
                 <label for="consoleModelSelector" class="visually-hidden" style="display:none;">Active Engine</label>
                 <select id="consoleModelSelector" class="console-model-select" title="Switch AI Inference Engine">
-                  <option value="hosted" selected>☁️ LANZAR Hosted AI (Cloud Engine)</option>
-                  <option value="stub">⚡ LANZAR Triad (Simulated)</option>
+                  <option value="stub" selected>⚡ LANZAR Triad (Simulated Cognitive Multi-Mind)</option>
+                  <option value="hosted">☁️ LANZAR Hosted AI (Cloud Engine)</option>
                   <option value="lanzar-001">⚛ LANZAR-001 PyTorch (Port 5050)</option>
                 </select>
-                <div class="engine-status-dot hosted" id="engineStatusDot" title="Engine Status: Hosted AI"></div>
+                <div class="engine-status-dot simulated" id="engineStatusDot" title="Engine Status: Simulated Triad"></div>
               </div>
 
               <!-- Thread Export Dropdown -->
@@ -554,29 +554,39 @@ export class ConsoleViewController {
     if (!stream) return;
 
     const isUser = msg.role === "user";
+    const personaId = msg.persona || "lanzar";
     const wrap = document.createElement("div");
-    wrap.className = `chat-bubble-wrap ${isUser ? "user-msg" : "ai-msg"} persona-${msg.persona || "lanzar"}`;
+    wrap.className = `chat-bubble-wrap ${isUser ? "user-msg" : "ai-msg"} persona-${personaId}`;
 
-    let authorClass = "author-collab";
+    let authorClass = `author-${personaId}`;
     let avatarSrc = "assets/icons/favicon.svg";
+    let accentColor = "var(--atomic-gold)";
 
-    if (msg.persona === "penny") {
-      authorClass = "author-penny";
-      avatarSrc = "assets/images/characters/Penelope/penny-headshot.png";
-    } else if (msg.persona === "pete") {
-      authorClass = "author-pete";
-      avatarSrc = "assets/images/characters/Peter/pete-headshot.png";
-    } else if (msg.persona === "mina") {
-      authorClass = "author-mina";
-      avatarSrc = "assets/images/characters/Mina/mina-headshot.png";
+    if (!isUser) {
+      const personaObj = this.#personaManager ? this.#personaManager.getPersona(personaId) : null;
+      if (personaObj) {
+        avatarSrc = personaObj.headshot || personaObj.avatar || "assets/icons/favicon.svg";
+        accentColor = personaObj.accentColor || "var(--atomic-gold)";
+      } else if (personaId === "penny") {
+        avatarSrc = "assets/images/characters/Penelope/penny-headshot.png";
+        authorClass = "author-penny";
+      } else if (personaId === "pete") {
+        avatarSrc = "assets/images/characters/Peter/pete-headshot.png";
+        authorClass = "author-pete";
+      } else if (personaId === "mina") {
+        avatarSrc = "assets/images/characters/Mina/mina-headshot.png";
+        authorClass = "author-mina";
+      } else {
+        authorClass = "author-collab";
+      }
     }
 
     wrap.innerHTML = `
-      <div class="avatar-badge ${isUser ? "avatar-user" : ""}">
+      <div class="avatar-badge ${isUser ? "avatar-user" : ""}" style="${!isUser && accentColor ? `border-color: ${accentColor};` : ''}">
         ${isUser ? "YOU" : `<img src="${avatarSrc}" alt="${msg.authorName || 'AI'}" />`}
       </div>
-      <div class="message-card">
-        ${!isUser ? `<div class="message-author ${authorClass}">${msg.authorName}</div>` : ""}
+      <div class="message-card" style="${!isUser && accentColor ? `border-left-color: ${accentColor};` : ''}">
+        ${!isUser ? `<div class="message-author ${authorClass}" style="${accentColor ? `color: ${accentColor};` : ''}">${msg.authorName}</div>` : ""}
         <div class="message-text">${this.#formatMessageText(msg.content)}</div>
         <div class="message-meta">
           ${!isUser ? `
@@ -662,15 +672,224 @@ export class ConsoleViewController {
     }
   }
 
+  /**
+   * Securely converts Markdown text into sanitized HTML.
+   * Supports headings, tables, lists, code blocks, inline code, blockquotes, bold/italic, and safe links.
+   *
+   * @param {string} text - Raw Markdown or plain text
+   * @returns {string} Sanitized HTML
+   */
   #formatMessageText(text) {
-    if (!text) return "";
-    return text
-      .replace(/```([\s\S]*?)```/g, "<pre><code>$1</code></pre>")
-      .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.*?)\*/g, "<em>$1</em>")
-      .replace(/\n\n/g, "<br><br>")
-      .replace(/\n• /g, "<br>• ");
+    if (!text || typeof text !== "string") return "";
+
+    // 1. HTML-escape raw text to prevent XSS injection before applying markdown tokens
+    const escapeHtml = (str) => {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
+
+    // Store extracted code blocks to preserve whitespace and protect them from markdown parsing
+    const codeBlocks = [];
+    let processed = text.replace(/```([a-zA-Z0-9_-]*)\r?\n?([\s\S]*?)```/g, (match, lang, code) => {
+      const id = `LZRBLOCKCODE${codeBlocks.length}LZR`;
+      const escapedCode = escapeHtml(code.replace(/\n+$/, ""));
+      const langClass = lang ? ` class="language-${escapeHtml(lang)}"` : "";
+      codeBlocks.push(`<pre><code${langClass}>${escapedCode}</code></pre>`);
+      return id;
+    });
+
+    // Store inline code
+    const inlineCodes = [];
+    processed = processed.replace(/`([^`\r\n]+)`/g, (match, code) => {
+      const id = `LZRINLINECODE${inlineCodes.length}LZR`;
+      inlineCodes.push(`<code>${escapeHtml(code)}</code>`);
+      return id;
+    });
+
+    // 2. Escape the rest of the text now that code blocks are protected
+    processed = escapeHtml(processed);
+
+    // 3. Process block-level Markdown elements line by line
+    const lines = processed.split(/\r?\n/);
+    const outputLines = [];
+    let inList = null; // 'ul' | 'ol'
+    let inBlockquote = false;
+    let tableRows = []; // Accumulate table lines
+
+    const flushTable = () => {
+      if (tableRows.length === 0) return;
+      let html = '<div class="message-table-wrapper"><table>';
+      let hasHeader = false;
+
+      // Check if row 1 is a delimiter (e.g. |---|---|)
+      if (tableRows.length >= 2 && /^\|?(\s*:?-+:?\s*\|?)+$/.test(tableRows[1].trim())) {
+        hasHeader = true;
+      }
+
+      if (hasHeader) {
+        const headerCells = tableRows[0].split('|').map(c => c.trim()).filter((c, i, arr) => !(i === 0 && c === '') && !(i === arr.length - 1 && c === ''));
+        html += '<thead><tr>' + headerCells.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
+        for (let i = 2; i < tableRows.length; i++) {
+          const cells = tableRows[i].split('|').map(c => c.trim()).filter((c, j, arr) => !(j === 0 && c === '') && !(j === arr.length - 1 && c === ''));
+          if (cells.length > 0) {
+            html += '<tr>' + cells.map(c => `<td>${c}</td>`).join('') + '</tr>';
+          }
+        }
+        html += '</tbody>';
+      } else {
+        html += '<tbody>';
+        for (let i = 0; i < tableRows.length; i++) {
+          const cells = tableRows[i].split('|').map(c => c.trim()).filter((c, j, arr) => !(j === 0 && c === '') && !(j === arr.length - 1 && c === ''));
+          if (cells.length > 0) {
+            html += '<tr>' + cells.map(c => `<td>${c}</td>`).join('') + '</tr>';
+          }
+        }
+        html += '</tbody>';
+      }
+
+      html += '</table></div>';
+      outputLines.push(html);
+      tableRows = [];
+    };
+
+    const flushList = () => {
+      if (inList) {
+        outputLines.push(inList === 'ol' ? '</ol>' : '</ul>');
+        inList = null;
+      }
+    };
+
+    const flushBlockquote = () => {
+      if (inBlockquote) {
+        outputLines.push('</blockquote>');
+        inBlockquote = false;
+      }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      // Check for Table Row
+      if (trimmed.startsWith('|') && trimmed.endsWith('|') && trimmed.length > 1) {
+        flushList();
+        flushBlockquote();
+        tableRows.push(trimmed);
+        continue;
+      } else {
+        flushTable();
+      }
+
+      // Check for Headings (# Heading, ## Heading, ### Heading, #### Heading)
+      const headingMatch = trimmed.match(/^(#{1,6})\s+(.+)$/);
+      if (headingMatch) {
+        flushList();
+        flushBlockquote();
+        const level = headingMatch[1].length;
+        outputLines.push(`<h${level}>${headingMatch[2]}</h${level}>`);
+        continue;
+      }
+
+      // Check for Horizontal Rules (---, ***, ___)
+      if (/^(\*{3,}|-{3,}|_{3,})$/.test(trimmed)) {
+        flushList();
+        flushBlockquote();
+        outputLines.push('<hr>');
+        continue;
+      }
+
+      // Check for Blockquotes (> Quote)
+      const bqMatch = line.match(/^>\s?(.*)$/);
+      if (bqMatch) {
+        flushList();
+        if (!inBlockquote) {
+          outputLines.push('<blockquote>');
+          inBlockquote = true;
+        }
+        outputLines.push(bqMatch[1] || '<br>');
+        continue;
+      } else {
+        flushBlockquote();
+      }
+
+      // Check for Unordered Lists (- item, * item, • item)
+      const ulMatch = line.match(/^[\s]*[-*•]\s+(.+)$/);
+      if (ulMatch) {
+        flushBlockquote();
+        if (inList !== 'ul') {
+          flushList();
+          outputLines.push('<ul>');
+          inList = 'ul';
+        }
+        outputLines.push(`<li>${ulMatch[1]}</li>`);
+        continue;
+      }
+
+      // Check for Ordered Lists (1. item, 2. item)
+      const olMatch = line.match(/^[\s]*\d+\.\s+(.+)$/);
+      if (olMatch) {
+        flushBlockquote();
+        if (inList !== 'ol') {
+          flushList();
+          outputLines.push('<ol>');
+          inList = 'ol';
+        }
+        outputLines.push(`<li>${olMatch[1]}</li>`);
+        continue;
+      }
+
+      // If not a list item, close any open list
+      flushList();
+
+      // Empty / blank lines
+      if (trimmed === '') {
+        outputLines.push('');
+        continue;
+      }
+
+      // Regular paragraph or line
+      outputLines.push(line);
+    }
+
+    flushTable();
+    flushList();
+    flushBlockquote();
+
+    let combined = outputLines.join('\n');
+
+    // 4. Inline formatting: Bold, Italic, Strikethrough
+    combined = combined
+      .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/___(.*?)___/g, '<strong><em>$1</em></strong>')
+      .replace(/__(.*?)__/g, '<strong>$1</strong>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/_([^_\n]+)_/g, '<em>$1</em>')
+      .replace(/~~(.*?)~~/g, '<del>$1</del>');
+
+    // 5. Links: [Label](URL) & Raw safe URLs
+    combined = combined
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/(?<!["'=])(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+
+    // 6. Paragraph separation and line breaks
+    combined = combined
+      .replace(/\n\n+/g, '<br><br>')
+      .replace(/(?<!<h[1-6]>|<hr>|<ul>|<ol>|<li>|<\/li>|<\/ul>|<\/ol>|<blockquote>|<\/blockquote>|<\/table>|<\/div>|<pre>|<\/pre>)\n(?!(?:<h[1-6]|<hr|<ul|<ol|<li|<\/li|<\/ul|<\/ol|<blockquote|<\/blockquote|<div|<\/div|<pre|<\/pre))/g, '<br>');
+
+    // 7. Restore code blocks and inline code
+    inlineCodes.forEach((code, idx) => {
+      combined = combined.replace(`LZRINLINECODE${idx}LZR`, () => code);
+    });
+    codeBlocks.forEach((block, idx) => {
+      combined = combined.replace(`LZRBLOCKCODE${idx}LZR`, () => block);
+    });
+
+    return combined;
   }
 
   #scrollToBottom() {
@@ -771,18 +990,23 @@ export class ConsoleViewController {
     const wrap = document.createElement("div");
     wrap.className = `chat-bubble-wrap ai-msg persona-${persona}`;
 
-    let authorClass = "author-collab";
+    let authorClass = `author-${persona}`;
     let avatarSrc = "assets/icons/favicon.svg";
 
-    if (persona === "penny") {
-      authorClass = "author-penny";
+    const personaObj = this.#personaManager ? this.#personaManager.getPersona(persona) : null;
+    if (personaObj) {
+      avatarSrc = personaObj.headshot || personaObj.avatar || "assets/icons/favicon.svg";
+    } else if (persona === "penny") {
       avatarSrc = "assets/images/characters/Penelope/penny-headshot.png";
+      authorClass = "author-penny";
     } else if (persona === "pete") {
-      authorClass = "author-pete";
       avatarSrc = "assets/images/characters/Peter/pete-headshot.png";
+      authorClass = "author-pete";
     } else if (persona === "mina") {
-      authorClass = "author-mina";
       avatarSrc = "assets/images/characters/Mina/mina-headshot.png";
+      authorClass = "author-mina";
+    } else {
+      authorClass = "author-collab";
     }
 
     wrap.innerHTML = `
@@ -811,7 +1035,11 @@ export class ConsoleViewController {
     bubbleCard.wrap.className = `chat-bubble-wrap ai-msg persona-${persona}`;
     bubbleCard.authorEl.textContent = authorName;
 
-    if (persona === "penny") {
+    const personaObj = this.#personaManager ? this.#personaManager.getPersona(persona) : null;
+    if (personaObj) {
+      bubbleCard.authorEl.className = `message-author author-${persona}`;
+      bubbleCard.avatarImg.src = personaObj.headshot || personaObj.avatar || "assets/icons/favicon.svg";
+    } else if (persona === "penny") {
       bubbleCard.authorEl.className = "message-author author-penny";
       bubbleCard.avatarImg.src = "assets/images/characters/Penelope/penny-headshot.png";
     } else if (persona === "pete") {

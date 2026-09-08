@@ -341,8 +341,19 @@ In the actual game lore, mythicals like **Celebi**, **Jirachi**, **Deoxys**, and
       };
     }
 
+    // J2. Matchbox / Die-cast Toy Cars & Casual Collectibles
+    if (query.includes("matchbox") || query.includes("hot wheels") || query.includes("die-cast") || query.includes("diecast")) {
+      return {
+        perspective: "mina",
+        isMultiTurn: false,
+        persona: "mina",
+        authorName: "Mina",
+        content: `Ooh, I love Matchbox cars! 🚗✨ There's something so charming about those tiny retro die-cast details and vintage metallic paint jobs! Penny usually likes to see how fast they roll across the workshop floor, but I just love how cute they look lined up on a shelf. Do you collect them? 💖`
+      };
+    }
+
     // K. Specific Conceptual Artwork (e.g. anime dinosaur driving a NASCAR)
-    if (query.includes("dinosaur") || query.includes("nascar") || query.includes("anime") || query.includes("car") || query.includes("race")) {
+    if (query.includes("dinosaur") && (query.includes("nascar") || query.includes("race") || query.includes("stock car") || query.includes("anime"))) {
       return {
         perspective: "mina",
         isMultiTurn: false,
@@ -1243,8 +1254,8 @@ If any specific step, boundary condition, or underlying assumption in our prior 
       };
     }
 
-    // G2. Live / Dynamic / Empirical Questions (e.g. sports scores, live stats, current events)
-    const isEmpiricalOrLive = query.includes("score") || query.includes("game") || query.includes("weather") || query.includes("stock") || query.includes("price") || query.includes("who won") || query.includes("red sox") || query.includes("current");
+    // G2. Live / Dynamic / Empirical Questions (e.g. sports scores, live stats, current events, local admission)
+    const isEmpiricalOrLive = query.includes("score") || query.includes("game") || query.includes("weather") || query.includes("stock") || query.includes("price") || query.includes("who won") || query.includes("red sox") || query.includes("current") || query.includes("open") || query.includes("museum") || query.includes("admission") || query.includes("ebt");
     if (isEmpiricalOrLive) {
       return {
         perspective: "pete",
@@ -1252,7 +1263,7 @@ If any specific step, boundary condition, or underlying assumption in our prior 
         persona: "pete",
         authorName: "Pete",
         provenance: "VERIFIED_EXTERNAL",
-        content: `I'd be glad to look that up for you. Could you specify which game or date you have in mind? Once you share the details, I can pull the exact verified score and box statistics.`
+        content: `I'm analyzing the parameters for "${rawQuery}". For live schedules, operating hours, ticket policies, or empirical event data, please verify with official venue channels or switch to the **Hosted AI** engine for real-time live web research.`
       };
     }
 
@@ -1262,7 +1273,7 @@ If any specific step, boundary condition, or underlying assumption in our prior 
       isMultiTurn: false,
       persona: "pete",
       authorName: "Pete",
-      content: `I am looking into "${rawQuery}". Let's examine the key variables and determine the best way to approach this.`
+      content: `Addressing your inquiry regarding "${rawQuery}": let's systematically analyze the core requirements and establish our baseline operational approach.`
     };
   }
 

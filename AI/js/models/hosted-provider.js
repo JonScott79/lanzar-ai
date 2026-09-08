@@ -288,13 +288,19 @@ export class HostedModelProvider extends ModelProvider {
 
           try {
             const parsed = JSON.parse(dataStr);
+            if (parsed.error) {
+              throw new Error(parsed.error);
+            }
             if (parsed.token) {
               fullContent += parsed.token;
               if (typeof onToken === "function") {
                 onToken(parsed.token);
               }
             }
-          } catch {
+          } catch (e) {
+            if (e.message && !e.message.startsWith("JSON")) {
+              throw e;
+            }
             // Ignore incomplete chunks
           }
         }
@@ -447,7 +453,7 @@ export class HostedModelProvider extends ModelProvider {
       isMultiTurn: false,
       persona: "lanzar",
       authorName: "LANZAR Cloud Bridge",
-      content: `⚠️ **Hosted AI Inference Unreachable**\n\n${errorMsg ? `*Reason: ${errorMsg}*\n\n` : ''}The server-side hosted AI provider is not currently configured or reachable.\n\n**To configure Hosted Cloud Inference:**\n1. Add your API key to \`.env\` in the project root:\n\`\`\`bash\nHOSTED_AI_API_KEY=your_api_key_here\nHOSTED_AI_DEFAULT_MODEL=llama-3.1-8b-instant\n\`\`\`\n2. Or switch to **LANZAR-001 (PyTorch)** or **Simulated Triad** in the top-bar model switcher to continue working offline.`
+      content: `⚠️ **Hosted AI Inference Unreachable**\n\n${errorMsg ? `*Reason: ${errorMsg}*\n\n` : ''}The server-side hosted AI provider is not currently configured or reachable.\n\n**To configure Hosted Cloud Inference:**\n1. Add your API key to \`.env\` in the project root:\n\`\`\`bash\nHOSTED_AI_API_KEY=your_api_key_here\nHOSTED_AI_DEFAULT_MODEL=openai/gpt-oss-120b\n\`\`\`\n2. Or switch to **LANZAR-001 (PyTorch)** or **Simulated Triad** in the top-bar model switcher to continue working offline.`
     };
   }
 }

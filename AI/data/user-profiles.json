@@ -8275,5 +8275,173 @@
       "conversationalPace": "brisk",
       "explanationStyle": "systems"
     }
+  },
+  "test_user_alpha_1788063764502": {
+    "profile": {
+      "uid": "test_user_alpha_1788063764502",
+      "displayName": "User Alpha 1788063764502",
+      "email": "test_user_alpha_1788063764502@lanzar.me",
+      "photoURL": "",
+      "preferredName": "Commander Alpha",
+      "occupation": "Lead Aerospace Architect",
+      "interests": [
+        "Propulsion",
+        "Orbital Mechanics",
+        "AI Architecture"
+      ],
+      "skills": [
+        "Systems Engineering",
+        "Telemetry Analysis"
+      ],
+      "hobbies": [
+        "Astronomy",
+        "Rocketry"
+      ],
+      "goals": [
+        "Explore advanced dual-mind AI reasoning"
+      ],
+      "aboutMe": "Building the next generation of ion engines.",
+      "createdAt": "2026-08-30T04:22:44.577Z",
+      "updatedAt": "2026-08-30T04:22:44.587Z"
+    },
+    "settings": {
+      "enabledCharacters": [
+        "penny",
+        "pete"
+      ],
+      "selectedCharacter": "auto",
+      "activeModelProvider": "lanzar-001",
+      "perspectiveMode": "auto",
+      "banterFrequency": "natural",
+      "technicalDepth": "deep-theoretical",
+      "conversationalPace": "brisk",
+      "explanationStyle": "systems"
+    }
+  },
+  "test_user_beta_1788063764502": {
+    "profile": {
+      "uid": "test_user_beta_1788063764502",
+      "displayName": "User Beta 1788063764502",
+      "email": "test_user_beta_1788063764502@lanzar.me",
+      "photoURL": "",
+      "preferredName": "User Beta 1788063764502",
+      "occupation": "Research Pilot / Engineer",
+      "interests": [
+        "Propulsion",
+        "Orbital Mechanics",
+        "AI Architecture"
+      ],
+      "skills": [
+        "Systems Engineering",
+        "Telemetry Analysis"
+      ],
+      "hobbies": [
+        "Astronomy",
+        "Rocketry"
+      ],
+      "goals": [
+        "Explore advanced dual-mind AI reasoning"
+      ],
+      "aboutMe": "",
+      "createdAt": "2026-08-30T04:22:44.601Z",
+      "updatedAt": "2026-08-30T04:22:44.601Z"
+    },
+    "settings": {
+      "enabledCharacters": [
+        "penny",
+        "mina"
+      ],
+      "selectedCharacter": "auto",
+      "activeModelProvider": "stub",
+      "perspectiveMode": "auto",
+      "banterFrequency": "natural",
+      "technicalDepth": "standard",
+      "conversationalPace": "brisk",
+      "explanationStyle": "systems"
+    }
+  },
+  "test_user_alpha_1788103009938": {
+    "profile": {
+      "uid": "test_user_alpha_1788103009938",
+      "displayName": "User Alpha 1788103009938",
+      "email": "test_user_alpha_1788103009938@lanzar.me",
+      "photoURL": "",
+      "preferredName": "Commander Alpha",
+      "occupation": "Lead Aerospace Architect",
+      "interests": [
+        "Propulsion",
+        "Orbital Mechanics",
+        "AI Architecture"
+      ],
+      "skills": [
+        "Systems Engineering",
+        "Telemetry Analysis"
+      ],
+      "hobbies": [
+        "Astronomy",
+        "Rocketry"
+      ],
+      "goals": [
+        "Explore advanced dual-mind AI reasoning"
+      ],
+      "aboutMe": "Building the next generation of ion engines.",
+      "createdAt": "2026-08-30T15:16:49.979Z",
+      "updatedAt": "2026-08-30T15:16:49.984Z"
+    },
+    "settings": {
+      "enabledCharacters": [
+        "penny",
+        "pete"
+      ],
+      "selectedCharacter": "auto",
+      "activeModelProvider": "lanzar-001",
+      "perspectiveMode": "auto",
+      "banterFrequency": "natural",
+      "technicalDepth": "deep-theoretical",
+      "conversationalPace": "brisk",
+      "explanationStyle": "systems"
+    }
+  },
+  "test_user_beta_1788103009938": {
+    "profile": {
+      "uid": "test_user_beta_1788103009938",
+      "displayName": "User Beta 1788103009938",
+      "email": "test_user_beta_1788103009938@lanzar.me",
+      "photoURL": "",
+      "preferredName": "User Beta 1788103009938",
+      "occupation": "Research Pilot / Engineer",
+      "interests": [
+        "Propulsion",
+        "Orbital Mechanics",
+        "AI Architecture"
+      ],
+      "skills": [
+        "Systems Engineering",
+        "Telemetry Analysis"
+      ],
+      "hobbies": [
+        "Astronomy",
+        "Rocketry"
+      ],
+      "goals": [
+        "Explore advanced dual-mind AI reasoning"
+      ],
+      "aboutMe": "",
+      "createdAt": "2026-08-30T15:16:49.992Z",
+      "updatedAt": "2026-08-30T15:16:49.992Z"
+    },
+    "settings": {
+      "enabledCharacters": [
+        "penny",
+        "mina"
+      ],
+      "selectedCharacter": "auto",
+      "activeModelProvider": "stub",
+      "perspectiveMode": "auto",
+      "banterFrequency": "natural",
+      "technicalDepth": "standard",
+      "conversationalPace": "brisk",
+      "explanationStyle": "systems"
+    }
   }
 }
