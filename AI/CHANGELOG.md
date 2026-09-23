@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.4.0-alpha] - 2026-09-22
+
+### Added
+- **DuckDuckGo Lite Live Search Integration**: Added DDG Lite live web search capability to the cognitive routing pipeline, enabling real-time information retrieval for current-events and factual queries.
+- **Pythos Submodule Phase B — Context Window & Conversation Management**: Upgraded Pythos integration to Phase B with context window management, conversation threading, and memory-aware mathematical dialogue.
+- **Child-Safe Language & Zero-Profanity Mandate (Pythos)**: Added explicit child-safe language enforcement and zero-profanity policy to the Pythos subsystem.
+- **Authoritative Developer Guide**: Published comprehensive developer guide for creating and registering new brain packages within the LANZAR AI modular architecture.
+
+### Changed
+- **Enhanced Cognitive Routing & Persona Deference**: Improved cognitive routing accuracy with better persona deference logic and expanded test coverage across routing scenarios.
+- **Hosted Cloud Engine Default**: Defaulted active model provider to the hosted cloud engine, ensuring authoritative telemetry for live clock and real-time queries.
+
+### Fixed
+- **Arithmetic Hijacking of Equivalence Inquiries (Pythos)**: Prevented standalone arithmetic from hijacking equivalence inquiries and active expression follow-ups in the Pythos math pipeline.
+- **Conversational Salutation Parsing**: Cleaned conversational salutations (greetings, addresses) before parsing arithmetic expressions, preventing false math triggers on casual messages.
+- **Conversational Address Greeting Detection**: Refined greeting detection in the stub provider pipeline to prevent conversational addresses from being misrouted.
+- **Speaker Handoff Announcements**: Eliminated artificial speaker handoff announcements in the router, fixed task priority over persona selection, and enabled general utility response handling across all minds.
+
+---
+
 ## [0.3.0-alpha] - 2026-08-28
 
 ### Added
