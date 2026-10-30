@@ -13,6 +13,11 @@ venv/
 env/
 ENV/
 
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Dependencies
 node_modules/
 package-lock.json
