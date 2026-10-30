@@ -1,166 +1,874 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- =====================================
-     Metadata / SEO
+     LANZAR AI — Coming Soon
+     Subdomain: ai.lanzar.me
+     Theme: Mid-Century Atomic Age Retro-Futurism
 ===================================== -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LANZAR AI — Intelligence from the Future. Built for Today.</title>
-  <meta name="description" content="LANZAR AI Cognitive Triad — Featuring Penelope (Penny), Peter (Pete), and Mina. Intelligence from the future, built for today." />
+  <title>LANZAR AI — Intelligence from the Future | Coming Soon</title>
+  <meta name="description" content="LANZAR AI is calibrating its next-generation cognitive triad (Penny, Pete, and Mina). In the meantime, launch our verified AI math & physics tutor at Pythos (pythos.lanzar.me)!" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#15222e" />
+  <meta name="theme-color" content="#0a1219" />
   <link rel="canonical" href="https://ai.lanzar.me/" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="LANZAR AI — Intelligence from the Future." />
-  <meta property="og:description" content="Three brilliant minds. One shared intelligence. Explore ideas with Penny, analyze systems with Pete, and craft soul with Mina." />
+  <meta property="og:title" content="LANZAR AI — Intelligence from the Future | Coming Soon" />
+  <meta property="og:description" content="Three brilliant minds. One shared intelligence. Penny, Pete, and Mina are docking soon. In the meantime, explore verified AI math and physics on Pythos." />
   <meta property="og:url" content="https://ai.lanzar.me/" />
   <meta property="og:image" content="assets/images/og-preview.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LANZAR AI — Intelligence from the Future." />
-  <meta name="twitter:description" content="Atomic Age AI intelligence powered by Penelope, Peter, and Mina." />
+  <meta name="twitter:title" content="LANZAR AI — Intelligence from the Future | Coming Soon" />
+  <meta name="twitter:description" content="Atomic Age AI intelligence docking soon. Check out Pythos for verified AI math and physics right now!" />
   <meta name="twitter:image" content="assets/images/og-preview.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
-
-  <!-- Web Manifest -->
   <link rel="manifest" href="site.webmanifest" />
 
   <!-- Typography: Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* =====================================================================
+       LANZAR ATOMIC AGE RETRO-FUTURISTIC SYSTEM DESIGN
+    ===================================================================== */
+    :root {
+      --cockpit-black: #070d14;
+      --cockpit-navy: #0d1722;
+      --cockpit-panel: #132230;
+      --cockpit-panel-elevated: #182a3c;
+      --bezel-border: #22374c;
+      --bezel-border-glow: rgba(56, 189, 248, 0.28);
+      
+      --retro-teal: #2a728f;
+      --retro-teal-bright: #38bdf8;
+      --retro-teal-dark: #1a4d61;
+      
+      --rocket-orange: #f46b45;
+      --rocket-orange-bright: #ff7d57;
+      --rocket-orange-glow: rgba(244, 107, 69, 0.45);
+      
+      --atomic-gold: #e2b84d;
+      --atomic-gold-bright: #ffd466;
+      --atomic-gold-glow: rgba(226, 184, 77, 0.35);
 
-  <!-- KaTeX / LaTeX Math Support -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+      --cream: #fbf7ee;
+      --parchment: #e6dfcf;
+      --text-muted: #8899a6;
+      --text-dim: #5c6f7e;
 
-  <!-- Structured Data JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "LANZAR AI",
-    "applicationCategory": "DesignApplication, EngineeringApplication",
-    "operatingSystem": "Web",
-    "description": "Atomic Age retro-futuristic AI intelligence featuring Penelope and Peter personas."
-  }
-  </script>
+      --penny-coral: #d45d42;
+      --pete-blueprint: #245873;
+      --mina-crimson: #d32f3f;
+
+      --font-heading: 'Space Grotesk', system-ui, sans-serif;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--cockpit-black);
+      color: var(--cream);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Cosmic Grid & Atmosphere */
+    body {
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(42, 114, 143, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 80% 85%, rgba(244, 107, 69, 0.12) 0%, transparent 50%),
+        linear-gradient(to right, rgba(42, 114, 143, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(42, 114, 143, 0.08) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+      position: relative;
+    }
+
+    /* Ambient CRT Scanline Overlay */
+    .crt-scanlines {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%);
+      background-size: 100% 4px;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* Cockpit Bezel Containers */
+    .viewport-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Header Nav */
+    .header-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 24px;
+      background: rgba(13, 23, 34, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--bezel-border);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .brand-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .brand-logo {
+      height: 42px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.3));
+    }
+
+    .status-beacon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(10, 18, 26, 0.85);
+      border: 1px solid rgba(226, 184, 77, 0.4);
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--atomic-gold);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--atomic-gold);
+      box-shadow: 0 0 10px var(--atomic-gold);
+      animation: beaconPulse 1.8s infinite ease-in-out;
+    }
+
+    @keyframes beaconPulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Hero Section */
+    .hero-bezel {
+      position: relative;
+      background: linear-gradient(175deg, rgba(19, 34, 48, 0.95) 0%, rgba(13, 23, 34, 0.98) 100%);
+      border: 2px solid var(--bezel-border);
+      border-radius: 20px;
+      padding: 56px 40px;
+      text-align: center;
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 20px 50px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    /* Retro Screws */
+    .screw {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #334b63;
+      border: 1px solid #1a2c3d;
+      border-radius: 50%;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+    }
+    .screw::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 1px;
+      width: 6px;
+      height: 1px;
+      background: #738ca6;
+    }
+    .screw-tl { top: 12px; left: 12px; }
+    .screw-tr { top: 12px; right: 12px; }
+    .screw-bl { bottom: 12px; left: 12px; }
+    .screw-br { bottom: 12px; right: 12px; }
+
+    /* Orbital decorative rings */
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(42, 114, 143, 0.25);
+      pointer-events: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .orbit-ring-1 { width: 580px; height: 580px; animation: spinOrbit 45s linear infinite; }
+    .orbit-ring-2 { width: 820px; height: 820px; animation: spinOrbitReverse 60s linear infinite; }
+
+    @keyframes spinOrbit {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes spinOrbitReverse {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    .badge-mission {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(244, 107, 69, 0.12);
+      border: 1px solid var(--rocket-orange);
+      border-radius: 9999px;
+      color: var(--rocket-orange-bright);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      box-shadow: 0 0 15px rgba(244, 107, 69, 0.25);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, #ffffff 10%, var(--retro-teal-bright) 60%, var(--atomic-gold-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-subhead {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--parchment);
+      max-width: 760px;
+      margin: 0 auto 28px;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .hero-subhead strong {
+      color: var(--atomic-gold-bright);
+      font-weight: 600;
+    }
+
+    .telemetry-tape {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .telemetry-item {
+      background: rgba(10, 18, 26, 0.7);
+      border: 1px solid rgba(42, 114, 143, 0.35);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: var(--text-muted);
+    }
+
+    .telemetry-item span {
+      color: var(--retro-teal-bright);
+      font-weight: 600;
+    }
+
+    /* =====================================================================
+       PYTHOS HERO TRANSMISSION CARD ("cuz well DUH! lol")
+    ===================================================================== */
+    .pythos-transmission-card {
+      position: relative;
+      background: linear-gradient(145deg, #162a3c 0%, #101e2c 100%);
+      border: 2px solid var(--atomic-gold);
+      border-radius: 18px;
+      padding: 36px 36px;
+      box-shadow: 
+        0 0 30px rgba(226, 184, 77, 0.22),
+        0 16px 40px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      overflow: hidden;
+    }
+
+    .pythos-transmission-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rocket-orange), var(--atomic-gold), var(--retro-teal-bright));
+    }
+
+    .pythos-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .pythos-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      background: var(--atomic-gold);
+      color: var(--cockpit-black);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .pythos-subdomain-pill {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--retro-teal-bright);
+      background: rgba(42, 114, 143, 0.18);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 4px 12px;
+      border-radius: 9999px;
+    }
+
+    .pythos-content-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (min-width: 820px) {
+      .pythos-content-grid {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+
+    .pythos-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .pythos-desc {
+      font-size: 1.05rem;
+      color: var(--parchment);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .pythos-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .pythos-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #d1dde6;
+    }
+
+    .pythos-feature-item svg {
+      color: var(--atomic-gold);
+      flex-shrink: 0;
+    }
+
+    .pythos-cta-box {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      gap: 14px;
+      background: rgba(9, 17, 24, 0.7);
+      border: 1px solid var(--bezel-border);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .btn-launch-pythos {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--rocket-orange) 0%, #e0542c 100%);
+      color: #ffffff;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 16px 28px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px var(--rocket-orange-glow);
+      transition: all 0.25s cubic-bezier(0.25, 1, 0.35, 1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-launch-pythos:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(244, 107, 69, 0.65);
+      background: linear-gradient(135deg, var(--rocket-orange-bright) 0%, var(--rocket-orange) 100%);
+    }
+
+    .btn-launch-pythos:active {
+      transform: translateY(1px);
+    }
+
+    .pythos-cta-subtext {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* =====================================================================
+       COGNITIVE TRIAD PREVIEW (PENNY, PETE, MINA)
+    ===================================================================== */
+    .triad-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-masthead {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--bezel-border);
+      padding-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span {
+      color: var(--retro-teal-bright);
+    }
+
+    .section-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .triad-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 860px) {
+      .triad-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .character-card {
+      background: var(--cockpit-panel);
+      border: 1px solid var(--bezel-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      overflow: hidden;
+    }
+
+    .character-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .character-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .card-penny::before { background: var(--penny-coral); }
+    .card-pete::before { background: var(--retro-teal-bright); }
+    .card-mina::before { background: var(--mina-crimson); }
+
+    .character-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .avatar-wrapper {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--bezel-border);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #09121a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .character-meta h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .character-role {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .card-penny .character-role { color: var(--penny-coral); }
+    .card-pete .character-role { color: var(--retro-teal-bright); }
+    .card-mina .character-role { color: #f87171; }
+
+    .character-bio {
+      font-size: 0.92rem;
+      color: #b0c0ce;
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .character-status {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      background: rgba(10, 18, 26, 0.8);
+      border-radius: 6px;
+      border: 1px dashed var(--bezel-border);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .character-status strong {
+      color: var(--atomic-gold);
+    }
+
+    /* =====================================================================
+       FOOTER
+    ===================================================================== */
+    .site-footer {
+      border-top: 1px solid var(--bezel-border);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--cream);
+    }
+
+    .footer-links a.highlight-pythos {
+      color: var(--atomic-gold-bright);
+      font-weight: 600;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      max-width: 650px;
+      line-height: 1.4;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+  </style>
 </head>
 
-<!-- =====================================
-     Main Application Body
-===================================== -->
-<body class="retro-grid-bg">
-  <div class="app-wrapper">
+<body>
+  <!-- Ambient CRT Scanline Effect -->
+  <div class="crt-scanlines" aria-hidden="true"></div>
+
+  <div class="viewport-wrapper">
 
     <!-- Top Site Navigation Header -->
-    <header class="site-header" role="banner">
-      <div class="header-brand">
-        <button id="btnNavHome" class="header-logo" type="button" aria-label="LANZAR AI Home">
-          <img src="assets/icons/logo-lanzar-ai.svg" alt="LANZAR AI Logo" class="brand-logo-img" />
-        </button>
-        <span class="header-tagline">Intelligence from the Future. Built for Today.</span>
-      </div>
+    <header class="header-panel" role="banner">
+      <a href="https://lanzar.me/" class="brand-link" title="LANZAR Master HQ">
+        <img src="assets/icons/logo-lanzar-ai-light.svg" alt="LANZAR AI" class="brand-logo" />
+      </a>
 
-      <nav class="header-nav" role="navigation" aria-label="Main Navigation">
-        <div class="nav-links">
-          <button class="btn btn-secondary nav-tab-btn active" id="btnNavConsole" type="button" style="font-size: 0.85rem; padding: 0.45rem 1rem;">
-            <span>🚀 Launch Console</span>
-          </button>
-          <button class="btn btn-secondary nav-tab-btn" id="btnNavStaff" type="button" style="font-size: 0.85rem; padding: 0.45rem 1rem; background: rgba(30,48,60,0.08); color: var(--deep-navy); border: 1px solid var(--border-medium);">
-            <span>👥 Meet the Staff</span>
-          </button>
-          <button class="btn btn-icon" id="btnNavTheme" title="Toggle Dark / Light Theme" type="button" aria-label="Toggle Theme">
-            🌓
-          </button>
-          <button class="btn btn-icon" id="btnNavLab" title="Tools & Lab" type="button" aria-label="Tools and Lab">
-            🧪
-          </button>
-          <button class="btn btn-icon" id="btnNavSettings" title="Settings" type="button" aria-label="Settings">
-            ⚙️
-          </button>
-          <button class="btn btn-secondary" id="btnNavAuth" title="Authentication & Identity" type="button" style="font-size: 0.8rem; padding: 0.4rem 0.85rem; background: linear-gradient(135deg, var(--retro-teal), #2b6d85); color: #fff;">
-            <span id="navAuthLabel">🔐 Sign In</span>
-          </button>
-        </div>
-      </nav>
+      <div class="status-beacon" title="Subdomain Status">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>STATUS: CALIBRATING // 2026</span>
+      </div>
     </header>
 
-    <!-- Main Content Stage -->
-    <main class="main-content" role="main">
+    <!-- Main Hero: Coming Soon -->
+    <main role="main">
+      <section class="hero-bezel" aria-label="Coming Soon Transmission">
+        <!-- Screw Embellishments -->
+        <div class="screw screw-tl" aria-hidden="true"></div>
+        <div class="screw screw-tr" aria-hidden="true"></div>
+        <div class="screw screw-bl" aria-hidden="true"></div>
+        <div class="screw screw-br" aria-hidden="true"></div>
 
-      <!-- Primary View: Launch Console (Conversation Interface) -->
-      <section id="viewConsole" class="view-section active" aria-label="Launch Console Interface">
-        <!-- Rendered by ConsoleViewController -->
+        <!-- Decorative Orbit Background -->
+        <div class="orbit-ring orbit-ring-1" aria-hidden="true"></div>
+        <div class="orbit-ring orbit-ring-2" aria-hidden="true"></div>
+
+        <div style="position: relative; z-index: 2;">
+          <div class="badge-mission">
+            <span>✦ TRANSMISSION PROTOCOL • AI-2026 ✦</span>
+          </div>
+
+          <h1 class="hero-title">
+            INTELLIGENCE FROM THE FUTURE.<br />
+            <span class="highlight">DOCKING AT AI.LANZAR.ME</span>
+          </h1>
+
+          <p class="hero-subhead">
+            We're polishing the vacuum tubes, synchronizing our deterministic math engines, and calibrating the Triad — <strong>Penelope</strong>, <strong>Peter</strong>, and <strong>Mina</strong>. Our next-generation autonomous AI suite is launching soon.
+          </p>
+
+          <div class="telemetry-tape" aria-label="System Telemetry">
+            <div class="telemetry-item">SUBSYSTEM: <span>ai.lanzar.me</span></div>
+            <div class="telemetry-item">STATUS: <span>CALIBRATION IN FLIGHT</span></div>
+            <div class="telemetry-item">TRIAD CORES: <span>3 / 3 SYNCHRONIZING</span></div>
+            <div class="telemetry-item">PYTHOS CORE: <span>ONLINE & OPERATIONAL</span></div>
+          </div>
+        </div>
       </section>
-
-      <!-- Secondary View: Meet the Staff (Penny & Pete Dual Mind Showcase) -->
-      <section id="viewStaff" class="view-section" aria-label="Meet the Staff Stage">
-        <!-- Rendered by StaffViewController / HeroViewController -->
-      </section>
-
-      <!-- Secondary View: Tools & Lab Workbench -->
-      <section id="viewLab" class="view-section" aria-label="Tools & Lab Workbench">
-        <!-- Rendered by LabViewController -->
-      </section>
-
     </main>
 
-    <!-- Auth Modal Container -->
-    <div id="authModalContainer">
-      <!-- Rendered by AuthModalController -->
-    </div>
+    <!-- PYTHOS SPOTLIGHT SECTION ("cuz well DUH! lol") -->
+    <section class="pythos-transmission-card" aria-label="Pythos AI Math and Physics Tutor Spotlight">
+      <div class="pythos-header">
+        <span class="pythos-badge">🚀 ACTIVE IN PRODUCTION</span>
+        <span class="pythos-subdomain-pill">pythos.lanzar.me</span>
+      </div>
 
-    <!-- Settings Modal Container -->
-    <div id="settingsModalContainer">
-      <!-- Rendered by SettingsModalController -->
-    </div>
+      <div class="pythos-content-grid">
+        <div>
+          <h2 class="pythos-headline">Need verified AI right this second? Well... DUH! 🚀</h2>
+          <p class="pythos-desc">
+            While we ready the full multi-agent console here at <code>ai.lanzar.me</code>, our flagship AI engine is already live and solving problems! Meet <strong>Pythos</strong> — our free, verified Socratic AI tutor for algebra, calculus, and physics.
+          </p>
 
-    <!-- Workbench Modal Container -->
-    <div id="workbenchModalContainer">
-      <!-- Rendered by WorkbenchModalController -->
-    </div>
+          <ul class="pythos-features" aria-label="Pythos Key Capabilities">
+            <li class="pythos-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Zero-hallucination math ground truth</span>
+            </li>
+            <li class="pythos-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Socratic step-by-step problem solver</span>
+            </li>
+            <li class="pythos-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Interactive function graphing & proofs</span>
+            </li>
+            <li class="pythos-feature-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>100% Free • No signup required</span>
+            </li>
+          </ul>
+        </div>
 
-    <!-- Site Footer -->
+        <div class="pythos-cta-box">
+          <a href="https://pythos.lanzar.me/" class="btn-launch-pythos" title="Launch Pythos Socratic Math & Physics Tutor">
+            <span>Launch Pythos Now</span>
+            <span aria-hidden="true">➔</span>
+          </a>
+          <span class="pythos-cta-subtext">Direct Link: https://pythos.lanzar.me/</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEET THE COGNITIVE TRIAD (COMING SOON) -->
+    <section class="triad-section" aria-label="The Cognitive Triad">
+      <div class="section-masthead">
+        <h2 class="section-title">
+          <span>👥</span> Meet the Staff in Training
+        </h2>
+        <span class="section-tagline">[TRIAD INITIALIZATION IN PROGRESS]</span>
+      </div>
+
+      <div class="triad-grid">
+        <!-- Penelope (Penny) -->
+        <article class="character-card card-penny">
+          <div class="character-header">
+            <div class="avatar-wrapper">
+              <img src="assets/images/characters/Penelope/penny-headshot.png" alt="Penelope (Penny) Sterling" />
+            </div>
+            <div class="character-meta">
+              <h3>Penelope</h3>
+              <div class="character-role">Creative Strategy & Synthesis</div>
+            </div>
+          </div>
+          <p class="character-bio">
+            Lateral thinking, creative intuition, and rapid concept synthesis. Penny connects distant dots and crafts ambitious solutions.
+          </p>
+          <div class="character-status">
+            <span>HEURISTIC ARRAYS:</span>
+            <strong>WARMING UP</strong>
+          </div>
+        </article>
+
+        <!-- Peter (Pete) -->
+        <article class="character-card card-pete">
+          <div class="character-header">
+            <div class="avatar-wrapper">
+              <img src="assets/images/characters/Peter/pete-headshot.png" alt="Peter (Pete) Sterling" />
+            </div>
+            <div class="character-meta">
+              <h3>Peter</h3>
+              <div class="character-role">Deterministic Logic & Systems</div>
+            </div>
+          </div>
+          <p class="character-bio">
+            Methodical systems architecture, rigorous verification, and deterministic physics. Pete brings unshakeable ground truth.
+          </p>
+          <div class="character-status">
+            <span>VERIFICATION CORE:</span>
+            <strong>CALIBRATING</strong>
+          </div>
+        </article>
+
+        <!-- Mina -->
+        <article class="character-card card-mina">
+          <div class="character-header">
+            <div class="avatar-wrapper">
+              <img src="assets/images/characters/Mina/mina-headshot.png" alt="Mina" />
+            </div>
+            <div class="character-meta">
+              <h3>Mina</h3>
+              <div class="character-role">Cognitive Soul & Empathy</div>
+            </div>
+          </div>
+          <p class="character-bio">
+            Nuanced linguistic rapport, narrative depth, and thoughtful alignment. Mina bridges cold logic with authentic human resonance.
+          </p>
+          <div class="character-status">
+            <span>EMPATHY MATRIX:</span>
+            <strong>SYNCHING</strong>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="site-footer" role="contentinfo">
-      <div class="footer-inner">
-        <div style="display: flex; align-items: center; gap: 0.85rem;">
-          <img src="assets/icons/logo-lanzar-ai-light.svg" alt="LANZAR AI" style="height: 34px; width: auto;" />
-          <span style="font-size: 0.85rem; color: var(--text-muted); border-left: 1px solid rgba(255,255,255,0.15); padding-left: 0.85rem;">
-            Intelligence from the Future. Built for Today.
-          </span>
-        </div>
-        <div>
-          Three Minds. One Mission. • Penny, Pete & Mina
-        </div>
-        <div style="opacity: 0.75; font-size: 0.8rem;">
-          AI can make mistakes. Lanzar takes no responsibility for extended hysterical AI conversations. Use at your own risk.
-        </div>
-        <div>
-          &copy; 2026 LANZAR. All rights reserved.
-        </div>
+      <ul class="footer-links">
+        <li><a href="https://lanzar.me/">LANZAR HQ</a></li>
+        <li><a href="https://pythos.lanzar.me/" class="highlight-pythos">Pythos (Math & Physics)</a></li>
+        <li><a href="https://threadline.lanzar.me/">Threadline (Apps)</a></li>
+        <li><a href="https://portal.lanzar.me/">Customer Portal</a></li>
+        <li><a href="https://tickets.lanzar.me/">Support Tickets</a></li>
+      </ul>
+
+      <p class="footer-disclaimer">
+        AI can make mistakes. Lanzar takes no responsibility for extended hysterical AI conversations. Use at your own risk.
+      </p>
+
+      <div class="footer-copy">
+        &copy; 2026 LANZAR. All rights reserved. • Three Minds. One Mission.
       </div>
     </footer>
 
   </div>
-
-  <!-- =====================================
-       Application Scripts
-  ===================================== -->
-  <script type="module" src="js/core/app.js"></script>
 </body>
 </html>
