@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>401 — Unauthorized Access | LANZAR AI</title>
+  <meta name="description" content="Error 401: Security badge not scanned. Stella at reception needs to verify your identity!" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/error-page.css" />
+  <style>
+    :root {
+      --accent-theme: var(--theme-stella);
+      --accent-glow: var(--theme-stella-glow);
+    }
+  </style>
+</head>
+<body>
+  <div class="crt-scanlines" aria-hidden="true"></div>
+
+  <div class="error-viewport">
+    <header class="error-header" role="banner">
+      <a href="index.html" class="brand-link" title="LANZAR AI">
+        <img src="assets/icons/logo-lanzar-ai-light.svg" alt="LANZAR AI" class="brand-logo" />
+      </a>
+      <div class="header-status-badge" style="border-color: rgba(226, 184, 77, 0.4); color: var(--atomic-gold-bright);">
+        <span class="pulse-red" style="background: var(--atomic-gold); box-shadow: 0 0 10px var(--atomic-gold);" aria-hidden="true"></span>
+        <span>SECURITY CHECKPOINT // CODE 401</span>
+      </div>
+    </header>
+
+    <main class="stage-container" role="main">
+      <!-- Character Podium: Stella -->
+      <div class="character-podium">
+        <div class="character-halo" style="background: radial-gradient(circle, var(--theme-stella) 0%, transparent 70%);"></div>
+        <div class="character-art-wrapper">
+          <img src="assets/images/characters/Stella/stella-blue-white-dots-bob.png" alt="Stella holding error sign" class="character-img" />
+          <div class="sign-clamp-attachment" aria-hidden="true">
+            <div class="clamp-bracket"></div>
+            <div class="clamp-bracket"></div>
+          </div>
+        </div>
+      </div>
+
+      <article class="held-sign-board" aria-label="Error 401 Notice">
+        <div class="sign-chains" aria-hidden="true">
+          <div class="chain-link"></div>
+          <div class="chain-link"></div>
+        </div>
+        <div class="screw screw-tl" aria-hidden="true"></div>
+        <div class="screw screw-tr" aria-hidden="true"></div>
+        <div class="screw screw-bl" aria-hidden="true"></div>
+        <div class="screw screw-br" aria-hidden="true"></div>
+
+        <div class="sign-marquee-top">
+          <span class="sign-badge" style="background: var(--theme-stella); color: #080e14;">🪪 BADGE CHECK REQUIRED 🪪</span>
+          <div class="sign-telemetry">AIRLOCK: <span>GATEWAY_AUTHENTICATION</span></div>
+        </div>
+
+        <div class="error-code-marquee">
+          <div class="error-code-num">401</div>
+          <div class="error-code-label">Badge Not Scanned</div>
+        </div>
+
+        <div class="character-speech-bubble">
+          <div class="speech-speaker-tag" style="color: var(--atomic-gold-bright);">
+            <span>🎙️ STELLA AT RECEPTION:</span>
+          </div>
+          <p class="speech-quote">
+            "Pardon the interruption, darling! Before stepping through the airlock, we need to scan your security badge at the desk. You haven't provided valid credentials, so let's get you properly signed in first!"
+          </p>
+        </div>
+
+        <div class="sign-actions">
+          <a href="index.html" class="btn-error-primary" style="background: linear-gradient(135deg, var(--atomic-gold) 0%, #b8861d 100%); color: #0b141e;">
+            <span>🚀 Return Home</span>
+          </a>
+          <a href="https://portal.lanzar.me/" class="btn-error-secondary">
+            <span>🔐 Sign In at Portal</span>
+          </a>
+          <a href="https://pythos.lanzar.me/" class="btn-error-pythos">
+            <span>📐 Go to Pythos</span>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="error-footer" role="contentinfo">
+      <div>&copy; 2026 LANZAR. All rights reserved. • Three Minds. One Mission.</div>
+      <ul class="error-footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="https://pythos.lanzar.me/">Pythos</a></li>
+        <li><a href="errors.html">All Error Codes</a></li>
+        <li><a href="https://lanzar.me/">Lanzar HQ</a></li>
+      </ul>
+    </footer>
+  </div>
+</body>
+</html>
