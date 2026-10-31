@@ -2,6 +2,9 @@
   base = "AI"
   publish = "."
 
+[build.environment]
+  GIT_SUBMODULES = "false"
+
 [[headers]]
   for = "/*"
   [headers.values]
