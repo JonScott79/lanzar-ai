@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const { initializeApp, cert, getApps } = require('firebase-admin/app');
-const { getFirestore } = require('firebase-admin/firestore');
+const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 const { getAuth } = require('firebase-admin/auth');
 
 const IS_LIVE = process.argv.includes('--live');
@@ -149,38 +149,41 @@ async function main() {
         role: 'user',
         status: 'active',
         tokenVersion: 1,
-        derivedBadges: ['PYTHOS FOUNDER'],
+        derivedBadges: ['pythos_founder'],
         pythosLegacyUid: item.pythosLegacyUid,
         migratedAt: new Date().toISOString(),
         tenant_id: 'lanzar'
       }, { merge: true });
 
       // Grant authoritative founder record
-      await userRef.collection('founders').doc('pythos').set({
-        programId: 'pythos',
+      await userRef.collection('founders').doc('pythos_founder').set({
+        programId: 'pythos_founder',
         founderNumber: 'P-00' + Math.floor(100 + Math.random() * 899),
-        title: 'PYTHOS FOUNDER',
+        title: 'Pythos Founder',
+        badgeIconUrl: '/assets/badges/badge-pythos-founder.svg',
         grantedAt: new Date().toISOString(),
         grantReason: 'Ecosystem migration from legacy Pythos patron roster',
         grantedBy: 'system_migration_daemon',
-        status: 'active'
+        active: true
       });
       console.log(`  ✓ Provisioned new user & founder: ${item.email} (${item.targetUid})`);
     } else {
       // Merge into existing profile
       await userRef.set({
         pythosLegacyUid: item.pythosLegacyUid,
+        derivedBadges: FieldValue.arrayUnion('pythos_founder'),
         updatedAt: new Date().toISOString()
       }, { merge: true });
 
-      await userRef.collection('founders').doc('pythos').set({
-        programId: 'pythos',
+      await userRef.collection('founders').doc('pythos_founder').set({
+        programId: 'pythos_founder',
         founderNumber: 'P-00' + Math.floor(100 + Math.random() * 899),
-        title: 'PYTHOS FOUNDER',
+        title: 'Pythos Founder',
+        badgeIconUrl: '/assets/badges/badge-pythos-founder.svg',
         grantedAt: new Date().toISOString(),
         grantReason: 'Consolidated legacy Pythos patron into existing canonical profile',
         grantedBy: 'system_migration_daemon',
-        status: 'active'
+        active: true
       }, { merge: true });
 
       console.log(`  ✓ Merged legacy account & linked founder: ${item.email} (${item.targetUid})`);
