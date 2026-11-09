@@ -1,0 +1,154 @@
+{
+  "timestamp": "2026-11-09T00:33:00.595Z",
+  "sourceManifestHash": "a40e22fa36aec559174e7a891640ff1988810f6f2dce0bfb5c51d04ef8616286",
+  "databaseSizeBytes": 250212352,
+  "tableCounts": {
+    "chunks_fts": 5144,
+    "chunks_fts_config": 1,
+    "chunks_fts_content": 5144,
+    "chunks_fts_data": 322,
+    "chunks_fts_docsize": 5144,
+    "chunks_fts_idx": 306,
+    "conversation_chunks": 5144,
+    "conversation_participants": 123,
+    "conversations": 57,
+    "imports": 392,
+    "message_imports": 29376,
+    "messages": 29379,
+    "messages_fts": 29379,
+    "messages_fts_config": 1,
+    "messages_fts_content": 29379,
+    "messages_fts_data": 686,
+    "messages_fts_docsize": 29379,
+    "messages_fts_idx": 558,
+    "participants": 79,
+    "saved_segment_messages": 23738,
+    "saved_segments": 9,
+    "threadline_segments": 1,
+    "threadlines": 23,
+    "timeline_events": 29377
+  },
+  "ownersIdentified": [
+    "local",
+    "user_test_ingest",
+    "user_test_diag",
+    "user_semantic_step10",
+    "test_nav_range_uid",
+    "user_tl_case_1791817451482",
+    "user_tl_recipient_1791817451519",
+    "user_tl_case_1791817481839",
+    "user_tl_recipient_1791817481870",
+    "phase1_test_1792022175868",
+    "phase1_test_1792022211977",
+    "test_chunk_user_uid",
+    "test_timeline_uid",
+    "meta_test_uid",
+    "test_user_timerange_1788628610401",
+    "test",
+    "user_other_test_1788620752273",
+    "user_delete_test_1788620760989",
+    "user_other_test_1788620760989"
+  ],
+  "mappingPlan": [
+    {
+      "threadlineOwnerId": "local",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_test_ingest",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_test_diag",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_semantic_step10",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "test_nav_range_uid",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_tl_case_1791817451482",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_tl_recipient_1791817451519",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_tl_case_1791817481839",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_tl_recipient_1791817481870",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "phase1_test_1792022175868",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "phase1_test_1792022211977",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "test_chunk_user_uid",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "test_timeline_uid",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "meta_test_uid",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "test_user_timerange_1788628610401",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "test",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_other_test_1788620752273",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_delete_test_1788620760989",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    },
+    {
+      "threadlineOwnerId": "user_other_test_1788620760989",
+      "status": "requires_provisioning",
+      "targetCanonicalUid": null
+    }
+  ],
+  "consolidationPolicy": {
+    "tenantBoundary": "tenant_id: \"lanzar\"",
+    "cutOverProtocol": "Dual-read active during 14-day transition",
+    "rollbackWindowMinutes": 5
+  }
+}

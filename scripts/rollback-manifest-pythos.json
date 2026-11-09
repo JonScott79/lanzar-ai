@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-11-09T00:31:29.519Z",
+  "sourceSha256": "c6d969598221ab15b5549e860ecc43a5b6f16a654c86d0aa75bf43bc513c3774",
+  "sourceRecordCount": 9,
+  "plan": [
+    {
+      "targetUid": "lanzar_0745adf6b61afc51f078",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_0745adf6b61afc51f078"
+    },
+    {
+      "targetUid": "lanzar_38ccbbbda3c2f5d201e4",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_38ccbbbda3c2f5d201e4"
+    },
+    {
+      "targetUid": "lanzar_a1a7d5c48060f646b994",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_a1a7d5c48060f646b994"
+    },
+    {
+      "targetUid": "lanzar_32767111a21f2e2b3ad5",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_32767111a21f2e2b3ad5"
+    },
+    {
+      "targetUid": "lanzar_9de0e27d18d57999a719",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_9de0e27d18d57999a719"
+    },
+    {
+      "targetUid": "lanzar_352ffc974a93864b766f",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_352ffc974a93864b766f"
+    },
+    {
+      "targetUid": "lanzar_57e6bef265949b61bb88",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_57e6bef265949b61bb88"
+    },
+    {
+      "targetUid": "lanzar_0ae7607efe832e50a66d",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_0ae7607efe832e50a66d"
+    },
+    {
+      "targetUid": "lanzar_991ed7538b484c955c46",
+      "isNewUser": true,
+      "pythosLegacyUid": "lanzar_991ed7538b484c955c46"
+    }
+  ]
+}
