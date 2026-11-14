@@ -414,11 +414,20 @@
   margin-bottom: 0;
 }
 
-.login-panel ::selection {
-  background: var(--deep-navy);
-  color: #ffffff;
+/* Text selection contrast: Deep Navy background (#20303c) with crisp White text (#ffffff) */
+.login-panel ::selection,
+.login-panel *::selection {
+  background: #20303c !important;
+  color: #ffffff !important;
 }
 
+.login-panel ::-moz-selection,
+.login-panel *::-moz-selection {
+  background: #20303c !important;
+  color: #ffffff !important;
+}
+
+/* Strictly scoped recovery codes presentation */
 .login-panel .recovery-codes-box {
   background: transparent;
   border: none;
@@ -427,20 +436,79 @@
   text-align: center;
 }
 
+.login-panel .recovery-codes-box .recovery-title,
 .login-panel .recovery-title {
   font-family: var(--font-heading);
-  color: var(--deep-navy);
+  color: var(--deep-navy, #20303c);
   margin: 1rem 0 0.35rem 0;
   font-size: 1rem;
 }
 
+.login-panel .recovery-codes-box .recovery-desc,
 .login-panel .recovery-desc {
   font-size: 0.85rem;
   line-height: 1.5;
   color: #334155;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.85rem 0;
 }
 
+/* Copy All Codes Action Header */
+.login-panel .recovery-codes-box .recovery-actions-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.login-panel .recovery-codes-box .copy-all-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  background: #f8fafc;
+  color: #20303c;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-sm, 8px);
+  padding: 0.5rem 0.85rem;
+  font-family: var(--font-heading, "Space Grotesk", sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #cbd5e1;
+  transition: all var(--speed-fast, 0.15s) ease;
+}
+
+.login-panel .recovery-codes-box .copy-all-btn:hover {
+  background: #f1f5f9;
+  border-color: #20303c;
+  box-shadow: 3px 3px 0px #20303c;
+  transform: translateY(-1px);
+}
+
+.login-panel .recovery-codes-box .copy-all-btn:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0px #20303c;
+}
+
+.login-panel .recovery-codes-box .copy-all-btn.copied {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #22c55e;
+  box-shadow: 2px 2px 0px #166534;
+}
+
+.login-panel .recovery-codes-box .copy-all-feedback {
+  font-family: var(--font-code, "JetBrains Mono", monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #166534;
+}
+
+/* Recovery Code Grid */
+.login-panel .recovery-codes-box .recovery-code-grid,
 .login-panel .recovery-code-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -448,15 +516,52 @@
   margin-bottom: 1rem;
 }
 
+/* Recovery Code Pill with individual copy interaction */
+.login-panel .recovery-codes-box .recovery-code-pill,
 .login-panel .recovery-code-pill {
   background: #f1f5f9;
   padding: 0.45rem 0.6rem;
-  font-family: var(--font-code);
+  font-family: var(--font-code, "JetBrains Mono", monospace);
   font-weight: bold;
   font-size: 0.85rem;
   border: 1.5px solid #cbd5e1;
-  border-radius: var(--radius-sm);
-  color: var(--deep-navy);
+  border-radius: var(--radius-sm, 8px);
+  color: #20303c;
+  cursor: pointer;
+  transition: all var(--speed-fast, 0.15s) ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.login-panel .recovery-codes-box .recovery-code-pill:hover,
+.login-panel .recovery-code-pill:hover {
+  background: #e2e8f0;
+  border-color: #20303c;
+  transform: translateY(-1px);
+}
+
+.login-panel .recovery-codes-box .recovery-code-pill:focus-visible,
+.login-panel .recovery-code-pill:focus-visible {
+  outline: 2px solid var(--retro-teal, #2a728f);
+  outline-offset: 1px;
+}
+
+.login-panel .recovery-codes-box .recovery-code-pill.copied,
+.login-panel .recovery-code-pill.copied {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #22c55e;
+}
+
+.login-panel .recovery-codes-box .recovery-code-pill .code-text {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 }
 
 

@@ -336,6 +336,12 @@ async function runTests() {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
+      const context = browser.defaultBrowserContext();
+      try {
+        await context.overridePermissions(viteUrl, ['clipboard-read', 'clipboard-write']);
+      } catch {
+        // Ignored if unsupported in certain puppeteer environments
+      }
       const page = await browser.newPage();
       page.on('pageerror', (e) => origLog('  [PAGE ERROR]', e.message));
       page.on('requestfailed', (req) => origLog('  [REQ FAILED]', req.url(), req.failure()?.errorText));
@@ -461,16 +467,46 @@ async function runTests() {
       const recState = await page.evaluate(() => {
         const desc = document.querySelector('.recovery-desc');
         const pill = document.querySelector('.recovery-code-pill');
+        const copyAllBtn = document.querySelector('.copy-all-btn');
         return {
           count: document.querySelectorAll('.recovery-code-pill').length,
           descColor: desc ? getComputedStyle(desc).color : null,
           pillBg: pill ? getComputedStyle(pill).backgroundColor : null,
-          pillColor: pill ? getComputedStyle(pill).color : null
+          pillColor: pill ? getComputedStyle(pill).color : null,
+          hasCopyAllBtn: !!copyAllBtn,
+          copyAllBtnText: copyAllBtn ? copyAllBtn.textContent.trim() : null
         };
       });
       check('Valid 6-digit code activates MFA in UI and displays 8 recovery codes', recState.count === 8);
       check('Recovery description uses high-contrast dark slate color even alongside MyLanzarAccount.css', recState.descColor === 'rgb(51, 65, 85)', recState.descColor);
       check('Recovery code pills use light background and dark navy ink in Login card', recState.pillBg === 'rgb(241, 245, 249)' && recState.pillColor === 'rgb(32, 48, 60)', `${recState.pillColor} on ${recState.pillBg}`);
+      check('Copy All Codes button rendered above pills with clear action label', recState.hasCopyAllBtn && recState.copyAllBtnText.includes('COPY ALL CODES'), recState.copyAllBtnText);
+
+      // Test Copy All Codes interaction
+      await page.click('.copy-all-btn');
+      await new Promise(r => setTimeout(r, 150));
+      const copyAllFeedback = await page.evaluate(() => {
+        const btn = document.querySelector('.copy-all-btn');
+        const feedback = document.querySelector('.copy-all-feedback');
+        return {
+          isCopied: btn ? btn.classList.contains('copied') : false,
+          feedbackText: feedback ? feedback.textContent.trim() : null
+        };
+      });
+      check('Clicking Copy All Codes updates button state to copied with feedback', copyAllFeedback.isCopied && !!copyAllFeedback.feedbackText, JSON.stringify(copyAllFeedback));
+
+      // Test Individual Copy interaction
+      await page.click('.recovery-code-pill:first-child');
+      await new Promise(r => setTimeout(r, 150));
+      const singleCopyFeedback = await page.evaluate(() => {
+        const pill = document.querySelector('.recovery-code-pill:first-child');
+        return {
+          isCopied: pill ? pill.classList.contains('copied') : false,
+          pillText: pill ? pill.textContent.trim() : null
+        };
+      });
+      check('Clicking individual recovery code pill activates individual copy state', singleCopyFeedback.isCopied && singleCopyFeedback.pillText.includes('COPIED'), JSON.stringify(singleCopyFeedback));
+
       check('Zero external requests made during entire browser QR enrollment flow', externalRequests.length === 0, `externalRequests=${externalRequests.length}`);
     } finally {
       if (browser) await browser.close();

@@ -37,6 +37,8 @@ export default function Login({
   const [showManualKey, setShowManualKey] = useState(false)
   const [copiedKey, setCopiedKey] = useState(false)
   const [recoveryCodes, setRecoveryCodes] = useState([])
+  const [copiedAllCodes, setCopiedAllCodes] = useState(false)
+  const [copiedCodeIdx, setCopiedCodeIdx] = useState(null)
   
   const [loading, setLoading] = useState(false)
   const [localError, setLocalError] = useState(null)
@@ -250,14 +252,57 @@ export default function Login({
   // ==========================================
   // MFA: Copy Setup Key Helper
   // ==========================================
-  const handleCopyManualKey = async () => {
-    if (!mfaEnrollSecret || !navigator?.clipboard?.writeText) return
+  const copyTextToClipboard = async (text) => {
+    if (!text) return false
+    if (navigator?.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text)
+        return true
+      } catch {
+        // Fallback if browser blocks asynchronous clipboard access
+      }
+    }
     try {
-      await navigator.clipboard.writeText(mfaEnrollSecret)
+      const textArea = document.createElement('textarea')
+      textArea.value = text
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-9999px'
+      textArea.style.top = '-9999px'
+      document.body.appendChild(textArea)
+      textArea.focus()
+      textArea.select()
+      const successful = document.execCommand('copy')
+      document.body.removeChild(textArea)
+      return !!successful
+    } catch {
+      return false
+    }
+  }
+
+  const handleCopyManualKey = async () => {
+    if (!mfaEnrollSecret) return
+    const success = await copyTextToClipboard(mfaEnrollSecret)
+    if (success) {
       setCopiedKey(true)
       setTimeout(() => setCopiedKey(false), 2000)
-    } catch {
-      setCopiedKey(false)
+    }
+  }
+
+  const handleCopyAllCodes = async () => {
+    if (!recoveryCodes.length) return
+    const success = await copyTextToClipboard(recoveryCodes.join('\n'))
+    if (success) {
+      setCopiedAllCodes(true)
+      setTimeout(() => setCopiedAllCodes(false), 2500)
+    }
+  }
+
+  const handleCopySingleCode = async (code, idx) => {
+    if (!code) return
+    const success = await copyTextToClipboard(code)
+    if (success) {
+      setCopiedCodeIdx(idx)
+      setTimeout(() => setCopiedCodeIdx(null), 2000)
     }
   }
 
@@ -468,9 +513,35 @@ export default function Login({
               <p className="success-msg">{successMsg}</p>
               <h4 className="recovery-title">SINGLE-USE RECOVERY CODES</h4>
               <p className="recovery-desc">Store these codes in a safe place. If you lose your authenticator, each code can be used once to access your account.</p>
+              
+              <div className="recovery-actions-header">
+                <button
+                  type="button"
+                  className={`copy-all-btn ${copiedAllCodes ? 'copied' : ''}`}
+                  onClick={handleCopyAllCodes}
+                  aria-label="Copy all recovery codes to clipboard"
+                >
+                  {copiedAllCodes ? '✓ ALL CODES COPIED' : '📋 COPY ALL CODES'}
+                </button>
+                {copiedAllCodes && (
+                  <span className="copy-all-feedback" role="status" aria-live="polite">
+                    All 8 recovery codes copied to clipboard
+                  </span>
+                )}
+              </div>
+
               <div className="recovery-code-grid">
                 {recoveryCodes.map((code, idx) => (
-                  <div key={idx} className="recovery-code-pill">{code}</div>
+                  <button
+                    key={idx}
+                    type="button"
+                    className={`recovery-code-pill ${copiedCodeIdx === idx ? 'copied' : ''}`}
+                    onClick={() => handleCopySingleCode(code, idx)}
+                    title="Click to copy recovery code"
+                    aria-label={`Copy recovery code ${code}`}
+                  >
+                    <span className="code-text">{copiedCodeIdx === idx ? 'COPIED!' : code}</span>
+                  </button>
                 ))}
               </div>
               <button 
