@@ -53,25 +53,29 @@ test('REG-04: Approved client "ai" is registered and enabled', () => {
   assert(client.redirectUris.includes('https://ai.lanzar.me'), 'ai redirect URI must be present');
 });
 
-// 2. Unapproved / Legacy Clients Excised
+// 2. Ecosystem Clients & Legacy Excision
 test('REG-05: Legacy client "id" (id.lanzar.me) is completely removed from registry', () => {
   assert(clients['id'] === undefined, 'clients.id must be undefined');
   assert(getClient('id') === null, 'getClient("id") must return null');
 });
 
-test('REG-06: Unapproved client "pythos" (pythos.lanzar.me) is excluded from registry', () => {
-  assert(clients['pythos'] === undefined, 'clients.pythos must be undefined');
-  assert(getClient('pythos') === null, 'getClient("pythos") must return null');
+test('REG-06: Approved client "pythos" (pythos.lanzar.me) is registered and enabled', () => {
+  const client = getClient('pythos');
+  assert(client !== null, 'pythos client must exist');
+  assert(client.enabled === true, 'pythos client must be enabled');
+  assert(client.redirectUris.includes('https://pythos.lanzar.me'), 'pythos redirect URI must be present');
 });
 
-test('REG-07: Unapproved client "mothership" (lanzar.me) is excluded from registry', () => {
-  assert(clients['mothership'] === undefined, 'clients.mothership must be undefined');
-  assert(getClient('mothership') === null, 'getClient("mothership") must return null');
+test('REG-07: Approved client "mothership" (lanzar.me) is registered and enabled', () => {
+  const client = getClient('mothership');
+  assert(client !== null, 'mothership client must exist');
+  assert(client.enabled === true, 'mothership client must be enabled');
+  assert(client.redirectUris.includes('https://lanzar.me'), 'mothership redirect URI must be present');
 });
 
-test('REG-08: Registry strictly contains exactly 4 approved ecosystem clients', () => {
+test('REG-08: Registry strictly contains exactly 6 approved ecosystem clients', () => {
   const registeredKeys = Object.keys(clients).sort();
-  const expectedKeys = ['ai', 'portal', 'threadline', 'tickets'].sort();
+  const expectedKeys = ['ai', 'mothership', 'portal', 'pythos', 'threadline', 'tickets'].sort();
   assert.deepStrictEqual(registeredKeys, expectedKeys, `Expected registry keys to be strictly [${expectedKeys.join(', ')}], got [${registeredKeys.join(', ')}]`);
 });
 

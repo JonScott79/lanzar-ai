@@ -284,6 +284,7 @@ async function runTestSuite() {
     }),
     EXPECTED_SA_EMAIL: 'lanzar-auth-api@lanzar-95ae3-dev.iam.gserviceaccount.com',
     SESSION_SIGNING_SECRET: 'test_session_signing_secret_at_least_32_bytes_long_123456',
+    MFA_HMAC_SECRET: 'test_mfa_hmac_secret_at_least_32_bytes_long_1234567890',
     FEATURE_STRIPE: 'disabled'
   };
 
@@ -297,6 +298,7 @@ async function runTestSuite() {
     }),
     EXPECTED_SA_EMAIL: 'lanzar-auth-api@lanzar-95ae3.iam.gserviceaccount.com',
     SESSION_SIGNING_SECRET: 'prod_session_signing_secret_at_least_32_bytes_long_123456',
+    MFA_HMAC_SECRET: 'prod_mfa_hmac_secret_at_least_32_bytes_long_1234567890',
     FEATURE_STRIPE: 'disabled'
   };
 

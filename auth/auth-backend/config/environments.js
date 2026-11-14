@@ -18,9 +18,11 @@ const ENV_CONFIGS = {
       'https://pythos.lanzar.me': 'pythos',
       'https://tickets.lanzar.me': 'tickets',
       'https://threadline.lanzar.me': 'threadline',
+      'https://ai.lanzar.me': 'ai',
       'https://id.lanzar.me': 'id_portal',
       'https://portal.lanzar.me': 'mission_control',
       'https://lanzar.me': 'marketing_site',
+      'https://www.lanzar.me': 'marketing_site',
       'https://auth.lanzar.me': 'auth_hub'
     },
     continuationAllowlist: [
@@ -28,7 +30,10 @@ const ENV_CONFIGS = {
       'https://pythos.lanzar.me/',
       'https://tickets.lanzar.me/',
       'https://threadline.lanzar.me/',
-      'https://portal.lanzar.me/'
+      'https://ai.lanzar.me/',
+      'https://portal.lanzar.me/',
+      'https://lanzar.me/',
+      'https://www.lanzar.me/'
     ]
   },
 
@@ -48,6 +53,7 @@ const ENV_CONFIGS = {
       'https://pythos-dev.lanzar.me': 'pythos',
       'https://tickets-dev.lanzar.me': 'tickets',
       'https://threadline-dev.lanzar.me': 'threadline',
+      'https://ai-dev.lanzar.me': 'ai',
       'https://id-dev.lanzar.me': 'id_portal',
       'https://portal-dev.lanzar.me': 'mission_control',
       'https://dev.lanzar.me': 'marketing_site',
@@ -58,6 +64,7 @@ const ENV_CONFIGS = {
       'https://pythos-dev.lanzar.me/',
       'https://tickets-dev.lanzar.me/',
       'https://threadline-dev.lanzar.me/',
+      'https://ai-dev.lanzar.me/',
       'https://portal-dev.lanzar.me/'
     ]
   },
@@ -82,8 +89,14 @@ const ENV_CONFIGS = {
       'http://localhost:5174': 'tickets',
       'http://localhost:5175': 'threadline',
       'http://localhost:5176': 'ai',
+      'http://localhost:3004': 'ai',
+      'http://127.0.0.1:3004': 'ai',
+      'http://localhost:3005': 'pythos',
+      'http://127.0.0.1:3005': 'pythos',
+      'http://localhost:5177': 'pythos',
       'http://localhost:3000': 'portal',
-      'http://localhost:5178': 'auth_hub_legacy'
+      'http://localhost:5178': 'auth_hub_legacy',
+      'http://localhost:8888': 'marketing_site'
     },
     continuationAllowlist: [
       'http://localhost:4000/',
@@ -91,6 +104,13 @@ const ENV_CONFIGS = {
       'http://localhost:5174/',
       'http://localhost:5175/',
       'http://localhost:5176/',
+      'http://localhost:3004/',
+      'http://127.0.0.1:3004/',
+      'http://localhost:3005/',
+      'http://127.0.0.1:3005/',
+      'http://localhost:5177/',
+      'http://localhost:5178/',
+      'http://localhost:8888/',
       'http://localhost:3000/'
     ]
   },
