@@ -39,6 +39,8 @@ export class AuthModalController {
   #render() {
     const user = authService.getUser();
     const isAuthenticated = authService.isAuthenticated();
+    const isLocalDevHost = typeof window !== "undefined" &&
+      (window.location?.hostname === "localhost" || window.location?.hostname === "127.0.0.1");
 
     this.#container.innerHTML = `
       <div class="modal-backdrop" id="authBackdrop" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
@@ -86,20 +88,21 @@ export class AuthModalController {
               </div>
 
               <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                <!-- Google / OAuth Hub Sign In -->
+                <!-- Centralized LANZAR ID Hub Sign In (S256 PKCE) -->
                 <button type="button" class="btn btn-primary" id="btnSignInGoogle" style="width: 100%; justify-content: center; font-size: 0.9rem; padding: 0.75rem;">
-                  <span style="font-size: 1.1rem; margin-right: 0.3rem;">🌐</span> Continue with Google / LANZAR Hub
+                  <span style="font-size: 1.1rem; margin-right: 0.3rem;">🛡️</span> Sign in with LANZAR ID
                 </button>
 
+                ${isLocalDevHost ? `
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0;">
                   <hr style="flex: 1; border: none; border-top: 1px solid var(--border-subtle);" />
-                  <span style="font-size: 0.72rem; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">Identity Switcher</span>
+                  <span style="font-size: 0.72rem; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">Local Dev Identity Switcher</span>
                   <hr style="flex: 1; border: none; border-top: 1px solid var(--border-subtle);" />
                 </div>
 
-                <!-- Instant Multi-User Identity Testing Switcher -->
+                <!-- Instant Multi-User Identity Testing Switcher (Localhost Dev Only) -->
                 <p style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">
-                  Switch identity to test complete server-side session isolation:
+                  Switch local dev identity to test server-side session isolation:
                 </p>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
                   <button type="button" class="btn btn-secondary btn-switch-identity" data-uid="user_dr_vance" data-name="Dr. Penelope Vance" style="font-size: 0.78rem; padding: 0.5rem;">
@@ -115,6 +118,7 @@ export class AuthModalController {
                     🧪 User Alpha
                   </button>
                 </div>
+                ` : ''}
               </div>
             `}
 
@@ -147,15 +151,13 @@ export class AuthModalController {
       if (e.target === backdrop) this.close();
     });
 
-    btnSignOut?.addEventListener("click", () => {
-      authService.signOut();
+    btnSignOut?.addEventListener("click", async () => {
+      await authService.signOut();
       this.close();
     });
 
-    btnGoogle?.addEventListener("click", () => {
-      // Connect to LANZAR Auth Hub with Google / default account
-      authService.signInWithIdentity("user_google_authenticated", "LANZAR Pilot (Google SSO)", "pilot@lanzar.me");
-      this.close();
+    btnGoogle?.addEventListener("click", async () => {
+      await authService.loginWithLanzarId();
     });
 
     // Identity switchers

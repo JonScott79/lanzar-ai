@@ -69,8 +69,9 @@ class AuthVerifier {
       };
     }
 
-    // 1. Isolated Dev / Test Tokens (e.g. "test_user_alpha", "user_beta")
-    if (token.startsWith('test_') || token.startsWith('user_') || token.startsWith('mock_')) {
+    // 1. Isolated Dev / Test Tokens (strictly forbidden in production environments)
+    const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.RAILWAY_ENVIRONMENT);
+    if (!isProduction && (token.startsWith('test_') || token.startsWith('user_') || token.startsWith('mock_'))) {
       return {
         uid: token,
         email: `${token}@lanzar.me`,
@@ -80,10 +81,10 @@ class AuthVerifier {
       };
     }
 
-    // 2. Real Firebase ID Token Verification
+    // 2. Real Firebase ID Token Verification (with checkRevoked = true)
     if (adminAuth) {
       try {
-        const decoded = await adminAuth.verifyIdToken(token);
+        const decoded = await adminAuth.verifyIdToken(token, true);
         return {
           uid: decoded.uid,
           email: decoded.email || '',
@@ -93,14 +94,20 @@ class AuthVerifier {
           isDevTest: false
         };
       } catch (err) {
-        console.warn('[AuthVerifier] Invalid or expired Firebase ID token:', err.message);
+        console.warn('[AuthVerifier] Invalid, expired, or revoked Firebase ID token:', err.message);
         const error = new Error('Invalid or expired authentication token');
         error.status = 401;
         throw error;
       }
     }
 
-    // 3. Fallback when Firebase Admin is unavailable
+    // 3. Fallback when Firebase Admin is unavailable — fail closed in production
+    if (isProduction) {
+      const error = new Error('Authentication verification service unavailable in production');
+      error.status = 401;
+      throw error;
+    }
+
     return {
       uid: token,
       email: `${token}@lanzar.me`,
